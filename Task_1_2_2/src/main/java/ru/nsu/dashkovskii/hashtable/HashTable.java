@@ -30,30 +30,16 @@ public class HashTable<K, V> implements Iterable<HashNode<K, V>> {
     }
 
     /**
-     * Вычисляет индекс в таблице для заданного ключа.
-     *
-     * @param key ключ
-     * @return индекс в таблице
-     */
-    private int index(K key) {
-        return Math.abs(key.hashCode()) % table.length;
-    }
-
-    /**
      * Добавляет пару ключ-значение в таблицу.
      * Если ключ уже существует, обновляет его значение.
      *
      * @param key   ключ
      * @param value значение
-     * @throws IllegalArgumentException если ключ равен null
      */
     public void put(K key, V value) {
-        if (key == null) {
-            throw new IllegalArgumentException("Key cannot be null");
-        }
         int i = index(key);
         for (HashNode<K, V> node = table[i]; node != null; node = node.next) {
-            if (node.key.equals(key)) {
+            if (Objects.equals(node.key, key)) {
                 node.value = value;
                 modCount++;
                 return;
@@ -75,15 +61,10 @@ public class HashTable<K, V> implements Iterable<HashNode<K, V>> {
      * @throws IllegalArgumentException если ключ не найден
      */
     public void update(K key, V value) {
-        int i = index(key);
-        for (HashNode<K, V> node = table[i]; node != null; node = node.next) {
-            if (node.key.equals(key)) {
-                node.value = value;
-                modCount++;
-                return;
-            }
+        if (!containsKey(key)) {
+            throw new IllegalArgumentException("Key not found: " + key);
         }
-        throw new IllegalArgumentException("Key not found: " + key);
+        put(key, value);
     }
 
     /**
@@ -95,7 +76,7 @@ public class HashTable<K, V> implements Iterable<HashNode<K, V>> {
     public V get(K key) {
         int i = index(key);
         for (HashNode<K, V> node = table[i]; node != null; node = node.next) {
-            if (node.key.equals(key)) {
+            if (Objects.equals(node.key, key)) {
                 return node.value;
             }
         }
@@ -109,7 +90,13 @@ public class HashTable<K, V> implements Iterable<HashNode<K, V>> {
      * @return true, если ключ присутствует
      */
     public boolean containsKey(K key) {
-        return get(key) != null;
+        int i = index(key);
+        for (HashNode<K, V> node = table[i]; node != null; node = node.next) {
+            if (Objects.equals(node.key, key)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -122,7 +109,7 @@ public class HashTable<K, V> implements Iterable<HashNode<K, V>> {
         int i = index(key);
         HashNode<K, V> prev = null;
         for (HashNode<K, V> node = table[i]; node != null; node = node.next) {
-            if (node.key.equals(key)) {
+            if (Objects.equals(node.key, key)) {
                 if (prev == null) {
                     table[i] = node.next;
                 } else {
@@ -135,20 +122,6 @@ public class HashTable<K, V> implements Iterable<HashNode<K, V>> {
             prev = node;
         }
         return null;
-    }
-
-    /**
-     * Увеличивает размер внутреннего массива и перехеширует все элементы.
-     */
-    private void resize() {
-        HashNode<K, V>[] old = table;
-        table = new HashNode[old.length * 2];
-        size = 0;
-        for (HashNode<K, V> head : old) {
-            for (HashNode<K, V> node = head; node != null; node = node.next) {
-                put(node.key, node.value);
-            }
-        }
     }
 
     /**
@@ -168,24 +141,6 @@ public class HashTable<K, V> implements Iterable<HashNode<K, V>> {
     @Override
     public Iterator<HashNode<K, V>> iterator() {
         return new HashTableIterator<>(this);
-    }
-
-    /**
-     * Возвращает счетчик модификаций таблицы.
-     *
-     * @return счетчик модификаций
-     */
-    int getModCount() {
-        return modCount;
-    }
-
-    /**
-     * Возвращает внутренний массив (для использования итератором).
-     *
-     * @return массив bucket'ов
-     */
-    HashNode<K, V>[] getTable() {
-        return table;
     }
 
     /**
@@ -236,22 +191,6 @@ public class HashTable<K, V> implements Iterable<HashNode<K, V>> {
     }
 
     /**
-     * Вспомогательный метод для получения значения без учета типов (для equals).
-     *
-     * @param key ключ
-     * @return значение или null
-     */
-    private Object getRaw(Object key) {
-        int i = Math.abs(key.hashCode()) % table.length;
-        for (HashNode<K, V> node = table[i]; node != null; node = node.next) {
-            if (node.key.equals(key)) {
-                return node.value;
-            }
-        }
-        return null;
-    }
-
-    /**
      * Вычисляет хеш-код таблицы.
      *
      * @return хеш-код
@@ -263,5 +202,71 @@ public class HashTable<K, V> implements Iterable<HashNode<K, V>> {
             hash += Objects.hashCode(node.key) ^ Objects.hashCode(node.value);
         }
         return hash;
+    }
+
+    /**
+     * Возвращает счетчик модификаций таблицы.
+     *
+     * @return счетчик модификаций
+     */
+    int getModCount() {
+        return modCount;
+    }
+
+    /**
+     * Возвращает внутренний массив (для использования итератором).
+     *
+     * @return массив bucket'ов
+     */
+    HashNode<K, V>[] getTable() {
+        return table;
+    }
+
+    /**
+     * Вычисляет индекс в таблице для заданного ключа.
+     *
+     * @param key ключ
+     * @return индекс в таблице
+     */
+    private int index(K key) {
+        if (key == null) {
+            return 0;
+        }
+        return Math.abs(key.hashCode()) % table.length;
+    }
+
+    /**
+     * Увеличивает размер внутреннего массива и перехеширует все элементы.
+     */
+    private void resize() {
+        HashNode<K, V>[] old = table;
+        table = new HashNode[old.length * 2];
+        size = 0;
+        for (HashNode<K, V> head : old) {
+            for (HashNode<K, V> node = head; node != null; node = node.next) {
+                put(node.key, node.value);
+            }
+        }
+    }
+
+    /**
+     * Вспомогательный метод для получения значения без учета типов (для equals).
+     *
+     * @param key ключ
+     * @return значение или null
+     */
+    private Object getRaw(Object key) {
+        int i;
+        if (key == null) {
+            i = 0;
+        } else {
+            i = Math.abs(key.hashCode()) % table.length;
+        }
+        for (HashNode<K, V> node = table[i]; node != null; node = node.next) {
+            if (Objects.equals(node.key, key)) {
+                return node.value;
+            }
+        }
+        return null;
     }
 }

@@ -94,7 +94,11 @@ class HashTableTest {
     @Test
     void testNullKey() {
         HashTable<String, Integer> ht = new HashTable<>();
-        assertThrows(IllegalArgumentException.class, () -> ht.put(null, 10));
+        ht.put(null, 10);
+        assertEquals(10, ht.get(null));
+        assertTrue(ht.containsKey(null));
+        assertEquals(10, ht.remove(null));
+        assertFalse(ht.containsKey(null));
     }
 
     @Test
