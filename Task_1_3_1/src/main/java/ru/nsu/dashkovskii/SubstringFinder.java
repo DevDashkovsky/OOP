@@ -3,7 +3,6 @@ package ru.nsu.dashkovskii;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,49 +28,43 @@ public class SubstringFinder {
         }
 
         List<Long> indices = new ArrayList<>();
-        StringBuilder buffer = new StringBuilder();
+        byte[] patternBytes = pattern.getBytes(StandardCharsets.UTF_8);
+        byte[] buffer = new byte[BUFFER_SIZE + patternBytes.length - 1];
+        int bufferSize = 0;
         long globalPosition = 0;
 
         try (BufferedInputStream bis = new BufferedInputStream(
-                new FileInputStream(filename), BUFFER_SIZE);
-             InputStreamReader reader = new InputStreamReader(bis, StandardCharsets.UTF_8)) {
+                new FileInputStream(filename), BUFFER_SIZE)) {
 
-            char[] chunk = new char[BUFFER_SIZE];
-            int charsRead;
+            byte[] chunk = new byte[BUFFER_SIZE];
+            int bytesRead;
 
-            while ((charsRead = reader.read(chunk)) != -1) {
-                buffer.append(chunk, 0, charsRead);
+            while ((bytesRead = bis.read(chunk)) != -1) {
+                // Копируем новые данные в конец буфера
+                System.arraycopy(chunk, 0, buffer, bufferSize, bytesRead);
+                bufferSize += bytesRead;
 
                 // Ищем все вхождения в текущем буфере
-                int searchLimit = buffer.length() - pattern.length() + 1;
-                int searchStart = Math.max(0, buffer.length() - charsRead - pattern.length() + 1);
-
-                for (int i = searchStart; i < searchLimit; i++) {
-                    if (matches(buffer, i, pattern)) {
-                        long position = globalPosition + i;
-                        if (indices.isEmpty() || indices.get(indices.size() - 1) != position) {
-                            indices.add(position);
-                        }
+                int searchLimit = bufferSize - patternBytes.length + 1;
+                for (int i = 0; i < searchLimit; i++) {
+                    if (matches(buffer, i, patternBytes)) {
+                        indices.add(globalPosition + i);
                     }
                 }
 
-                // Оставляем в буфере только последние (pattern.length - 1) символов
-                if (buffer.length() >= pattern.length()) {
-                    int keepSize = pattern.length() - 1;
-                    globalPosition += buffer.length() - keepSize;
-                    String overlap = buffer.substring(buffer.length() - keepSize);
-                    buffer.setLength(0);
-                    buffer.append(overlap);
+                // Сдвигаем буфер: оставляем только последние (pattern.length - 1) байтов
+                if (bufferSize >= patternBytes.length) {
+                    int keepSize = patternBytes.length - 1;
+                    globalPosition += bufferSize - keepSize;
+                    System.arraycopy(buffer, bufferSize - keepSize, buffer, 0, keepSize);
+                    bufferSize = keepSize;
                 }
             }
 
             // Проверяем оставшуюся часть буфера
-            for (int i = 0; i <= buffer.length() - pattern.length(); i++) {
-                if (matches(buffer, i, pattern)) {
-                    long position = globalPosition + i;
-                    if (indices.isEmpty() || indices.get(indices.size() - 1) != position) {
-                        indices.add(position);
-                    }
+            for (int i = 0; i <= bufferSize - patternBytes.length; i++) {
+                if (matches(buffer, i, patternBytes)) {
+                    indices.add(globalPosition + i);
                 }
             }
         }
@@ -82,18 +75,17 @@ public class SubstringFinder {
     /**
      * Проверяет, совпадает ли подстрока в буфере с паттерном.
      *
-     * @param buffer  буфер с текстом
-     * @param start   начальная позиция в буфере
-     * @param pattern искомый паттерн
+     * @param buffer       буфер с байтами текста
+     * @param start        начальная позиция в буфере
+     * @param patternBytes байты искомого паттерна
      * @return true, если найдено совпадение
      */
-    private boolean matches(StringBuilder buffer, int start, String pattern) {
-        for (int i = 0; i < pattern.length(); i++) {
-            if (buffer.charAt(start + i) != pattern.charAt(i)) {
+    private boolean matches(byte[] buffer, int start, byte[] patternBytes) {
+        for (int i = 0; i < patternBytes.length; i++) {
+            if (buffer[start + i] != patternBytes[i]) {
                 return false;
             }
         }
         return true;
     }
 }
-
