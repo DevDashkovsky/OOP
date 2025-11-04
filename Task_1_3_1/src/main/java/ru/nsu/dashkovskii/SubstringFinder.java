@@ -3,6 +3,7 @@ package ru.nsu.dashkovskii;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class SubstringFinder {
      *
      * @param filename путь к файлу
      * @param pattern  искомая подстрока
-     * @return список индексов начала каждого вхождения
+     * @return список индексов начала каждого вхождения (в символах)
      * @throws IOException если возникла ошибка при чтении файла
      */
     public List<Long> find(String filename, String pattern) throws IOException {
@@ -28,33 +29,34 @@ public class SubstringFinder {
         }
 
         List<Long> indices = new ArrayList<>();
-        byte[] patternBytes = pattern.getBytes(StandardCharsets.UTF_8);
-        byte[] buffer = new byte[BUFFER_SIZE + patternBytes.length - 1];
+        char[] patternChars = pattern.toCharArray();
+        char[] buffer = new char[BUFFER_SIZE + patternChars.length - 1];
         int bufferSize = 0;
         long globalPosition = 0;
 
         try (BufferedInputStream bis = new BufferedInputStream(
-                new FileInputStream(filename), BUFFER_SIZE)) {
+                new FileInputStream(filename), BUFFER_SIZE);
+             InputStreamReader reader = new InputStreamReader(bis, StandardCharsets.UTF_8)) {
 
-            byte[] chunk = new byte[BUFFER_SIZE];
-            int bytesRead;
+            char[] chunk = new char[BUFFER_SIZE];
+            int charsRead;
 
-            while ((bytesRead = bis.read(chunk)) != -1) {
+            while ((charsRead = reader.read(chunk)) != -1) {
                 // Копируем новые данные в конец буфера
-                System.arraycopy(chunk, 0, buffer, bufferSize, bytesRead);
-                bufferSize += bytesRead;
+                System.arraycopy(chunk, 0, buffer, bufferSize, charsRead);
+                bufferSize += charsRead;
 
                 // Ищем все вхождения в текущем буфере
-                int searchLimit = bufferSize - patternBytes.length + 1;
+                int searchLimit = bufferSize - patternChars.length + 1;
                 for (int i = 0; i < searchLimit; i++) {
-                    if (matches(buffer, i, patternBytes)) {
+                    if (matches(buffer, i, patternChars)) {
                         indices.add(globalPosition + i);
                     }
                 }
 
-                // Сдвигаем буфер: оставляем только последние (pattern.length - 1) байтов
-                if (bufferSize >= patternBytes.length) {
-                    int keepSize = patternBytes.length - 1;
+                // Сдвигаем буфер: оставляем только последние (pattern.length - 1) символов
+                if (bufferSize >= patternChars.length) {
+                    int keepSize = patternChars.length - 1;
                     globalPosition += bufferSize - keepSize;
                     System.arraycopy(buffer, bufferSize - keepSize, buffer, 0, keepSize);
                     bufferSize = keepSize;
@@ -62,8 +64,8 @@ public class SubstringFinder {
             }
 
             // Проверяем оставшуюся часть буфера
-            for (int i = 0; i <= bufferSize - patternBytes.length; i++) {
-                if (matches(buffer, i, patternBytes)) {
+            for (int i = 0; i <= bufferSize - patternChars.length; i++) {
+                if (matches(buffer, i, patternChars)) {
                     indices.add(globalPosition + i);
                 }
             }
@@ -75,14 +77,14 @@ public class SubstringFinder {
     /**
      * Проверяет, совпадает ли подстрока в буфере с паттерном.
      *
-     * @param buffer       буфер с байтами текста
+     * @param buffer       буфер с символами текста
      * @param start        начальная позиция в буфере
-     * @param patternBytes байты искомого паттерна
+     * @param patternChars символы искомого паттерна
      * @return true, если найдено совпадение
      */
-    private boolean matches(byte[] buffer, int start, byte[] patternBytes) {
-        for (int i = 0; i < patternBytes.length; i++) {
-            if (buffer[start + i] != patternBytes[i]) {
+    private boolean matches(char[] buffer, int start, char[] patternChars) {
+        for (int i = 0; i < patternChars.length; i++) {
+            if (buffer[start + i] != patternChars[i]) {
                 return false;
             }
         }
