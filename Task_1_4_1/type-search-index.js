@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ru.nsu.dashkovskii","l":"ControlType"},{"p":"ru.nsu.dashkovskii","l":"Grade"},{"p":"ru.nsu.dashkovskii","l":"GradeBook"},{"p":"ru.nsu.dashkovskii","l":"Main"},{"p":"ru.nsu.dashkovskii","l":"Record"}];updateSearchResults();
