@@ -20,6 +20,11 @@ public enum Grade {
     SATISFACTORY(3),
 
     /**
+     * Оценка "неудовлетворительно" (2) - не сдал.
+     */
+    FAILED(2),
+
+    /**
      * Зачет.
      */
     PASS(0);
@@ -56,5 +61,22 @@ public enum Grade {
     public boolean isSatisfactory() {
         return this == SATISFACTORY;
     }
-}
 
+    /**
+     * Проверяет, является ли оценка неудовлетворительной.
+     *
+     * @return true если оценка "неудовлетворительно"
+     */
+    public boolean isFailed() {
+        return this == FAILED;
+    }
+
+    /**
+     * Проверяет, является ли оценка положительной (не неуд).
+     *
+     * @return true если оценка положительная
+     */
+    public boolean isPassing() {
+        return this != FAILED;
+    }
+}
