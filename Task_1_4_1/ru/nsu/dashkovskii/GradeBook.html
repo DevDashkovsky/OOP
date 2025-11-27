@@ -76,7 +76,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">GradeBook</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Класс электронной зачетной книжки студента ФИТ.</div>
+<div class="block">Класс электронной зачетной книжки студента ФИТ.
+ Является фасадом над классом Student для обеспечения обратной совместимости.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -137,14 +138,19 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Получить список всех записей.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getStudentName()" class="member-name-link">getStudentName</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Student.html" title="class in ru.nsu.dashkovskii">Student</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getStudent()" class="member-name-link">getStudent</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Получить объект студента для прямой работы с новой моделью.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getStudentName()" class="member-name-link">getStudentName</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Получить имя студента.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isPaid()" class="member-name-link">isPaid</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isPaid()" class="member-name-link">isPaid</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Проверить, обучается ли студент на платной основе.</div>
 </div>
 </div>
@@ -201,7 +207,7 @@ loadScripts(document, 'script');</script>
 <h3>getAverageGrade</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">getAverageGrade</span>()</div>
 <div class="block">Вычислить средний балл за все время обучения.
- Учитываются только оценки с числовым значением (исключая зачеты).</div>
+ Учитываются только последние положительные оценки по предметам.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>средний балл</dd>
@@ -213,7 +219,7 @@ loadScripts(document, 'script');</script>
 <h3>canTransferToBudget</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">canTransferToBudget</span>()</div>
 <div class="block">Проверить возможность перевода с платной на бюджетную форму обучения.
- Требование: отсутствие оценок "удовлетворительно" за ЭКЗАМЕНЫ
+ Требование: отсутствие оценок "удовлетворительно" и "неуд" за ЭКЗАМЕНЫ
  в последние две сессии.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -278,6 +284,17 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>список записей</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getStudent()">
+<h3>getStudent</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Student.html" title="class in ru.nsu.dashkovskii">Student</a></span>&nbsp;<span class="element-name">getStudent</span>()</div>
+<div class="block">Получить объект студента для прямой работы с новой моделью.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>студент</dd>
 </dl>
 </section>
 </li>
