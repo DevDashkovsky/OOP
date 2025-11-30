@@ -78,6 +78,15 @@ public class Semester {
     }
 
     /**
+     * Получить номер семестра.
+     *
+     * @return номер семестра
+     */
+    public int getNumber() {
+        return number;
+    }
+
+    /**
      * Проверяет, все ли экзамены и диф. зачеты сданы на отлично.
      *
      * @return true если все на отлично
@@ -90,5 +99,84 @@ public class Semester {
                     Optional<Grade> lastGrade = subject.getLastPassingGrade();
                     return lastGrade.isPresent() && lastGrade.get().isExcellent();
                 });
+    }
+
+    /**
+     * Получить последние положительные оценки по всем предметам семестра.
+     *
+     * @return карта предмет -> оценка
+     */
+    public Map<String, Grade> getLastPassingGrades() {
+        Map<String, Grade> result = new HashMap<>();
+        for (Subject subject : subjects.values()) {
+            subject.getLastPassingGrade().ifPresent(grade ->
+                    result.put(subject.getName(), grade)
+            );
+        }
+        return result;
+    }
+
+    /**
+     * Получить оценки для диплома (только экзамены и диф. зачёты).
+     *
+     * @return карта предмет -> оценка
+     */
+    public Map<String, Grade> getDiplomaGrades() {
+        Map<String, Grade> result = new HashMap<>();
+        for (Subject subject : subjects.values()) {
+            ControlType type = subject.getControlType();
+            if (type == ControlType.EXAM || type == ControlType.DIFF_CREDIT) {
+                subject.getLastPassingGrade().ifPresent(grade ->
+                        result.put(subject.getName(), grade)
+                );
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Проверяет, есть ли в семестре удовлетворительные оценки
+     * по экзаменам или диф. зачётам.
+     *
+     * @return true если есть удовлетворительные или неуд оценки
+     */
+    public boolean hasSatisfactoryInDiplomaSubjects() {
+        return subjects.values().stream()
+                .filter(s -> s.getControlType() == ControlType.EXAM
+                        || s.getControlType() == ControlType.DIFF_CREDIT)
+                .anyMatch(subject -> {
+                    Optional<Grade> lastGrade = subject.getLastPassingGrade();
+                    return lastGrade.isEmpty()
+                            || lastGrade.get().isSatisfactory()
+                            || lastGrade.get().isFailed();
+                });
+    }
+
+    /**
+     * Подсчитать количество отличных оценок в дипломных предметах.
+     *
+     * @return количество отличных оценок
+     */
+    public long countExcellentInDiplomaSubjects() {
+        return subjects.values().stream()
+                .filter(s -> s.getControlType() == ControlType.EXAM
+                        || s.getControlType() == ControlType.DIFF_CREDIT)
+                .filter(subject -> {
+                    Optional<Grade> lastGrade = subject.getLastPassingGrade();
+                    return lastGrade.isPresent() && lastGrade.get().isExcellent();
+                })
+                .count();
+    }
+
+    /**
+     * Подсчитать количество дипломных предметов (экзамены и диф. зачёты).
+     *
+     * @return количество предметов
+     */
+    public long countDiplomaSubjects() {
+        return subjects.values().stream()
+                .filter(s -> s.getControlType() == ControlType.EXAM
+                        || s.getControlType() == ControlType.DIFF_CREDIT)
+                .count();
     }
 }

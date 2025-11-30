@@ -9,7 +9,6 @@ import ru.nsu.dashkovskii.enums.Grade;
 import ru.nsu.dashkovskii.model.Semester;
 import ru.nsu.dashkovskii.model.Session;
 import ru.nsu.dashkovskii.model.Student;
-import ru.nsu.dashkovskii.model.Subject;
 
 /**
  * Класс электронной зачетной книжки студента ФИТ.
@@ -71,17 +70,16 @@ public class GradeBook {
      * @return средний балл
      */
     public double getAverageGrade() {
-        Map<String, Grade> lastGrades = getAllLastPassingGrades();
-
-        List<Grade> grades = lastGrades.values().stream()
+        List<Grade> allGrades = semesters.values().stream()
+                .flatMap(semester -> semester.getLastPassingGrades().values().stream())
                 .filter(g -> g != Grade.PASS)
                 .toList();
 
-        if (grades.isEmpty()) {
+        if (allGrades.isEmpty()) {
             return 0.0;
         }
 
-        return grades.stream()
+        return allGrades.stream()
                 .mapToInt(Grade::getValue)
                 .average()
                 .orElse(0.0);
@@ -119,26 +117,28 @@ public class GradeBook {
      * @return true если возможен красный диплом
      */
     public boolean canGetRedDiploma() {
-        Map<String, Grade> diplomaGrades = getDiplomaGrades();
-
-        if (diplomaGrades.isEmpty()) {
-            return false;
-        }
-
-        // Проверяем отсутствие удовлетворительных оценок
-        boolean hasNoSatisfactory = diplomaGrades.values().stream()
-                .noneMatch(g -> g.isSatisfactory() || g.isFailed());
+        // Проверяем отсутствие удовлетворительных оценок используя методы семестров
+        boolean hasNoSatisfactory = semesters.values().stream()
+                .noneMatch(Semester::hasSatisfactoryInDiplomaSubjects);
 
         if (!hasNoSatisfactory) {
             return false;
         }
 
-        // Подсчитываем процент отличных оценок
-        long excellentCount = diplomaGrades.values().stream()
-                .filter(Grade::isExcellent)
-                .count();
+        // Подсчитываем процент отличных оценок агрегируя результаты семестров
+        long totalExcellent = semesters.values().stream()
+                .mapToLong(Semester::countExcellentInDiplomaSubjects)
+                .sum();
 
-        double excellentPercentage = (double) excellentCount / diplomaGrades.size() * 100;
+        long totalDiplomaSubjects = semesters.values().stream()
+                .mapToLong(Semester::countDiplomaSubjects)
+                .sum();
+
+        if (totalDiplomaSubjects == 0) {
+            return false;
+        }
+
+        double excellentPercentage = (double) totalExcellent / totalDiplomaSubjects * 100;
 
         // Проверяем ВКР (если защищена)
         if (thesisGrade != null && !thesisGrade.isExcellent()) {
@@ -217,47 +217,5 @@ public class GradeBook {
                                                    s1.getSemesterNumber()))
                 .limit(2)
                 .toList();
-    }
-
-    /**
-     * Получить последние положительные оценки по всем предметам.
-     *
-     * @return карта предмет -> последняя положительная оценка
-     */
-    private Map<String, Grade> getAllLastPassingGrades() {
-        Map<String, Grade> result = new HashMap<>();
-
-        for (Semester semester : semesters.values()) {
-            for (Subject subject : semester.getAllSubjects()) {
-                subject.getLastPassingGrade().ifPresent(grade ->
-                        result.put(subject.getName(), grade)
-                );
-            }
-        }
-
-        return result;
-    }
-
-    /**
-     * Получить оценки для приложения к диплому.
-     * Это последние положительные оценки по экзаменам и диф. зачётам.
-     *
-     * @return карта предмет -> оценка
-     */
-    private Map<String, Grade> getDiplomaGrades() {
-        Map<String, Grade> result = new HashMap<>();
-
-        for (Semester semester : semesters.values()) {
-            for (Subject subject : semester.getAllSubjects()) {
-                ControlType type = subject.getControlType();
-                if (type == ControlType.EXAM || type == ControlType.DIFF_CREDIT) {
-                    subject.getLastPassingGrade().ifPresent(grade ->
-                            result.put(subject.getName(), grade)
-                    );
-                }
-            }
-        }
-
-        return result;
     }
 }

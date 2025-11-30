@@ -42,11 +42,9 @@ public class GradeBookTest {
         Student student = new Student("Тестовый студент", true);
         GradeBook book = new GradeBook(student);
 
-        // Первый семестр
         book.addGrade(1, "Предмет 1", ControlType.EXAM, Grade.EXCELLENT);
         book.addGrade(1, "Предмет 2", ControlType.EXAM, Grade.GOOD);
 
-        // Второй семестр
         book.addGrade(2, "Предмет 3", ControlType.EXAM, Grade.EXCELLENT);
         book.addGrade(2, "Предмет 4", ControlType.EXAM, Grade.GOOD);
 
@@ -58,11 +56,9 @@ public class GradeBookTest {
         Student student = new Student("Тестовый студент", true);
         GradeBook book = new GradeBook(student);
 
-        // Первый семестр
         book.addGrade(1, "Предмет 1", ControlType.EXAM, Grade.EXCELLENT);
         book.addGrade(1, "Предмет 2", ControlType.EXAM, Grade.SATISFACTORY);
 
-        // Второй семестр
         book.addGrade(2, "Предмет 3", ControlType.EXAM, Grade.EXCELLENT);
         book.addGrade(2, "Предмет 4", ControlType.EXAM, Grade.GOOD);
 
@@ -85,11 +81,9 @@ public class GradeBookTest {
         Student student = new Student("Тестовый студент", true);
         GradeBook book = new GradeBook(student);
 
-        // Первый семестр
         book.addGrade(1, "Предмет 1", ControlType.EXAM, Grade.EXCELLENT);
         book.addGrade(1, "Предмет 2", ControlType.DIFF_CREDIT, Grade.SATISFACTORY);
 
-        // Второй семестр
         book.addGrade(2, "Предмет 3", ControlType.EXAM, Grade.GOOD);
         book.addGrade(2, "Предмет 4", ControlType.EXAM, Grade.EXCELLENT);
 
@@ -101,7 +95,6 @@ public class GradeBookTest {
         Student student = new Student("Тестовый студент", false);
         GradeBook book = new GradeBook(student);
 
-        // 6 из 8 оценок отлично (75%)
         book.addGrade(1, "Предмет 1", ControlType.EXAM, Grade.EXCELLENT);
         book.addGrade(1, "Предмет 2", ControlType.EXAM, Grade.EXCELLENT);
         book.addGrade(2, "Предмет 3", ControlType.EXAM, Grade.EXCELLENT);
@@ -131,7 +124,6 @@ public class GradeBookTest {
         Student student = new Student("Тестовый студент", false);
         GradeBook book = new GradeBook(student);
 
-        // Только 50% отлично
         book.addGrade(1, "Предмет 1", ControlType.EXAM, Grade.EXCELLENT);
         book.addGrade(1, "Предмет 2", ControlType.EXAM, Grade.EXCELLENT);
         book.addGrade(2, "Предмет 3", ControlType.EXAM, Grade.GOOD);
@@ -197,5 +189,17 @@ public class GradeBookTest {
         book.addGrade(1, "Предмет 2", ControlType.EXAM, Grade.EXCELLENT);
 
         assertFalse(book.canGetIncreasedScholarship());
+    }
+
+    @Test
+    public void testAverageGradeWithRetakes() {
+        Student student = new Student("Тестовый студент", false);
+        GradeBook book = new GradeBook(student);
+
+        book.addGrade(1, "Математика", ControlType.EXAM, Grade.FAILED);
+        book.addGrade(1, "Математика", ControlType.EXAM, Grade.GOOD);
+        book.addGrade(1, "Физика", ControlType.EXAM, Grade.EXCELLENT);
+
+        assertEquals(4.5, book.getAverageGrade(), 0.01);
     }
 }
