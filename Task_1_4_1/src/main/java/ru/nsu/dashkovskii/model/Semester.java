@@ -1,14 +1,16 @@
-package ru.nsu.dashkovskii;
+package ru.nsu.dashkovskii.model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import ru.nsu.dashkovskii.enums.ControlType;
+import ru.nsu.dashkovskii.enums.Grade;
 
 /**
  * Семестр обучения студента.
+ * Содержит информацию о сессии и всех предметах семестра.
  */
 public class Semester {
     private final int number;
@@ -27,25 +29,23 @@ public class Semester {
     }
 
     /**
-     * Добавить результат по предмету.
+     * Добавить оценку по предмету.
      *
      * @param subjectName название предмета
      * @param controlType тип контроля
      * @param grade оценка
-     * @param date дата
      */
-    public void addGrade(String subjectName, ControlType controlType,
-                        Grade grade, LocalDate date) {
+    public void addGrade(String subjectName, ControlType controlType, Grade grade) {
         Subject subject = subjects.get(subjectName);
         if (subject == null) {
             subject = new Subject(subjectName, controlType);
             subjects.put(subjectName, subject);
         }
-        subject.addAttempt(grade, date);
+        subject.addAttempt(grade);
 
-        // Если это экзамен или диф. зачет, добавляем в сессию
+        // Добавляем в сессию, если это экзамен или диф. зачет
         if (controlType == ControlType.EXAM || controlType == ControlType.DIFF_CREDIT) {
-            session.addGrade(subjectName, controlType, grade, date);
+            session.addGrade(subjectName, controlType, grade);
         }
     }
 
@@ -53,7 +53,7 @@ public class Semester {
      * Получить предмет по названию.
      *
      * @param subjectName название предмета
-     * @return предмет или empty
+     * @return предмет или empty если не найден
      */
     public Optional<Subject> getSubject(String subjectName) {
         return Optional.ofNullable(subjects.get(subjectName));
@@ -78,50 +78,17 @@ public class Semester {
     }
 
     /**
-     * Получить номер семестра.
-     *
-     * @return номер
-     */
-    public int getNumber() {
-        return number;
-    }
-
-    /**
      * Проверяет, все ли экзамены и диф. зачеты сданы на отлично.
      *
-     * @return true если все на 5
+     * @return true если все на отлично
      */
     public boolean allExamsAndDiffCreditsExcellent() {
         return subjects.values().stream()
                 .filter(s -> s.getControlType() == ControlType.EXAM
-                          || s.getControlType() == ControlType.DIFF_CREDIT)
+                        || s.getControlType() == ControlType.DIFF_CREDIT)
                 .allMatch(subject -> {
-                    Optional<Grade> grade = subject.getLastPassingGrade();
-                    return grade.isPresent() && grade.get().isExcellent();
+                    Optional<Grade> lastGrade = subject.getLastPassingGrade();
+                    return lastGrade.isPresent() && lastGrade.get().isExcellent();
                 });
     }
-
-    /**
-     * Вычислить средний балл за семестр (только положительные оценки).
-     *
-     * @return средний балл
-     */
-    public double getAverageGrade() {
-        List<Grade> grades = subjects.values().stream()
-                .map(Subject::getLastPassingGrade)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .filter(g -> g != Grade.PASS)
-                .toList();
-
-        if (grades.isEmpty()) {
-            return 0.0;
-        }
-
-        return grades.stream()
-                .mapToInt(Grade::getValue)
-                .average()
-                .orElse(0.0);
-    }
 }
-

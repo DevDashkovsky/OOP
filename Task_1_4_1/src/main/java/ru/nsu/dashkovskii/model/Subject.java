@@ -1,9 +1,10 @@
-package ru.nsu.dashkovskii;
+package ru.nsu.dashkovskii.model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import ru.nsu.dashkovskii.enums.ControlType;
+import ru.nsu.dashkovskii.enums.Grade;
 
 /**
  * Предмет с возможными несколькими попытками сдачи.
@@ -29,22 +30,9 @@ public class Subject {
      * Добавить попытку сдачи предмета.
      *
      * @param grade оценка
-     * @param date дата попытки
      */
-    public void addAttempt(Grade grade, LocalDate date) {
-        attempts.add(new Attempt(grade, date));
-    }
-
-    /**
-     * Получить последнюю попытку сдачи.
-     *
-     * @return последняя попытка или empty если попыток не было
-     */
-    public Optional<Attempt> getLastAttempt() {
-        if (attempts.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(attempts.get(attempts.size() - 1));
+    public void addAttempt(Grade grade) {
+        attempts.add(new Attempt(grade));
     }
 
     /**
@@ -60,15 +48,6 @@ public class Subject {
             }
         }
         return Optional.empty();
-    }
-
-    /**
-     * Проверяет, сдан ли предмет (есть ли хотя бы одна положительная оценка).
-     *
-     * @return true если предмет сдан
-     */
-    public boolean isPassed() {
-        return getLastPassingGrade().isPresent();
     }
 
     /**
@@ -108,14 +87,4 @@ public class Subject {
     public ControlType getControlType() {
         return controlType;
     }
-
-    /**
-     * Получить все попытки.
-     *
-     * @return список попыток
-     */
-    public List<Attempt> getAttempts() {
-        return new ArrayList<>(attempts);
-    }
 }
-

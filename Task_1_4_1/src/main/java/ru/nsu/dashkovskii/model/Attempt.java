@@ -1,23 +1,20 @@
-package ru.nsu.dashkovskii;
+package ru.nsu.dashkovskii.model;
 
-import java.time.LocalDate;
+import ru.nsu.dashkovskii.enums.Grade;
 
 /**
  * Попытка сдачи предмета (может быть несколько попыток - пересдачи).
  */
 public class Attempt {
     private final Grade grade;
-    private final LocalDate date;
 
     /**
      * Конструктор попытки сдачи.
      *
      * @param grade оценка
-     * @param date дата попытки
      */
-    public Attempt(Grade grade, LocalDate date) {
+    public Attempt(Grade grade) {
         this.grade = grade;
-        this.date = date;
     }
 
     /**
@@ -30,15 +27,6 @@ public class Attempt {
     }
 
     /**
-     * Получить дату попытки.
-     *
-     * @return дата
-     */
-    public LocalDate getDate() {
-        return date;
-    }
-
-    /**
      * Проверяет, является ли попытка успешной (не провалена).
      *
      * @return true если попытка успешна
@@ -47,4 +35,3 @@ public class Attempt {
         return grade.isPassing();
     }
 }
-

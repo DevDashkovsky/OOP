@@ -25,9 +25,7 @@ application {
 
 jar {
     manifest {
-        attributes(
-                'Main-Class': application.mainClass
-        )
+        attributes 'Main-Class': 'ru.nsu.dashkovskii.Main'
     }
 }
 

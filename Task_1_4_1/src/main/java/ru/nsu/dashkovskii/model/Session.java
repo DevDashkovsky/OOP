@@ -1,11 +1,12 @@
-package ru.nsu.dashkovskii;
+package ru.nsu.dashkovskii.model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import ru.nsu.dashkovskii.enums.ControlType;
+import ru.nsu.dashkovskii.enums.Grade;
 
 /**
  * Сессия - экзаменационный период в конце семестра.
@@ -25,49 +26,19 @@ public class Session {
     }
 
     /**
-     * Добавить предмет в сессию.
-     *
-     * @param subject предмет
-     */
-    public void addSubject(Subject subject) {
-        subjects.put(subject.getName(), subject);
-    }
-
-    /**
      * Добавить оценку по предмету (или создать предмет, если его нет).
      *
      * @param subjectName название предмета
      * @param controlType тип контроля
      * @param grade оценка
-     * @param date дата попытки
      */
-    public void addGrade(String subjectName, ControlType controlType,
-                        Grade grade, LocalDate date) {
+    public void addGrade(String subjectName, ControlType controlType, Grade grade) {
         Subject subject = subjects.get(subjectName);
         if (subject == null) {
             subject = new Subject(subjectName, controlType);
             subjects.put(subjectName, subject);
         }
-        subject.addAttempt(grade, date);
-    }
-
-    /**
-     * Получить предмет по названию.
-     *
-     * @param subjectName название предмета
-     * @return предмет или empty если не найден
-     */
-    public Optional<Subject> getSubject(String subjectName) {
-        return Optional.ofNullable(subjects.get(subjectName));
-    }
-
-    /**
-     * Получить все предметы сессии.
-     *
-     * @return список предметов
-     */
-    public List<Subject> getAllSubjects() {
-        return new ArrayList<>(subjects.values());
+        subject.addAttempt(grade);
     }
 
     /**
@@ -103,22 +74,4 @@ public class Session {
     public int getSemesterNumber() {
         return semesterNumber;
     }
-
-    /**
-     * Проверяет, все ли экзамены сданы на отлично.
-     *
-     * @return true если все экзамены на 5
-     */
-    public boolean allExamsExcellent() {
-        List<Subject> exams = getExams();
-        if (exams.isEmpty()) {
-            return false;
-        }
-        return exams.stream()
-                .allMatch(subject -> {
-                    Optional<Grade> grade = subject.getLastPassingGrade();
-                    return grade.isPresent() && grade.get().isExcellent();
-                });
-    }
 }
-

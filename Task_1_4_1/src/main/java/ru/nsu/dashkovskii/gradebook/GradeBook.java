@@ -1,30 +1,33 @@
-package ru.nsu.dashkovskii;
+package ru.nsu.dashkovskii.gradebook;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import ru.nsu.dashkovskii.enums.ControlType;
+import ru.nsu.dashkovskii.enums.Grade;
+import ru.nsu.dashkovskii.model.Semester;
+import ru.nsu.dashkovskii.model.Session;
+import ru.nsu.dashkovskii.model.Student;
+import ru.nsu.dashkovskii.model.Subject;
 
 /**
- * Студент - центральная сущность системы.
+ * Класс электронной зачетной книжки студента ФИТ.
+ * Содержит всю информацию об оценках, семестрах и выполняет все расчёты.
+ * Зачётная книжка не может существовать без студента (композиция).
  */
-public class Student {
-    private final String name;
-    private boolean isPaid;
+public class GradeBook {
+    private final Student student;
     private final Map<Integer, Semester> semesters;
     private Grade thesisGrade;
 
     /**
-     * Конструктор студента.
+     * Конструктор зачетной книжки.
      *
-     * @param name имя студента
-     * @param isPaid обучается ли на платной основе
+     * @param student студент, владелец зачётной книжки
      */
-    public Student(String name, boolean isPaid) {
-        this.name = name;
-        this.isPaid = isPaid;
+    public GradeBook(Student student) {
+        this.student = student;
         this.semesters = new HashMap<>();
         this.thesisGrade = null;
     }
@@ -36,10 +39,9 @@ public class Student {
      * @param subjectName название предмета
      * @param controlType тип контроля
      * @param grade оценка
-     * @param date дата
      */
     public void addGrade(int semesterNumber, String subjectName,
-                        ControlType controlType, Grade grade, LocalDate date) {
+                        ControlType controlType, Grade grade) {
         if (controlType == ControlType.THESIS) {
             thesisGrade = grade;
             return;
@@ -50,20 +52,16 @@ public class Student {
             semester = new Semester(semesterNumber);
             semesters.put(semesterNumber, semester);
         }
-        semester.addGrade(subjectName, controlType, grade, date);
+        semester.addGrade(subjectName, controlType, grade);
     }
 
     /**
-     * Добавить оценку по предмету (без указания даты - используется текущая).
+     * Установить оценку за ВКР.
      *
-     * @param semesterNumber номер семестра
-     * @param subjectName название предмета
-     * @param controlType тип контроля
      * @param grade оценка
      */
-    public void addGrade(int semesterNumber, String subjectName,
-                        ControlType controlType, Grade grade) {
-        addGrade(semesterNumber, subjectName, controlType, grade, LocalDate.now());
+    public void setThesisGrade(Grade grade) {
+        this.thesisGrade = grade;
     }
 
     /**
@@ -90,14 +88,14 @@ public class Student {
     }
 
     /**
-     * Проверить возможность перевода с платной на бюджетную форму.
+     * Проверить возможность перевода с платной на бюджетную форму обучения.
      * Требование: отсутствие оценок "удовлетворительно" и "неуд" за ЭКЗАМЕНЫ
      * в последние две экзаменационные сессии.
      *
      * @return true если возможен перевод
      */
     public boolean canTransferToBudget() {
-        if (!isPaid) {
+        if (!student.isPaid()) {
             return false;
         }
 
@@ -107,7 +105,6 @@ public class Student {
             return false;
         }
 
-        // Проверяем, что в последних двух сессиях нет удовлетворительных оценок по экзаменам
         return sessions.stream()
                 .noneMatch(Session::hasExamsSatisfactoryOrFailed);
     }
@@ -159,7 +156,7 @@ public class Student {
      * @return true если возможна повышенная стипендия
      */
     public boolean canGetIncreasedScholarship() {
-        if (isPaid) {
+        if (student.isPaid()) {
             return false;
         }
 
@@ -167,6 +164,33 @@ public class Student {
 
         return lastSemester.map(Semester::allExamsAndDiffCreditsExcellent)
                 .orElse(false);
+    }
+
+    /**
+     * Получить студента.
+     *
+     * @return студент
+     */
+    public Student getStudent() {
+        return student;
+    }
+
+    /**
+     * Получить все семестры.
+     *
+     * @return карта семестров
+     */
+    public Map<Integer, Semester> getSemesters() {
+        return new HashMap<>(semesters);
+    }
+
+    /**
+     * Получить оценку за ВКР.
+     *
+     * @return оценка за ВКР или null если не защищена
+     */
+    public Grade getThesisGrade() {
+        return thesisGrade;
     }
 
     /**
@@ -205,8 +229,9 @@ public class Student {
 
         for (Semester semester : semesters.values()) {
             for (Subject subject : semester.getAllSubjects()) {
-                Optional<Grade> grade = subject.getLastPassingGrade();
-                grade.ifPresent(g -> result.put(subject.getName(), g));
+                subject.getLastPassingGrade().ifPresent(grade ->
+                        result.put(subject.getName(), grade)
+                );
             }
         }
 
@@ -215,7 +240,7 @@ public class Student {
 
     /**
      * Получить оценки для приложения к диплому.
-     * Учитываются только экзамены и диф. зачеты (последние положительные оценки).
+     * Это последние положительные оценки по экзаменам и диф. зачётам.
      *
      * @return карта предмет -> оценка
      */
@@ -224,69 +249,15 @@ public class Student {
 
         for (Semester semester : semesters.values()) {
             for (Subject subject : semester.getAllSubjects()) {
-                if (subject.getControlType() == ControlType.EXAM
-                        || subject.getControlType() == ControlType.DIFF_CREDIT) {
-                    Optional<Grade> grade = subject.getLastPassingGrade();
-                    grade.ifPresent(g -> result.put(subject.getName(), g));
+                ControlType type = subject.getControlType();
+                if (type == ControlType.EXAM || type == ControlType.DIFF_CREDIT) {
+                    subject.getLastPassingGrade().ifPresent(grade ->
+                            result.put(subject.getName(), grade)
+                    );
                 }
             }
         }
 
         return result;
     }
-
-    /**
-     * Перевести на бюджет.
-     */
-    public void transferToBudget() {
-        if (canTransferToBudget()) {
-            this.isPaid = false;
-        }
-    }
-
-    /**
-     * Получить имя студента.
-     *
-     * @return имя
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Проверить, обучается ли на платной основе.
-     *
-     * @return true если на платной основе
-     */
-    public boolean isPaid() {
-        return isPaid;
-    }
-
-    /**
-     * Получить все семестры.
-     *
-     * @return карта номер семестра -> семестр
-     */
-    public Map<Integer, Semester> getSemesters() {
-        return new HashMap<>(semesters);
-    }
-
-    /**
-     * Получить оценку за ВКР.
-     *
-     * @return оценка за ВКР или null
-     */
-    public Grade getThesisGrade() {
-        return thesisGrade;
-    }
-
-    /**
-     * Установить оценку за ВКР.
-     *
-     * @param thesisGrade оценка
-     */
-    public void setThesisGrade(Grade thesisGrade) {
-        this.thesisGrade = thesisGrade;
-    }
 }
-
