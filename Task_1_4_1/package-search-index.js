@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.dashkovskii"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.dashkovskii"},{"l":"ru.nsu.dashkovskii.enums"},{"l":"ru.nsu.dashkovskii.gradebook"},{"l":"ru.nsu.dashkovskii.model"}];updateSearchResults();

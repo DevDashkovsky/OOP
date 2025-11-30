@@ -5,21 +5,21 @@
 <title>GradeBook (Task_1_4_1 1.0-SNAPSHOT API)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="declaration: package: ru.nsu.dashkovskii, class: GradeBook">
+<meta name="description" content="declaration: package: ru.nsu.dashkovskii.gradebook, class: GradeBook">
 <meta name="generator" content="javadoc/ClassWriterImpl">
-<link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
-<link rel="stylesheet" type="text/css" href="../../../script-dir/jquery-ui.min.css" title="Style">
-<link rel="stylesheet" type="text/css" href="../../../jquery-ui.overrides.css" title="Style">
-<script type="text/javascript" src="../../../script.js"></script>
-<script type="text/javascript" src="../../../script-dir/jquery-3.7.1.min.js"></script>
-<script type="text/javascript" src="../../../script-dir/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
+<link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
+<link rel="stylesheet" type="text/css" href="../../../../jquery-ui.overrides.css" title="Style">
+<script type="text/javascript" src="../../../../script.js"></script>
+<script type="text/javascript" src="../../../../script-dir/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="../../../../script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="class-declaration-page">
 <script type="text/javascript">var evenRowColor = "even-row-color";
 var oddRowColor = "odd-row-color";
 var tableTab = "table-tab";
 var activeTableTab = "active-table-tab";
-var pathtoroot = "../../../";
+var pathtoroot = "../../../../";
 loadScripts(document, 'script');</script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -31,11 +31,12 @@ loadScripts(document, 'script');</script>
 <div class="top-nav" id="navbar-top">
 <div class="skip-nav"><a href="#skip-navbar-top" title="Skip navigation links">Skip navigation links</a></div>
 <ul id="navbar-top-firstrow" class="nav-list" title="Navigation">
+<li><a href="../../../../index.html">Overview</a></li>
 <li><a href="package-summary.html">Package</a></li>
 <li class="nav-bar-cell1-rev">Class</li>
 <li><a href="package-tree.html">Tree</a></li>
-<li><a href="../../../index-all.html">Index</a></li>
-<li><a href="../../../help-doc.html#class">Help</a></li>
+<li><a href="../../../../index-all.html">Index</a></li>
+<li><a href="../../../../help-doc.html#class">Help</a></li>
 </ul>
 </div>
 <div class="sub-nav">
@@ -66,18 +67,19 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ru.nsu.dashkovskii</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ru.nsu.dashkovskii.gradebook</a></div>
 <h1 title="Class GradeBook" class="title">Class GradeBook</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">ru.nsu.dashkovskii.GradeBook</div>
+<div class="inheritance">ru.nsu.dashkovskii.gradebook.GradeBook</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">GradeBook</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Класс электронной зачетной книжки студента ФИТ.
- Является фасадом над классом Student для обеспечения обратной совместимости.</div>
+ Содержит всю информацию об оценках, семестрах и выполняет все расчёты.
+ Зачётная книжка не может существовать без студента (композиция).</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -89,8 +91,7 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,boolean)" class="member-name-link">GradeBook</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;studentName,
- boolean&nbsp;isPaid)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.dashkovskii.model.Student)" class="member-name-link">GradeBook</a><wbr>(<a href="../model/Student.html" title="class in ru.nsu.dashkovskii.model">Student</a>&nbsp;student)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Конструктор зачетной книжки.</div>
 </div>
@@ -109,14 +110,17 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addRecord(ru.nsu.dashkovskii.Record)" class="member-name-link">addRecord</a><wbr>(<a href="Record.html" title="class in ru.nsu.dashkovskii">Record</a>&nbsp;record)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addGrade(int,java.lang.String,ru.nsu.dashkovskii.enums.ControlType,ru.nsu.dashkovskii.enums.Grade)" class="member-name-link">addGrade</a><wbr>(int&nbsp;semesterNumber,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;subjectName,
+ <a href="../enums/ControlType.html" title="enum class in ru.nsu.dashkovskii.enums">ControlType</a>&nbsp;controlType,
+ <a href="../enums/Grade.html" title="enum class in ru.nsu.dashkovskii.enums">Grade</a>&nbsp;grade)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Добавить запись об оценке.</div>
+<div class="block">Добавить оценку по предмету.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#canGetIncreasedScholarship()" class="member-name-link">canGetIncreasedScholarship</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Проверить возможность получения повышенной стипендии в текущем семестре.</div>
+<div class="block">Проверить возможность получения повышенной стипендии.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#canGetRedDiploma()" class="member-name-link">canGetRedDiploma</a>()</code></div>
@@ -133,25 +137,25 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Вычислить средний балл за все время обучения.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Record.html" title="class in ru.nsu.dashkovskii">Record</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRecords()" class="member-name-link">getRecords</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="../model/Semester.html" title="class in ru.nsu.dashkovskii.model">Semester</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSemesters()" class="member-name-link">getSemesters</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Получить список всех записей.</div>
+<div class="block">Получить все семестры.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Student.html" title="class in ru.nsu.dashkovskii">Student</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../model/Student.html" title="class in ru.nsu.dashkovskii.model">Student</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getStudent()" class="member-name-link">getStudent</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Получить объект студента для прямой работы с новой моделью.</div>
+<div class="block">Получить студента.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getStudentName()" class="member-name-link">getStudentName</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../enums/Grade.html" title="enum class in ru.nsu.dashkovskii.enums">Grade</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getThesisGrade()" class="member-name-link">getThesisGrade</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Получить имя студента.</div>
+<div class="block">Получить оценку за ВКР.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isPaid()" class="member-name-link">isPaid</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setThesisGrade(ru.nsu.dashkovskii.enums.Grade)" class="member-name-link">setThesisGrade</a><wbr>(<a href="../enums/Grade.html" title="enum class in ru.nsu.dashkovskii.enums">Grade</a>&nbsp;grade)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Проверить, обучается ли студент на платной основе.</div>
+<div class="block">Установить оценку за ВКР.</div>
 </div>
 </div>
 </div>
@@ -171,15 +175,13 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(java.lang.String,boolean)">
+<section class="detail" id="&lt;init&gt;(ru.nsu.dashkovskii.model.Student)">
 <h3>GradeBook</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">GradeBook</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;studentName,
- boolean&nbsp;isPaid)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">GradeBook</span><wbr><span class="parameters">(<a href="../model/Student.html" title="class in ru.nsu.dashkovskii.model">Student</a>&nbsp;student)</span></div>
 <div class="block">Конструктор зачетной книжки.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>studentName</code> - имя студента</dd>
-<dd><code>isPaid</code> - обучается ли студент на платной основе</dd>
+<dd><code>student</code> - студент, владелец зачётной книжки</dd>
 </dl>
 </section>
 </li>
@@ -192,13 +194,30 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="addRecord(ru.nsu.dashkovskii.Record)">
-<h3>addRecord</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addRecord</span><wbr><span class="parameters">(<a href="Record.html" title="class in ru.nsu.dashkovskii">Record</a>&nbsp;record)</span></div>
-<div class="block">Добавить запись об оценке.</div>
+<section class="detail" id="addGrade(int,java.lang.String,ru.nsu.dashkovskii.enums.ControlType,ru.nsu.dashkovskii.enums.Grade)">
+<h3>addGrade</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addGrade</span><wbr><span class="parameters">(int&nbsp;semesterNumber,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;subjectName,
+ <a href="../enums/ControlType.html" title="enum class in ru.nsu.dashkovskii.enums">ControlType</a>&nbsp;controlType,
+ <a href="../enums/Grade.html" title="enum class in ru.nsu.dashkovskii.enums">Grade</a>&nbsp;grade)</span></div>
+<div class="block">Добавить оценку по предмету.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>record</code> - запись</dd>
+<dd><code>semesterNumber</code> - номер семестра</dd>
+<dd><code>subjectName</code> - название предмета</dd>
+<dd><code>controlType</code> - тип контроля</dd>
+<dd><code>grade</code> - оценка</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setThesisGrade(ru.nsu.dashkovskii.enums.Grade)">
+<h3>setThesisGrade</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setThesisGrade</span><wbr><span class="parameters">(<a href="../enums/Grade.html" title="enum class in ru.nsu.dashkovskii.enums">Grade</a>&nbsp;grade)</span></div>
+<div class="block">Установить оценку за ВКР.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>grade</code> - оценка</dd>
 </dl>
 </section>
 </li>
@@ -220,7 +239,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">canTransferToBudget</span>()</div>
 <div class="block">Проверить возможность перевода с платной на бюджетную форму обучения.
  Требование: отсутствие оценок "удовлетворительно" и "неуд" за ЭКЗАМЕНЫ
- в последние две сессии.</div>
+ в последние две экзаменационные сессии.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>true если возможен перевод</dd>
@@ -233,9 +252,9 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">canGetRedDiploma</span>()</div>
 <div class="block">Проверить возможность получения красного диплома.
  Требования:
- 1) 75% оценок в приложении к диплому (последняя оценка по предмету) – "отлично"
+ 1) 75% оценок в приложении к диплому – "отлично"
  2) Отсутствие итоговых оценок "удовлетворительно" по экзаменам и диф. зачетам
- 3) ВКР на "отлично" (если уже защищена)</div>
+ 3) ВКР на "отлично" (если защищена)</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>true если возможен красный диплом</dd>
@@ -246,8 +265,9 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="canGetIncreasedScholarship()">
 <h3>canGetIncreasedScholarship</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">canGetIncreasedScholarship</span>()</div>
-<div class="block">Проверить возможность получения повышенной стипендии в текущем семестре.
- Требование: только отличные оценки в последнем семестре по экзаменам и диф. зачетам.</div>
+<div class="block">Проверить возможность получения повышенной стипендии.
+ Требование: только отличные оценки в последнем семестре
+ по экзаменам и диф. зачетам.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>true если возможна повышенная стипендия</dd>
@@ -255,46 +275,35 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getStudentName()">
-<h3>getStudentName</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getStudentName</span>()</div>
-<div class="block">Получить имя студента.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>имя студента</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="isPaid()">
-<h3>isPaid</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isPaid</span>()</div>
-<div class="block">Проверить, обучается ли студент на платной основе.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>true если на платной основе</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getRecords()">
-<h3>getRecords</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Record.html" title="class in ru.nsu.dashkovskii">Record</a>&gt;</span>&nbsp;<span class="element-name">getRecords</span>()</div>
-<div class="block">Получить список всех записей.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>список записей</dd>
-</dl>
-</section>
-</li>
-<li>
 <section class="detail" id="getStudent()">
 <h3>getStudent</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Student.html" title="class in ru.nsu.dashkovskii">Student</a></span>&nbsp;<span class="element-name">getStudent</span>()</div>
-<div class="block">Получить объект студента для прямой работы с новой моделью.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../model/Student.html" title="class in ru.nsu.dashkovskii.model">Student</a></span>&nbsp;<span class="element-name">getStudent</span>()</div>
+<div class="block">Получить студента.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>студент</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getSemesters()">
+<h3>getSemesters</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="../model/Semester.html" title="class in ru.nsu.dashkovskii.model">Semester</a>&gt;</span>&nbsp;<span class="element-name">getSemesters</span>()</div>
+<div class="block">Получить все семестры.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>карта семестров</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getThesisGrade()">
+<h3>getThesisGrade</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../enums/Grade.html" title="enum class in ru.nsu.dashkovskii.enums">Grade</a></span>&nbsp;<span class="element-name">getThesisGrade</span>()</div>
+<div class="block">Получить оценку за ВКР.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>оценка за ВКР или null если не защищена</dd>
 </dl>
 </section>
 </li>
