@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'jacoco'
+}
+
+group = 'ru.nsu.dashkovskii'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    mainClass = 'ru.nsu.dashkovskii.Main'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'ru.nsu.dashkovskii.Main'
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.11"
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
