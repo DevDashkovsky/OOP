@@ -1,8 +1,17 @@
 package ru.nsu.dashkovskii;
 
+/**
+ * Утилитарный класс, содержащий методы, связанные с простыми числами.
+ */
 public class PrimeUtils {
     private PrimeUtils() {}
 
+    /**
+     * Проверяет, является ли заданное число простым.
+     *
+     * @param n число для проверки
+     * @return true, если число простое, иначе false
+     */
     public static boolean isPrime(int n) {
         if (n <= 1) {
             return false;

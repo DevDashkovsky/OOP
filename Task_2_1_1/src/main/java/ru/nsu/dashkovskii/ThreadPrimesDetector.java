@@ -2,11 +2,20 @@ package ru.nsu.dashkovskii;
 
 import java.util.List;
 
+/**
+ * Реализация PrimesDetector, использующая несколько потоков для обработки списка.
+ * Список делится на части, и каждая часть обрабатывается отдельным потоком.
+ */
 public class ThreadPrimesDetector implements PrimesDetector {
     private final int threadCount;
 
     private volatile boolean foundComposite;
 
+    /**
+     * Создает экземпляр ThreadPrimesDetector с указанным количеством потоков.
+     *
+     * @param threadCount количество потоков для обработки
+     */
     public ThreadPrimesDetector(int threadCount) {
         this.threadCount = threadCount;
     }
@@ -15,7 +24,7 @@ public class ThreadPrimesDetector implements PrimesDetector {
     public boolean containsComposite(List<Integer> numbers) {
         if (numbers.isEmpty()) return false;
 
-        foundComposite = false; // Сброс состояния перед запуском
+        foundComposite = false;
         int size = numbers.size();
         int actualThreads = Math.min(threadCount, size);
 
@@ -28,7 +37,6 @@ public class ThreadPrimesDetector implements PrimesDetector {
 
             threads[i] = new Thread(() -> {
                 for (int j = start; j < end; j++) {
-                    // Если другой поток уже нашел непростое число, выходим
                     if (foundComposite) return;
 
                     if (!PrimeUtils.isPrime(numbers.get(j))) {

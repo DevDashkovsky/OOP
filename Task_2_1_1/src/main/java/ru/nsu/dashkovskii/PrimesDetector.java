@@ -2,6 +2,9 @@ package ru.nsu.dashkovskii;
 
 import java.util.List;
 
+/**
+ * Интерфейс, определяющий контракт для поиска составных чисел в списке.
+ */
 public interface PrimesDetector {
     /**
      * Проверяет, содержится ли в списке хотя бы одно непростое число.
