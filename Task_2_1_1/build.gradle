@@ -8,6 +8,10 @@ plugins {
 group = 'ru.nsu.dashkovskii'
 version = '1.0-SNAPSHOT'
 
+checkstyle {
+    toolVersion = "10.12.5"
+}
+
 application {
     mainClass = 'ru.nsu.dashkovskii.Main'
 }
