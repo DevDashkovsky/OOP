@@ -32,7 +32,8 @@ public class Main {
         System.out.println("Generating test data (" + listSize + " large primes)...");
         List<Integer> numbers = new ArrayList<>(Collections.nCopies(listSize, largePrime));
 
-        new ConsistentPrimeDetector().containsComposite(numbers.subList(0, Math.min(100, numbers.size())));
+        new ConsistentPrimeDetector().containsComposite(
+                numbers.subList(0, Math.min(100, numbers.size())));
 
         System.out.println("Starting Benchmark...\n");
         System.out.println("Strategy | Threads | Time (ms)");
@@ -40,7 +41,7 @@ public class Main {
 
         PrimesDetector sequential = new ConsistentPrimeDetector();
         long start = System.nanoTime();
-        boolean resSeq = sequential.containsComposite(numbers);
+        final boolean resSeq = sequential.containsComposite(numbers);
         long durationSeq = (System.nanoTime() - start) / 1_000_000;
 
         System.out.printf("Sequential      | 1       | %d%n", durationSeq);

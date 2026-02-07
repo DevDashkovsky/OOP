@@ -37,7 +37,9 @@ public class ThreadPrimesDetector implements PrimesDetector {
 
             threads[i] = new Thread(() -> {
                 for (int j = start; j < end; j++) {
-                    if (foundComposite) return;
+                    if (foundComposite) {
+                        return;
+                    }
 
                     if (!PrimeUtils.isPrime(numbers.get(j))) {
                         foundComposite = true;
