@@ -22,7 +22,9 @@ public class ThreadPrimesDetector implements PrimesDetector {
 
     @Override
     public boolean containsComposite(List<Integer> numbers) {
-        if (numbers.isEmpty()) return false;
+        if (numbers.isEmpty()) {
+            return false;
+        }
 
         foundComposite = false;
         int size = numbers.size();

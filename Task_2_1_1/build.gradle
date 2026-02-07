@@ -1,10 +1,16 @@
 plugins {
     id 'java'
     id 'jacoco'
+    id 'application'
+    id 'checkstyle'
 }
 
-group = 'ru.nsu.shadrina'
+group = 'ru.nsu.dashkovskii'
 version = '1.0-SNAPSHOT'
+
+application {
+    mainClass = 'ru.nsu.dashkovskii.Main'
+}
 
 repositories {
     mavenCentral()

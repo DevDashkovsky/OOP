@@ -6,8 +6,8 @@ import java.util.List;
 
 /**
  * Главный класс для запуска бенчмарка различных реализаций PrimesDetector.
- * Может использоваться для сравнения производительности последовательного, многопоточного
- * подходов и использования параллельных потоков (Stream API).
+ * Может использоваться для сравнения производительности последовательного,
+ * многопоточного подходов и использования параллельных потоков (Stream API).
  */
 public class Main {
     /**
@@ -28,6 +28,7 @@ public class Main {
      */
     public static void runBenchmark(int listSize) {
         int largePrime = 1000000007;
+        boolean hasError = false;
 
         System.out.println("Generating test data (" + listSize + " large primes)...");
         List<Integer> numbers = new ArrayList<>(Collections.nCopies(listSize, largePrime));
@@ -42,19 +43,21 @@ public class Main {
         PrimesDetector sequential = new ConsistentPrimeDetector();
         long start = System.nanoTime();
         final boolean resSeq = sequential.containsComposite(numbers);
+        if (resSeq) {
+            hasError = true;
+        }
         long durationSeq = (System.nanoTime() - start) / 1_000_000;
 
-        System.out.printf("Sequential      | 1       | %d%n", durationSeq);
+        System.out.printf("Consistent      | 1       | %d%n", durationSeq);
 
         int cores = Runtime.getRuntime().availableProcessors();
-        boolean threadError = false;
 
         for (int i = 1; i <= cores; i++) {
             PrimesDetector threadDetector = new ThreadPrimesDetector(i);
             start = System.nanoTime();
             boolean resThread = threadDetector.containsComposite(numbers);
             if (resThread) {
-                threadError = true;
+                hasError = true;
             }
             long durationThread = (System.nanoTime() - start) / 1_000_000;
 
@@ -64,11 +67,14 @@ public class Main {
         PrimesDetector streamDetector = new ParallelStreamPrimesDetector();
         start = System.nanoTime();
         boolean resStream = streamDetector.containsComposite(numbers);
+        if (resStream) {
+            hasError = true;
+        }
         long durationStream = (System.nanoTime() - start) / 1_000_000;
 
         System.out.printf("ParallelStream  | ?       | %d%n", durationStream);
 
-        if (resSeq || resStream || threadError) {
+        if (hasError) {
             System.err.println("Error: Detectors found a composite number in a list of primes!");
         }
     }
