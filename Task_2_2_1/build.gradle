@@ -48,7 +48,8 @@ jacocoTestReport {
                     'ru/nsu/dashkovskii/service/Baker.class',
                     'ru/nsu/dashkovskii/service/Courier.class',
                     'ru/nsu/dashkovskii/service/PizzeriaClient.class',
-                    'ru/nsu/dashkovskii/strategy/**'
+                    'ru/nsu/dashkovskii/strategy/**',
+                    'ru/nsu/dashkovskii/util/**'
             ])
         }))
     }
