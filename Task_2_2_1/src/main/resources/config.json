@@ -1,0 +1,9 @@
+{
+  "bakersCount": 3,
+  "couriersCount": 2,
+  "warehouseCapacity": 10,
+  "storageCapacity": 20,
+  "cookingTimeMs": 2000,
+  "deliveryTimeMs": 3000,
+  "trunkCapacity": 2
+}
