@@ -3,6 +3,7 @@ package ru.nsu.dashkovskii.util;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Кастомная реализация блокирующей очереди.
@@ -12,11 +13,12 @@ import java.util.Queue;
 public class CustomQueue<T> {
     private final Queue<T> queue = new LinkedList<>();
     private final int capacity;
+    private final Object notFull = new Object();
+    private final Object notEmpty = new Object();
 
     public CustomQueue(int capacity) {
         this.capacity = capacity;
     }
-
 
     /**
      * Вставляет элемент и выполняет действие.
@@ -25,15 +27,19 @@ public class CustomQueue<T> {
      * @param action действие, выполняемое при успешном добавлении
      * @throws InterruptedException если ожидание прервано
      */
-    public synchronized void enqueue(T item, Runnable action) throws InterruptedException {
-        while (queue.size() >= capacity) {
-            wait();
+    public void enqueue(T item, Runnable action) throws InterruptedException {
+        synchronized (notFull) {
+            while (queue.size() >= capacity) {
+                notFull.wait();
+            }
+            if (action != null) {
+                action.run();
+            }
+            synchronized (notEmpty) {
+                queue.add(item);
+                notEmpty.notifyAll();
+            }
         }
-        if (action != null) {
-            action.run();
-        }
-        queue.add(item);
-        notifyAll();
     }
 
     /**
@@ -42,12 +48,17 @@ public class CustomQueue<T> {
      * @return первый элемент очереди
      * @throws InterruptedException если ожидание прервано
      */
-    public synchronized T dequeue() throws InterruptedException {
-        while (queue.isEmpty()) {
-            wait();
+    public T dequeue() throws InterruptedException {
+        T item;
+        synchronized (notEmpty) {
+            while (queue.isEmpty()) {
+                notEmpty.wait();
+            }
+            item = queue.poll();
         }
-        T item = queue.poll();
-        notifyAll();
+        synchronized (notFull) {
+            notFull.notifyAll();
+        }
         return item;
     }
 
@@ -56,12 +67,17 @@ public class CustomQueue<T> {
      *
      * @return первый элемент очереди или null
      */
-    public synchronized T poll() {
-        if (queue.isEmpty()) {
-            return null;
+    public T poll() {
+        T item;
+        synchronized (notEmpty) {
+            if (queue.isEmpty()) {
+                return null;
+            }
+            item = queue.poll();
         }
-        T item = queue.poll();
-        notifyAll();
+        synchronized (notFull) {
+            notFull.notifyAll();
+        }
         return item;
     }
 
@@ -72,15 +88,19 @@ public class CustomQueue<T> {
      * @return список извлеченных элементов
      * @throws InterruptedException если ожидание прервано
      */
-    public synchronized List<T> dequeueBatch(int maxCount) throws InterruptedException {
-        while (queue.isEmpty()) {
-            wait();
-        }
+    public List<T> dequeueBatch(int maxCount) throws InterruptedException {
         List<T> batch = new LinkedList<>();
-        while (!queue.isEmpty() && batch.size() < maxCount) {
-            batch.add(queue.poll());
+        synchronized (notEmpty) {
+            while (queue.isEmpty()) {
+                notEmpty.wait();
+            }
+            while (!queue.isEmpty() && batch.size() < maxCount) {
+                batch.add(queue.poll());
+            }
         }
-        notifyAll();
+        synchronized (notFull) {
+            notFull.notifyAll();
+        }
         return batch;
     }
 
