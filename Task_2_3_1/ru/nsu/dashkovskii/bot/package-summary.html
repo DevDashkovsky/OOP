@@ -73,12 +73,10 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><a href="../package-summary.html">ru.nsu.dashkovskii</a></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><a href="../controller/package-summary.html">ru.nsu.dashkovskii.controller</a></div>
+<div class="col-first odd-row-color"><a href="../model/package-summary.html">ru.nsu.dashkovskii.model</a></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><a href="../model/package-summary.html">ru.nsu.dashkovskii.model</a></div>
+<div class="col-first even-row-color"><a href="../view/package-summary.html">ru.nsu.dashkovskii.view</a></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><a href="../view/package-summary.html">ru.nsu.dashkovskii.view</a></div>
-<div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </div>
 </li>
@@ -99,11 +97,14 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="GreedyStrategy.html" title="class in ru.nsu.dashkovskii.bot">GreedyStrategy</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Стратегия бота, жадно движущегося к ближайшей еде.</div>
+<div class="block">Стратегия бота, использующая BFS для поиска кратчайшего
+ безопасного пути к ближайшей еде.</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="RandomStrategy.html" title="class in ru.nsu.dashkovskii.bot">RandomStrategy</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Стратегия бота, движущегося случайным образом и избегающего немедленных столкновений.</div>
+<div class="block">Стратегия бота, движущегося полуслучайно: с вероятностью
+ стремится к еде, иначе выбирает направление с наибольшим
+ свободным пространством, чтобы не загнать себя в тупик.</div>
 </div>
 </div>
 </div>

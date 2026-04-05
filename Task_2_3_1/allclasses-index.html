@@ -83,9 +83,10 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Конфигурация игры, загружаемая из JSON-файла.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/controller/GameController.html" title="class in ru.nsu.dashkovskii.controller">GameController</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Управляет игровой логикой: движением, столкновениями, едой, ботами и уровнями.</div>
+<div class="block">Игровой движок: управляет игровой логикой —
+ движением, столкновениями, едой, ботами и уровнями.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/model/GameField.html" title="class in ru.nsu.dashkovskii.model">GameField</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
@@ -95,32 +96,39 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab3">
 <div class="block">Возможные состояния игры.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/view/GameView.html" title="class in ru.nsu.dashkovskii.view">GameView</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="ru/nsu/dashkovskii/model/GameStateListener.html" title="interface in ru.nsu.dashkovskii.model">GameStateListener</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
+<div class="block">Слушатель изменений состояния игры.</div>
+</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/view/GameView.html" title="class in ru.nsu.dashkovskii.view">GameView</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Отрисовывает состояние игры на JavaFX Canvas в стиле Nokia.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/view/GameViewController.html" title="class in ru.nsu.dashkovskii.view">GameViewController</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/view/GameViewController.html" title="class in ru.nsu.dashkovskii.view">GameViewController</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">FXML-контроллер, связывающий ввод, игровой цикл и отрисовку.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/bot/GreedyStrategy.html" title="class in ru.nsu.dashkovskii.bot">GreedyStrategy</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Стратегия бота, жадно движущегося к ближайшей еде.</div>
-</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/Main.html" title="class in ru.nsu.dashkovskii">Main</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/bot/GreedyStrategy.html" title="class in ru.nsu.dashkovskii.bot">GreedyStrategy</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Стратегия бота, использующая BFS для поиска кратчайшего
+ безопасного пути к ближайшей еде.</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/Main.html" title="class in ru.nsu.dashkovskii">Main</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Точка входа в игровое приложение «Змейка».</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/model/Point.html" title="class in ru.nsu.dashkovskii.model">Point</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/model/Point.html" title="class in ru.nsu.dashkovskii.model">Point</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Неизменяемая двумерная точка на игровом поле.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/bot/RandomStrategy.html" title="class in ru.nsu.dashkovskii.bot">RandomStrategy</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Стратегия бота, движущегося случайным образом и избегающего немедленных столкновений.</div>
-</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/model/Snake.html" title="class in ru.nsu.dashkovskii.model">Snake</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/bot/RandomStrategy.html" title="class in ru.nsu.dashkovskii.bot">RandomStrategy</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Стратегия бота, движущегося полуслучайно: с вероятностью
+ стремится к еде, иначе выбирает направление с наибольшим
+ свободным пространством, чтобы не загнать себя в тупик.</div>
+</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/model/Snake.html" title="class in ru.nsu.dashkovskii.model">Snake</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Представляет змейку в виде упорядоченной деки сегментов тела с явно выделенными головой и хвостом.</div>
 </div>
 </div>

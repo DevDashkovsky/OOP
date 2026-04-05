@@ -74,9 +74,14 @@ loadScripts(document, 'script');</script>
 <div class="inheritance">ru.nsu.dashkovskii.view.GameView</div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>All Implemented Interfaces:</dt>
+<dd><code><a href="../model/GameStateListener.html" title="interface in ru.nsu.dashkovskii.model">GameStateListener</a></code></dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">GameView</span>
-<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
+implements <a href="../model/GameStateListener.html" title="interface in ru.nsu.dashkovskii.model">GameStateListener</a></span></div>
 <div class="block">Отрисовывает состояние игры на JavaFX Canvas в стиле Nokia.</div>
 </section>
 <section class="summary">
@@ -106,8 +111,13 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(ru.nsu.dashkovskii.controller.GameController)" class="member-name-link">render</a><wbr>(<a href="../controller/GameController.html" title="class in ru.nsu.dashkovskii.controller">GameController</a>&nbsp;controller)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onGameStateChanged(ru.nsu.dashkovskii.model.GameEngine)" class="member-name-link">onGameStateChanged</a><wbr>(<a href="../model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a>&nbsp;engine)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Вызывается при изменении состояния игры.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(ru.nsu.dashkovskii.model.GameEngine)" class="member-name-link">render</a><wbr>(<a href="../model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a>&nbsp;engine)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Отрисовывает всё игровое состояние.</div>
 </div>
 </div>
@@ -142,13 +152,27 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="render(ru.nsu.dashkovskii.controller.GameController)">
+<section class="detail" id="onGameStateChanged(ru.nsu.dashkovskii.model.GameEngine)">
+<h3>onGameStateChanged</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onGameStateChanged</span><wbr><span class="parameters">(<a href="../model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a>&nbsp;engine)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../model/GameStateListener.html#onGameStateChanged(ru.nsu.dashkovskii.model.GameEngine)">GameStateListener</a></code></span></div>
+<div class="block">Вызывается при изменении состояния игры.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../model/GameStateListener.html#onGameStateChanged(ru.nsu.dashkovskii.model.GameEngine)">onGameStateChanged</a></code>&nbsp;in interface&nbsp;<code><a href="../model/GameStateListener.html" title="interface in ru.nsu.dashkovskii.model">GameStateListener</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>engine</code> - движок игры, состояние которого изменилось</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="render(ru.nsu.dashkovskii.model.GameEngine)">
 <h3>render</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">render</span><wbr><span class="parameters">(<a href="../controller/GameController.html" title="class in ru.nsu.dashkovskii.controller">GameController</a>&nbsp;controller)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">render</span><wbr><span class="parameters">(<a href="../model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a>&nbsp;engine)</span></div>
 <div class="block">Отрисовывает всё игровое состояние.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>controller</code> - игровой контроллер для отрисовки</dd>
+<dd><code>engine</code> - игровой движок для отрисовки</dd>
 </dl>
 </section>
 </li>

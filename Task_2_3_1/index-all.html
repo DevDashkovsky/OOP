@@ -52,6 +52,10 @@ loadScripts(document, 'script');</script>
 <a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:K">K</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<a href="#I:W">W</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a>
 <h2 class="title" id="I:A">A</h2>
 <dl class="index">
+<dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#addListener(ru.nsu.dashkovskii.model.GameStateListener)" class="member-name-link">addListener(GameStateListener)</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
+<dd>
+<div class="block">Добавляет слушателя изменений состояния игры.</div>
+</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameField.html#addObstacle(ru.nsu.dashkovskii.model.Point)" class="member-name-link">addObstacle(Point)</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameField.html" title="class in ru.nsu.dashkovskii.model">GameField</a></dt>
 <dd>
 <div class="block">Добавляет препятствие в заданную точку.</div>
@@ -126,15 +130,16 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameConfig.html#%3Cinit%3E()" class="member-name-link">GameConfig()</a> - Constructor for class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameConfig.html" title="class in ru.nsu.dashkovskii.model">GameConfig</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/dashkovskii/controller/GameController.html" class="type-name-link" title="class in ru.nsu.dashkovskii.controller">GameController</a> - Class in <a href="ru/nsu/dashkovskii/controller/package-summary.html">ru.nsu.dashkovskii.controller</a></dt>
+<dt><a href="ru/nsu/dashkovskii/model/GameEngine.html" class="type-name-link" title="class in ru.nsu.dashkovskii.model">GameEngine</a> - Class in <a href="ru/nsu/dashkovskii/model/package-summary.html">ru.nsu.dashkovskii.model</a></dt>
 <dd>
-<div class="block">Управляет игровой логикой: движением, столкновениями, едой, ботами и уровнями.</div>
+<div class="block">Игровой движок: управляет игровой логикой —
+ движением, столкновениями, едой, ботами и уровнями.</div>
 </dd>
-<dt><a href="ru/nsu/dashkovskii/controller/GameController.html#%3Cinit%3E(ru.nsu.dashkovskii.model.GameConfig)" class="member-name-link">GameController(GameConfig)</a> - Constructor for class ru.nsu.dashkovskii.controller.<a href="ru/nsu/dashkovskii/controller/GameController.html" title="class in ru.nsu.dashkovskii.controller">GameController</a></dt>
+<dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#%3Cinit%3E(ru.nsu.dashkovskii.model.GameConfig)" class="member-name-link">GameEngine(GameConfig)</a> - Constructor for class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
 <dd>
 <div class="block">Инициализирует новую игру с заданной конфигурацией.</div>
 </dd>
-<dt><a href="ru/nsu/dashkovskii/controller/GameController.html#%3Cinit%3E(ru.nsu.dashkovskii.model.GameConfig,ru.nsu.dashkovskii.model.GameField)" class="member-name-link">GameController(GameConfig, GameField)</a> - Constructor for class ru.nsu.dashkovskii.controller.<a href="ru/nsu/dashkovskii/controller/GameController.html" title="class in ru.nsu.dashkovskii.controller">GameController</a></dt>
+<dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#%3Cinit%3E(ru.nsu.dashkovskii.model.GameConfig,ru.nsu.dashkovskii.model.GameField)" class="member-name-link">GameEngine(GameConfig, GameField)</a> - Constructor for class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
 <dd>
 <div class="block">Конструктор для тестирования с пользовательским игровым полем.</div>
 </dd>
@@ -154,6 +159,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Возможные состояния игры.</div>
 </dd>
+<dt><a href="ru/nsu/dashkovskii/model/GameStateListener.html" class="type-name-link" title="interface in ru.nsu.dashkovskii.model">GameStateListener</a> - Interface in <a href="ru/nsu/dashkovskii/model/package-summary.html">ru.nsu.dashkovskii.model</a></dt>
+<dd>
+<div class="block">Слушатель изменений состояния игры.</div>
+</dd>
 <dt><a href="ru/nsu/dashkovskii/view/GameView.html" class="type-name-link" title="class in ru.nsu.dashkovskii.view">GameView</a> - Class in <a href="ru/nsu/dashkovskii/view/package-summary.html">ru.nsu.dashkovskii.view</a></dt>
 <dd>
 <div class="block">Отрисовывает состояние игры на JavaFX Canvas в стиле Nokia.</div>
@@ -166,7 +175,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/view/GameViewController.html#%3Cinit%3E()" class="member-name-link">GameViewController()</a> - Constructor for class ru.nsu.dashkovskii.view.<a href="ru/nsu/dashkovskii/view/GameViewController.html" title="class in ru.nsu.dashkovskii.view">GameViewController</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/dashkovskii/controller/GameController.html#getAllSnakes()" class="member-name-link">getAllSnakes()</a> - Method in class ru.nsu.dashkovskii.controller.<a href="ru/nsu/dashkovskii/controller/GameController.html" title="class in ru.nsu.dashkovskii.controller">GameController</a></dt>
+<dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#getAllSnakes()" class="member-name-link">getAllSnakes()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
 <dd>
 <div class="block">Возвращает список всех змеек (игрок + боты).</div>
 </dd>
@@ -178,9 +187,9 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameConfig.html#getBotCount()" class="member-name-link">getBotCount()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameConfig.html" title="class in ru.nsu.dashkovskii.model">GameConfig</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/dashkovskii/controller/GameController.html#getBots()" class="member-name-link">getBots()</a> - Method in class ru.nsu.dashkovskii.controller.<a href="ru/nsu/dashkovskii/controller/GameController.html" title="class in ru.nsu.dashkovskii.controller">GameController</a></dt>
+<dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#getBots()" class="member-name-link">getBots()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/dashkovskii/controller/GameController.html#getCurrentSpeed()" class="member-name-link">getCurrentSpeed()</a> - Method in class ru.nsu.dashkovskii.controller.<a href="ru/nsu/dashkovskii/controller/GameController.html" title="class in ru.nsu.dashkovskii.controller">GameController</a></dt>
+<dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#getCurrentSpeed()" class="member-name-link">getCurrentSpeed()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/Snake.html#getDirection()" class="member-name-link">getDirection()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/Snake.html" title="class in ru.nsu.dashkovskii.model">Snake</a></dt>
 <dd>&nbsp;</dd>
@@ -188,7 +197,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/Direction.html#getDy()" class="member-name-link">getDy()</a> - Method in enum class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/Direction.html" title="enum class in ru.nsu.dashkovskii.model">Direction</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/dashkovskii/controller/GameController.html#getField()" class="member-name-link">getField()</a> - Method in class ru.nsu.dashkovskii.controller.<a href="ru/nsu/dashkovskii/controller/GameController.html" title="class in ru.nsu.dashkovskii.controller">GameController</a></dt>
+<dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#getField()" class="member-name-link">getField()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameConfig.html#getFieldHeight()" class="member-name-link">getFieldHeight()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameConfig.html" title="class in ru.nsu.dashkovskii.model">GameConfig</a></dt>
 <dd>&nbsp;</dd>
@@ -206,7 +215,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameConfig.html#getInitialSpeed()" class="member-name-link">getInitialSpeed()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameConfig.html" title="class in ru.nsu.dashkovskii.model">GameConfig</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/dashkovskii/controller/GameController.html#getLevel()" class="member-name-link">getLevel()</a> - Method in class ru.nsu.dashkovskii.controller.<a href="ru/nsu/dashkovskii/controller/GameController.html" title="class in ru.nsu.dashkovskii.controller">GameController</a></dt>
+<dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#getLevel()" class="member-name-link">getLevel()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameConfig.html#getLevelUpEvery()" class="member-name-link">getLevelUpEvery()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameConfig.html" title="class in ru.nsu.dashkovskii.model">GameConfig</a></dt>
 <dd>&nbsp;</dd>
@@ -214,17 +223,17 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameField.html#getObstacles()" class="member-name-link">getObstacles()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameField.html" title="class in ru.nsu.dashkovskii.model">GameField</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/dashkovskii/controller/GameController.html#getPlayerSnake()" class="member-name-link">getPlayerSnake()</a> - Method in class ru.nsu.dashkovskii.controller.<a href="ru/nsu/dashkovskii/controller/GameController.html" title="class in ru.nsu.dashkovskii.controller">GameController</a></dt>
+<dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#getPlayerSnake()" class="member-name-link">getPlayerSnake()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/Food.html#getPosition()" class="member-name-link">getPosition()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/Food.html" title="class in ru.nsu.dashkovskii.model">Food</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/dashkovskii/controller/GameController.html#getScore()" class="member-name-link">getScore()</a> - Method in class ru.nsu.dashkovskii.controller.<a href="ru/nsu/dashkovskii/controller/GameController.html" title="class in ru.nsu.dashkovskii.controller">GameController</a></dt>
+<dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#getScore()" class="member-name-link">getScore()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/bot/BotSnake.html#getSnake()" class="member-name-link">getSnake()</a> - Method in class ru.nsu.dashkovskii.bot.<a href="ru/nsu/dashkovskii/bot/BotSnake.html" title="class in ru.nsu.dashkovskii.bot">BotSnake</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameConfig.html#getSpeedFoodChance()" class="member-name-link">getSpeedFoodChance()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameConfig.html" title="class in ru.nsu.dashkovskii.model">GameConfig</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/dashkovskii/controller/GameController.html#getState()" class="member-name-link">getState()</a> - Method in class ru.nsu.dashkovskii.controller.<a href="ru/nsu/dashkovskii/controller/GameController.html" title="class in ru.nsu.dashkovskii.controller">GameController</a></dt>
+<dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#getState()" class="member-name-link">getState()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/bot/BotSnake.html#getStrategy()" class="member-name-link">getStrategy()</a> - Method in class ru.nsu.dashkovskii.bot.<a href="ru/nsu/dashkovskii/bot/BotSnake.html" title="class in ru.nsu.dashkovskii.bot">BotSnake</a></dt>
 <dd>&nbsp;</dd>
@@ -242,7 +251,8 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/bot/GreedyStrategy.html" class="type-name-link" title="class in ru.nsu.dashkovskii.bot">GreedyStrategy</a> - Class in <a href="ru/nsu/dashkovskii/bot/package-summary.html">ru.nsu.dashkovskii.bot</a></dt>
 <dd>
-<div class="block">Стратегия бота, жадно движущегося к ближайшей еде.</div>
+<div class="block">Стратегия бота, использующая BFS для поиска кратчайшего
+ безопасного пути к ближайшей еде.</div>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/bot/GreedyStrategy.html#%3Cinit%3E()" class="member-name-link">GreedyStrategy()</a> - Constructor for class ru.nsu.dashkovskii.bot.<a href="ru/nsu/dashkovskii/bot/GreedyStrategy.html" title="class in ru.nsu.dashkovskii.bot">GreedyStrategy</a></dt>
 <dd>&nbsp;</dd>
@@ -255,7 +265,8 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="ru/nsu/dashkovskii/view/GameViewController.html#handleKeyPress(javafx.scene.input.KeyEvent)" class="member-name-link">handleKeyPress(KeyEvent)</a> - Method in class ru.nsu.dashkovskii.view.<a href="ru/nsu/dashkovskii/view/GameViewController.html" title="class in ru.nsu.dashkovskii.view">GameViewController</a></dt>
 <dd>
-<div class="block">Обрабатывает события нажатия клавиш для управления змейкой и игровыми действиями.</div>
+<div class="block">Обрабатывает события нажатия клавиш
+ для управления змейкой и игровыми действиями.</div>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/model/Point.html#hashCode()" class="member-name-link">hashCode()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/Point.html" title="class in ru.nsu.dashkovskii.model">Point</a></dt>
 <dd>&nbsp;</dd>
@@ -323,6 +334,12 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:O">O</h2>
 <dl class="index">
+<dt><a href="ru/nsu/dashkovskii/model/GameStateListener.html#onGameStateChanged(ru.nsu.dashkovskii.model.GameEngine)" class="member-name-link">onGameStateChanged(GameEngine)</a> - Method in interface ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameStateListener.html" title="interface in ru.nsu.dashkovskii.model">GameStateListener</a></dt>
+<dd>
+<div class="block">Вызывается при изменении состояния игры.</div>
+</dd>
+<dt><a href="ru/nsu/dashkovskii/view/GameView.html#onGameStateChanged(ru.nsu.dashkovskii.model.GameEngine)" class="member-name-link">onGameStateChanged(GameEngine)</a> - Method in class ru.nsu.dashkovskii.view.<a href="ru/nsu/dashkovskii/view/GameView.html" title="class in ru.nsu.dashkovskii.view">GameView</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/Direction.html#opposite()" class="member-name-link">opposite()</a> - Method in enum class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/Direction.html" title="enum class in ru.nsu.dashkovskii.model">Direction</a></dt>
 <dd>
 <div class="block">Возвращает противоположное направление.</div>
@@ -343,13 +360,15 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="ru/nsu/dashkovskii/bot/RandomStrategy.html" class="type-name-link" title="class in ru.nsu.dashkovskii.bot">RandomStrategy</a> - Class in <a href="ru/nsu/dashkovskii/bot/package-summary.html">ru.nsu.dashkovskii.bot</a></dt>
 <dd>
-<div class="block">Стратегия бота, движущегося случайным образом и избегающего немедленных столкновений.</div>
+<div class="block">Стратегия бота, движущегося полуслучайно: с вероятностью
+ стремится к еде, иначе выбирает направление с наибольшим
+ свободным пространством, чтобы не загнать себя в тупик.</div>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/bot/RandomStrategy.html#%3Cinit%3E()" class="member-name-link">RandomStrategy()</a> - Constructor for class ru.nsu.dashkovskii.bot.<a href="ru/nsu/dashkovskii/bot/RandomStrategy.html" title="class in ru.nsu.dashkovskii.bot">RandomStrategy</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/bot/RandomStrategy.html#%3Cinit%3E(java.util.Random)" class="member-name-link">RandomStrategy(Random)</a> - Constructor for class ru.nsu.dashkovskii.bot.<a href="ru/nsu/dashkovskii/bot/RandomStrategy.html" title="class in ru.nsu.dashkovskii.bot">RandomStrategy</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/dashkovskii/view/GameView.html#render(ru.nsu.dashkovskii.controller.GameController)" class="member-name-link">render(GameController)</a> - Method in class ru.nsu.dashkovskii.view.<a href="ru/nsu/dashkovskii/view/GameView.html" title="class in ru.nsu.dashkovskii.view">GameView</a></dt>
+<dt><a href="ru/nsu/dashkovskii/view/GameView.html#render(ru.nsu.dashkovskii.model.GameEngine)" class="member-name-link">render(GameEngine)</a> - Method in class ru.nsu.dashkovskii.view.<a href="ru/nsu/dashkovskii/view/GameView.html" title="class in ru.nsu.dashkovskii.view">GameView</a></dt>
 <dd>
 <div class="block">Отрисовывает всё игровое состояние.</div>
 </dd>
@@ -358,8 +377,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/dashkovskii/package-summary.html">ru.nsu.dashkovskii</a> - package ru.nsu.dashkovskii</dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/bot/package-summary.html">ru.nsu.dashkovskii.bot</a> - package ru.nsu.dashkovskii.bot</dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/dashkovskii/controller/package-summary.html">ru.nsu.dashkovskii.controller</a> - package ru.nsu.dashkovskii.controller</dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/package-summary.html">ru.nsu.dashkovskii.model</a> - package ru.nsu.dashkovskii.model</dt>
 <dd>&nbsp;</dd>
@@ -374,7 +391,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Устанавливает новое направление, игнорируя разворот на 180 градусов.</div>
 </dd>
-<dt><a href="ru/nsu/dashkovskii/controller/GameController.html#setPlayerDirection(ru.nsu.dashkovskii.model.Direction)" class="member-name-link">setPlayerDirection(Direction)</a> - Method in class ru.nsu.dashkovskii.controller.<a href="ru/nsu/dashkovskii/controller/GameController.html" title="class in ru.nsu.dashkovskii.controller">GameController</a></dt>
+<dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#setPlayerDirection(ru.nsu.dashkovskii.model.Direction)" class="member-name-link">setPlayerDirection(Direction)</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
 <dd>
 <div class="block">Устанавливает направление движения змейки игрока.</div>
 </dd>
@@ -397,11 +414,11 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:T">T</h2>
 <dl class="index">
-<dt><a href="ru/nsu/dashkovskii/controller/GameController.html#tick()" class="member-name-link">tick()</a> - Method in class ru.nsu.dashkovskii.controller.<a href="ru/nsu/dashkovskii/controller/GameController.html" title="class in ru.nsu.dashkovskii.controller">GameController</a></dt>
+<dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#tick()" class="member-name-link">tick()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
 <dd>
 <div class="block">Продвигает игру на один шаг.</div>
 </dd>
-<dt><a href="ru/nsu/dashkovskii/controller/GameController.html#togglePause()" class="member-name-link">togglePause()</a> - Method in class ru.nsu.dashkovskii.controller.<a href="ru/nsu/dashkovskii/controller/GameController.html" title="class in ru.nsu.dashkovskii.controller">GameController</a></dt>
+<dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#togglePause()" class="member-name-link">togglePause()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
 <dd>
 <div class="block">Переключает паузу.</div>
 </dd>
