@@ -7,9 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import ru.nsu.dashkovskii.controller.GameController;
 import ru.nsu.dashkovskii.model.Direction;
 import ru.nsu.dashkovskii.model.GameConfig;
+import ru.nsu.dashkovskii.model.GameEngine;
 import ru.nsu.dashkovskii.model.GameState;
 
 /**
@@ -31,7 +31,7 @@ public class GameViewController {
     @FXML
     private Label stateLabel;
 
-    private GameController gameController;
+    private GameEngine gameEngine;
     private GameView gameView;
     private AnimationTimer timer;
     private long lastUpdate;
@@ -48,14 +48,17 @@ public class GameViewController {
         startNewGame();
 
         canvasPane.widthProperty().addListener((obs, o, n) ->
-                gameView.render(gameController));
+                gameView.render(gameEngine));
         canvasPane.heightProperty().addListener((obs, o, n) ->
-                gameView.render(gameController));
+                gameView.render(gameEngine));
     }
 
     private void startNewGame() {
-        GameConfig config = GameConfig.load("/ru/nsu/dashkovskii/config.json");
-        gameController = new GameController(config);
+        GameConfig config = GameConfig.load(
+                "/ru/nsu/dashkovskii/config.json");
+        gameEngine = new GameEngine(config);
+        gameEngine.addListener(gameView);
+        gameEngine.addListener(engine -> updateLabels());
         lastUpdate = 0;
 
         if (timer != null) {
@@ -66,22 +69,21 @@ public class GameViewController {
             @Override
             public void handle(long now) {
                 long interval = NANOS_PER_SECOND
-                        / gameController.getCurrentSpeed();
+                        / gameEngine.getCurrentSpeed();
                 if (now - lastUpdate >= interval) {
-                    gameController.tick();
-                    gameView.render(gameController);
-                    updateLabels();
+                    gameEngine.tick();
                     lastUpdate = now;
                 }
             }
         };
         timer.start();
-        gameView.render(gameController);
+        gameView.render(gameEngine);
         updateLabels();
     }
 
     /**
-     * Обрабатывает события нажатия клавиш для управления змейкой и игровыми действиями.
+     * Обрабатывает события нажатия клавиш
+     * для управления змейкой и игровыми действиями.
      *
      * @param event событие нажатия клавиши
      */
@@ -90,30 +92,26 @@ public class GameViewController {
         switch (code) {
             case UP:
             case W:
-                gameController.setPlayerDirection(Direction.UP);
+                gameEngine.setPlayerDirection(Direction.UP);
                 break;
             case DOWN:
             case S:
-                gameController.setPlayerDirection(Direction.DOWN);
+                gameEngine.setPlayerDirection(Direction.DOWN);
                 break;
             case LEFT:
             case A:
-                gameController.setPlayerDirection(Direction.LEFT);
+                gameEngine.setPlayerDirection(Direction.LEFT);
                 break;
             case RIGHT:
             case D:
-                gameController.setPlayerDirection(Direction.RIGHT);
+                gameEngine.setPlayerDirection(Direction.RIGHT);
                 break;
             case P:
-                gameController.togglePause();
-                if (gameController.getState() == GameState.PAUSED) {
-                    gameView.render(gameController);
-                    updateLabels();
-                }
+                gameEngine.togglePause();
                 break;
             case R:
-                if (gameController.getState() == GameState.WON
-                        || gameController.getState() == GameState.LOST) {
+                if (gameEngine.getState() == GameState.WON
+                        || gameEngine.getState() == GameState.LOST) {
                     startNewGame();
                 }
                 break;
@@ -123,12 +121,12 @@ public class GameViewController {
     }
 
     private void updateLabels() {
-        scoreLabel.setText("Счёт: " + gameController.getScore());
-        levelLabel.setText("Уровень: " + gameController.getLevel());
+        scoreLabel.setText("Счёт: " + gameEngine.getScore());
+        levelLabel.setText("Уровень: " + gameEngine.getLevel());
         lengthLabel.setText("Длина: "
-                + gameController.getPlayerSnake().length());
+                + gameEngine.getPlayerSnake().length());
 
-        switch (gameController.getState()) {
+        switch (gameEngine.getState()) {
             case WON:
                 stateLabel.setText("Победа!");
                 timer.stop();

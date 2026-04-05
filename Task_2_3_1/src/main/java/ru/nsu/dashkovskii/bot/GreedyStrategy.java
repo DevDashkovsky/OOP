@@ -1,7 +1,11 @@
 package ru.nsu.dashkovskii.bot;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 import ru.nsu.dashkovskii.model.Direction;
 import ru.nsu.dashkovskii.model.Food;
 import ru.nsu.dashkovskii.model.GameField;
@@ -9,22 +13,24 @@ import ru.nsu.dashkovskii.model.Point;
 import ru.nsu.dashkovskii.model.Snake;
 
 /**
- * Стратегия бота, жадно движущегося к ближайшей еде.
+ * Стратегия бота, использующая BFS для поиска кратчайшего
+ * безопасного пути к ближайшей еде.
  */
 public class GreedyStrategy implements BotStrategy {
+    private static final int MAX_BFS_STEPS = 200;
 
     @Override
-    public Direction chooseDirection(Snake self, List<Snake> allSnakes, GameField field) {
+    public Direction chooseDirection(Snake self,
+                                     List<Snake> allSnakes,
+                                     GameField field) {
         Point head = self.getHead();
-        Food nearest = findNearestFood(head, field);
-        Direction best = self.getDirection();
-        int bestDist = Integer.MAX_VALUE;
+        Direction current = self.getDirection();
 
         Direction[] allDirs = Direction.values();
         List<Direction> safeDirs = new ArrayList<>();
 
         for (Direction dir : allDirs) {
-            if (dir == self.getDirection().opposite() && self.length() > 1) {
+            if (dir == current.opposite() && self.length() > 1) {
                 continue;
             }
             Point next = field.wrapPoint(head.move(dir));
@@ -34,49 +40,112 @@ public class GreedyStrategy implements BotStrategy {
         }
 
         if (safeDirs.isEmpty()) {
-            return best;
+            return current;
         }
 
-        if (nearest != null) {
-            Point target = nearest.getPosition();
-            for (Direction dir : safeDirs) {
-                Point next = field.wrapPoint(head.move(dir));
-                int dist = manhattanDistance(next, target, field);
-                if (dist < bestDist) {
-                    bestDist = dist;
-                    best = dir;
+        Direction bfsDir = bfsToFood(head, self, allSnakes,
+                field, safeDirs);
+        if (bfsDir != null) {
+            return bfsDir;
+        }
+
+        return pickSafestDirection(head, self, allSnakes,
+                field, safeDirs);
+    }
+
+    private Direction bfsToFood(Point start, Snake self,
+                                 List<Snake> allSnakes,
+                                 GameField field,
+                                 List<Direction> safeDirs) {
+        Queue<Point> queue = new ArrayDeque<>();
+        Map<Point, Direction> firstStep = new HashMap<>();
+
+        for (Direction dir : safeDirs) {
+            Point next = field.wrapPoint(start.move(dir));
+            if (!firstStep.containsKey(next)) {
+                firstStep.put(next, dir);
+                queue.add(next);
+            }
+        }
+
+        Map<Point, Boolean> visited = new HashMap<>();
+        for (Point p : firstStep.keySet()) {
+            visited.put(p, true);
+        }
+
+        int steps = 0;
+        while (!queue.isEmpty() && steps < MAX_BFS_STEPS) {
+            Point cur = queue.poll();
+            steps++;
+
+            for (Food food : field.getFoods()) {
+                if (food.getPosition().equals(cur)) {
+                    return firstStep.get(cur);
                 }
             }
-        } else {
-            best = safeDirs.get(0);
-        }
 
+            for (Direction dir : Direction.values()) {
+                Point neighbor = field.wrapPoint(cur.move(dir));
+                if (!visited.containsKey(neighbor)
+                        && !isBlocked(neighbor, self,
+                        allSnakes, field)) {
+                    visited.put(neighbor, true);
+                    firstStep.put(neighbor, firstStep.get(cur));
+                    queue.add(neighbor);
+                }
+            }
+        }
+        return null;
+    }
+
+    private Direction pickSafestDirection(Point head, Snake self,
+                                           List<Snake> allSnakes,
+                                           GameField field,
+                                           List<Direction> safeDirs) {
+        Direction best = safeDirs.get(0);
+        int bestSpace = -1;
+
+        for (Direction dir : safeDirs) {
+            Point next = field.wrapPoint(head.move(dir));
+            int space = countReachable(next, self, allSnakes,
+                    field);
+            if (space > bestSpace) {
+                bestSpace = space;
+                best = dir;
+            }
+        }
         return best;
     }
 
-    private Food findNearestFood(Point head, GameField field) {
-        Food nearest = null;
-        int minDist = Integer.MAX_VALUE;
-        for (Food food : field.getFoods()) {
-            int dist = manhattanDistance(head, food.getPosition(), field);
-            if (dist < minDist) {
-                minDist = dist;
-                nearest = food;
+    private int countReachable(Point start, Snake self,
+                                List<Snake> allSnakes,
+                                GameField field) {
+        Queue<Point> queue = new ArrayDeque<>();
+        Map<Point, Boolean> visited = new HashMap<>();
+        queue.add(start);
+        visited.put(start, true);
+        int count = 0;
+        int limit = 50;
+
+        while (!queue.isEmpty() && count < limit) {
+            Point cur = queue.poll();
+            count++;
+            for (Direction dir : Direction.values()) {
+                Point neighbor = field.wrapPoint(cur.move(dir));
+                if (!visited.containsKey(neighbor)
+                        && !isBlocked(neighbor, self,
+                        allSnakes, field)) {
+                    visited.put(neighbor, true);
+                    queue.add(neighbor);
+                }
             }
         }
-        return nearest;
-    }
-
-    private int manhattanDistance(Point from, Point to, GameField field) {
-        int dx = Math.abs(from.getX() - to.getX());
-        int dy = Math.abs(from.getY() - to.getY());
-        dx = Math.min(dx, field.getWidth() - dx);
-        dy = Math.min(dy, field.getHeight() - dy);
-        return dx + dy;
+        return count;
     }
 
     private boolean isBlocked(Point point, Snake self,
-                              List<Snake> allSnakes, GameField field) {
+                              List<Snake> allSnakes,
+                              GameField field) {
         if (field.isObstacle(point)) {
             return true;
         }

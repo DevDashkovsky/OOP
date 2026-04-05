@@ -8,18 +8,19 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import ru.nsu.dashkovskii.bot.BotSnake;
-import ru.nsu.dashkovskii.controller.GameController;
 import ru.nsu.dashkovskii.model.Direction;
 import ru.nsu.dashkovskii.model.Food;
 import ru.nsu.dashkovskii.model.FoodType;
+import ru.nsu.dashkovskii.model.GameEngine;
 import ru.nsu.dashkovskii.model.GameState;
+import ru.nsu.dashkovskii.model.GameStateListener;
 import ru.nsu.dashkovskii.model.Point;
 import ru.nsu.dashkovskii.model.Snake;
 
 /**
  * Отрисовывает состояние игры на JavaFX Canvas в стиле Nokia.
  */
-public class GameView {
+public class GameView implements GameStateListener {
     private static final Color BG_LIGHT = Color.web("#9bbc0f");
     private static final Color BG_DARK = Color.web("#8bac0f");
     private static final Color PIXEL_ON = Color.web("#0f380f");
@@ -35,14 +36,19 @@ public class GameView {
         this.canvas = canvas;
     }
 
+    @Override
+    public void onGameStateChanged(GameEngine engine) {
+        render(engine);
+    }
+
     /**
      * Отрисовывает всё игровое состояние.
      *
-     * @param controller игровой контроллер для отрисовки
+     * @param engine игровой движок для отрисовки
      */
-    public void render(GameController controller) {
-        int fw = controller.getField().getWidth();
-        int fh = controller.getField().getHeight();
+    public void render(GameEngine engine) {
+        int fw = engine.getField().getWidth();
+        int fh = engine.getField().getHeight();
         cellSize = Math.min(canvas.getWidth() / fw,
                 canvas.getHeight() / fh);
         cellSize = Math.floor(cellSize);
@@ -60,16 +66,16 @@ public class GameView {
         gc.translate(offsetX, offsetY);
 
         drawField(gc, fw, fh);
-        drawObstacles(gc, controller);
-        drawFood(gc, controller);
-        drawSnake(gc, controller.getPlayerSnake(), PIXEL_ON);
+        drawObstacles(gc, engine);
+        drawFood(gc, engine);
+        drawSnake(gc, engine.getPlayerSnake(), PIXEL_ON);
 
-        for (BotSnake bot : controller.getBots()) {
+        for (BotSnake bot : engine.getBots()) {
             drawSnake(gc, bot.getSnake(), PIXEL_DIM);
         }
 
-        if (controller.getState() != GameState.RUNNING) {
-            drawOverlay(gc, controller, fw, fh);
+        if (engine.getState() != GameState.RUNNING) {
+            drawOverlay(gc, engine, fw, fh);
         }
 
         gc.restore();
@@ -92,15 +98,15 @@ public class GameView {
     }
 
     private void drawObstacles(GraphicsContext gc,
-                                GameController controller) {
-        for (Point pp : controller.getField().getObstacles()) {
+                                GameEngine engine) {
+        for (Point pp : engine.getField().getObstacles()) {
             fillCell(gc, pp.getX(), pp.getY(), PIXEL_DIM);
         }
     }
 
     private void drawFood(GraphicsContext gc,
-                           GameController controller) {
-        for (Food food : controller.getField().getFoods()) {
+                           GameEngine engine) {
+        for (Food food : engine.getField().getFoods()) {
             Color color;
             if (food.getType() == FoodType.BONUS) {
                 color = PIXEL_ON;
@@ -190,7 +196,7 @@ public class GameView {
     }
 
     private void drawOverlay(GraphicsContext gc,
-                              GameController controller,
+                              GameEngine engine,
                               int fw, int fh) {
         gc.setFill(Color.color(
                 BG_LIGHT.getRed(), BG_LIGHT.getGreen(),
@@ -199,15 +205,15 @@ public class GameView {
 
         String message;
         String sub;
-        switch (controller.getState()) {
+        switch (engine.getState()) {
             case WON:
                 message = "VICTORY!";
-                sub = "Score: " + controller.getScore()
+                sub = "Score: " + engine.getScore()
                         + "  R=restart";
                 break;
             case LOST:
                 message = "GAME OVER";
-                sub = "Score: " + controller.getScore()
+                sub = "Score: " + engine.getScore()
                         + "  R=restart";
                 break;
             case PAUSED:

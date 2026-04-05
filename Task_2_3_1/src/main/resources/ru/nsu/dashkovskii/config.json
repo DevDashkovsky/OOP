@@ -5,7 +5,7 @@
   "winLength": 200,
   "initialSpeed": 5,
   "maxSpeed": 15,
-  "botCount": 0,
+  "botCount": 2,
   "levelUpEvery": 5,
   "bonusFoodChance": 0.2,
   "speedFoodChance": 0.1

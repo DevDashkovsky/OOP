@@ -1,27 +1,22 @@
-package ru.nsu.dashkovskii.controller;
+package ru.nsu.dashkovskii.model;
 
 import java.util.ArrayList;
 import java.util.List;
 import ru.nsu.dashkovskii.bot.BotSnake;
 import ru.nsu.dashkovskii.bot.GreedyStrategy;
 import ru.nsu.dashkovskii.bot.RandomStrategy;
-import ru.nsu.dashkovskii.model.Direction;
-import ru.nsu.dashkovskii.model.Food;
-import ru.nsu.dashkovskii.model.FoodType;
-import ru.nsu.dashkovskii.model.GameConfig;
-import ru.nsu.dashkovskii.model.GameField;
-import ru.nsu.dashkovskii.model.GameState;
-import ru.nsu.dashkovskii.model.Point;
-import ru.nsu.dashkovskii.model.Snake;
 
 /**
- * Управляет игровой логикой: движением, столкновениями, едой, ботами и уровнями.
+ * Игровой движок: управляет игровой логикой —
+ * движением, столкновениями, едой, ботами и уровнями.
+ * Уведомляет подписчиков при изменении состояния.
  */
-public class GameController {
+public class GameEngine {
     private final GameField field;
     private final GameConfig config;
     private final Snake playerSnake;
     private final List<BotSnake> bots;
+    private final List<GameStateListener> listeners;
     private GameState state;
     private int currentSpeed;
     private int level;
@@ -32,12 +27,13 @@ public class GameController {
      *
      * @param config конфигурация игры
      */
-    public GameController(GameConfig config) {
+    public GameEngine(GameConfig config) {
         this.config = config;
         this.field = new GameField(config);
         this.currentSpeed = config.getInitialSpeed();
         this.level = 1;
         this.score = 0;
+        this.listeners = new ArrayList<>();
 
         Point center = new Point(config.getFieldWidth() / 2,
                 config.getFieldHeight() / 2);
@@ -56,12 +52,13 @@ public class GameController {
      * @param config конфигурация игры
      * @param field игровое поле для использования
      */
-    public GameController(GameConfig config, GameField field) {
+    public GameEngine(GameConfig config, GameField field) {
         this.config = config;
         this.field = field;
         this.currentSpeed = config.getInitialSpeed();
         this.level = 1;
         this.score = 0;
+        this.listeners = new ArrayList<>();
 
         Point center = new Point(config.getFieldWidth() / 2,
                 config.getFieldHeight() / 2);
@@ -69,6 +66,21 @@ public class GameController {
 
         this.bots = new ArrayList<>();
         this.state = GameState.RUNNING;
+    }
+
+    /**
+     * Добавляет слушателя изменений состояния игры.
+     *
+     * @param listener слушатель
+     */
+    public void addListener(GameStateListener listener) {
+        listeners.add(listener);
+    }
+
+    private void fireStateChanged() {
+        for (GameStateListener listener : listeners) {
+            listener.onGameStateChanged(this);
+        }
     }
 
     private void initBots() {
@@ -140,6 +152,7 @@ public class GameController {
         } else if (state == GameState.PAUSED) {
             state = GameState.RUNNING;
         }
+        fireStateChanged();
     }
 
     /**
@@ -165,17 +178,20 @@ public class GameController {
 
         if (!playerSnake.isAlive()) {
             state = GameState.LOST;
+            fireStateChanged();
             return state;
         }
 
         if (playerSnake.length() >= field.getWinLength()) {
             state = GameState.WON;
+            fireStateChanged();
             return state;
         }
 
         field.spawnFood(getAllSnakes());
         updateLevel();
 
+        fireStateChanged();
         return state;
     }
 
@@ -234,7 +250,8 @@ public class GameController {
     }
 
     private void updateLevel() {
-        int newLevel = 1 + (playerSnake.length() - 1) / config.getLevelUpEvery();
+        int newLevel = 1 + (playerSnake.length() - 1)
+                / config.getLevelUpEvery();
         if (newLevel > level) {
             level = newLevel;
             increaseSpeed(1);
@@ -242,7 +259,8 @@ public class GameController {
     }
 
     private void increaseSpeed(int amount) {
-        currentSpeed = Math.min(currentSpeed + amount, config.getMaxSpeed());
+        currentSpeed = Math.min(currentSpeed + amount,
+                config.getMaxSpeed());
     }
 
     /**
