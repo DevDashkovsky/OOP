@@ -10,10 +10,12 @@ import javafx.scene.layout.Pane;
 import ru.nsu.dashkovskii.model.Direction;
 import ru.nsu.dashkovskii.model.GameConfig;
 import ru.nsu.dashkovskii.model.GameEngine;
+import ru.nsu.dashkovskii.model.GameSnapshot;
 import ru.nsu.dashkovskii.model.GameState;
 
 /**
  * FXML-контроллер, связывающий ввод, игровой цикл и отрисовку.
+ * Компоненты (модель и view) передаются извне через init().
  */
 public class GameViewController {
     private static final long NANOS_PER_SECOND = 1_000_000_000L;
@@ -38,33 +40,53 @@ public class GameViewController {
 
     /**
      * Вызывается после инициализации FXML-полей.
+     * Привязывает размеры canvas к родительскому контейнеру.
      */
     @FXML
     public void initialize() {
-        gameCanvas.widthProperty().bind(canvasPane.widthProperty());
-        gameCanvas.heightProperty().bind(canvasPane.heightProperty());
-
-        gameView = new GameView(gameCanvas);
-        startNewGame();
-
-        canvasPane.widthProperty().addListener((obs, o, n) ->
-                gameView.render(gameEngine));
-        canvasPane.heightProperty().addListener((obs, o, n) ->
-                gameView.render(gameEngine));
+        gameCanvas.widthProperty().bind(
+                canvasPane.widthProperty());
+        gameCanvas.heightProperty().bind(
+                canvasPane.heightProperty());
     }
 
-    private void startNewGame() {
-        GameConfig config = GameConfig.load(
-                "/ru/nsu/dashkovskii/config.json");
-        gameEngine = new GameEngine(config);
-        gameEngine.addListener(gameView);
-        gameEngine.addListener(engine -> updateLabels());
-        lastUpdate = 0;
+    /**
+     * Возвращает canvas для создания GameView извне.
+     *
+     * @return игровой canvas
+     */
+    public Canvas getGameCanvas() {
+        return gameCanvas;
+    }
 
+    /**
+     * Инициализирует контроллер готовыми компонентами.
+     *
+     * @param engine игровой движок
+     * @param view   представление для отрисовки
+     */
+    public void init(GameEngine engine, GameView view) {
+        this.gameEngine = engine;
+        this.gameView = view;
+
+        gameEngine.addListener(gameView);
+        gameEngine.addListener(this::updateLabels);
+
+        canvasPane.widthProperty().addListener((obs, o, n) ->
+                gameView.render(new GameSnapshot(gameEngine)));
+        canvasPane.heightProperty().addListener((obs, o, n) ->
+                gameView.render(new GameSnapshot(gameEngine)));
+
+        startGameLoop();
+        gameView.render(new GameSnapshot(gameEngine));
+        updateLabels(new GameSnapshot(gameEngine));
+    }
+
+    private void startGameLoop() {
+        lastUpdate = 0;
         if (timer != null) {
             timer.stop();
         }
-
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -77,13 +99,24 @@ public class GameViewController {
             }
         };
         timer.start();
-        gameView.render(gameEngine);
-        updateLabels();
+    }
+
+    private void restartGame() {
+        if (timer != null) {
+            timer.stop();
+        }
+        GameConfig config = GameConfig.load(
+                "/ru/nsu/dashkovskii/config.json");
+        gameEngine = new GameEngine(config);
+        gameEngine.addListener(gameView);
+        gameEngine.addListener(this::updateLabels);
+        startGameLoop();
+        gameView.render(new GameSnapshot(gameEngine));
+        updateLabels(new GameSnapshot(gameEngine));
     }
 
     /**
-     * Обрабатывает события нажатия клавиш
-     * для управления змейкой и игровыми действиями.
+     * Обрабатывает события нажатия клавиш.
      *
      * @param event событие нажатия клавиши
      */
@@ -111,8 +144,9 @@ public class GameViewController {
                 break;
             case R:
                 if (gameEngine.getState() == GameState.WON
-                        || gameEngine.getState() == GameState.LOST) {
-                    startNewGame();
+                        || gameEngine.getState()
+                        == GameState.LOST) {
+                    restartGame();
                 }
                 break;
             default:
@@ -120,13 +154,13 @@ public class GameViewController {
         }
     }
 
-    private void updateLabels() {
-        scoreLabel.setText("Счёт: " + gameEngine.getScore());
-        levelLabel.setText("Уровень: " + gameEngine.getLevel());
+    private void updateLabels(GameSnapshot snapshot) {
+        scoreLabel.setText("Счёт: " + snapshot.getScore());
+        levelLabel.setText("Уровень: " + snapshot.getLevel());
         lengthLabel.setText("Длина: "
-                + gameEngine.getPlayerSnake().length());
+                + snapshot.getPlayerSnake().length());
 
-        switch (gameEngine.getState()) {
+        switch (snapshot.getState()) {
             case WON:
                 stateLabel.setText("Победа!");
                 timer.stop();

@@ -1,21 +1,19 @@
 package ru.nsu.dashkovskii.view;
 
-import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
-import ru.nsu.dashkovskii.bot.BotSnake;
 import ru.nsu.dashkovskii.model.Direction;
 import ru.nsu.dashkovskii.model.Food;
 import ru.nsu.dashkovskii.model.FoodType;
-import ru.nsu.dashkovskii.model.GameEngine;
+import ru.nsu.dashkovskii.model.GameSnapshot;
 import ru.nsu.dashkovskii.model.GameState;
 import ru.nsu.dashkovskii.model.GameStateListener;
 import ru.nsu.dashkovskii.model.Point;
-import ru.nsu.dashkovskii.model.Snake;
+import ru.nsu.dashkovskii.model.SnakeSnapshot;
 
 /**
  * Отрисовывает состояние игры на JavaFX Canvas в стиле Nokia.
@@ -37,18 +35,18 @@ public class GameView implements GameStateListener {
     }
 
     @Override
-    public void onGameStateChanged(GameEngine engine) {
-        render(engine);
+    public void onGameStateChanged(GameSnapshot snapshot) {
+        render(snapshot);
     }
 
     /**
      * Отрисовывает всё игровое состояние.
      *
-     * @param engine игровой движок для отрисовки
+     * @param snapshot снимок состояния игры для отрисовки
      */
-    public void render(GameEngine engine) {
-        int fw = engine.getField().getWidth();
-        int fh = engine.getField().getHeight();
+    public void render(GameSnapshot snapshot) {
+        int fw = snapshot.getFieldWidth();
+        int fh = snapshot.getFieldHeight();
         cellSize = Math.min(canvas.getWidth() / fw,
                 canvas.getHeight() / fh);
         cellSize = Math.floor(cellSize);
@@ -66,16 +64,16 @@ public class GameView implements GameStateListener {
         gc.translate(offsetX, offsetY);
 
         drawField(gc, fw, fh);
-        drawObstacles(gc, engine);
-        drawFood(gc, engine);
-        drawSnake(gc, engine.getPlayerSnake(), PIXEL_ON);
+        drawObstacles(gc, snapshot);
+        drawFood(gc, snapshot);
+        drawSnake(gc, snapshot.getPlayerSnake(), PIXEL_ON);
 
-        for (BotSnake bot : engine.getBots()) {
-            drawSnake(gc, bot.getSnake(), PIXEL_DIM);
+        for (SnakeSnapshot bot : snapshot.getBotSnakes()) {
+            drawSnake(gc, bot, PIXEL_DIM);
         }
 
-        if (engine.getState() != GameState.RUNNING) {
-            drawOverlay(gc, engine, fw, fh);
+        if (snapshot.getState() != GameState.RUNNING) {
+            drawOverlay(gc, snapshot, fw, fh);
         }
 
         gc.restore();
@@ -98,15 +96,15 @@ public class GameView implements GameStateListener {
     }
 
     private void drawObstacles(GraphicsContext gc,
-                                GameEngine engine) {
-        for (Point pp : engine.getField().getObstacles()) {
+                                GameSnapshot snapshot) {
+        for (Point pp : snapshot.getObstacles()) {
             fillCell(gc, pp.getX(), pp.getY(), PIXEL_DIM);
         }
     }
 
     private void drawFood(GraphicsContext gc,
-                           GameEngine engine) {
-        for (Food food : engine.getField().getFoods()) {
+                           GameSnapshot snapshot) {
+        for (Food food : snapshot.getFoods()) {
             Color color;
             if (food.getType() == FoodType.BONUS) {
                 color = PIXEL_ON;
@@ -126,19 +124,20 @@ public class GameView implements GameStateListener {
         }
     }
 
-    private void drawSnake(GraphicsContext gc, Snake snake,
+    private void drawSnake(GraphicsContext gc,
+                           SnakeSnapshot snake,
                            Color color) {
         if (!snake.isAlive()) {
             return;
         }
-        List<Point> body = new ArrayList<>(snake.getBody());
-        for (int i = 0; i < body.size(); i++) {
-            Point pp = body.get(i);
+        List<Point> body = snake.getBody();
+        for (Point pp : body) {
             fillCell(gc, pp.getX(), pp.getY(), color);
         }
 
         if (!body.isEmpty()) {
-            drawEyes(gc, body.get(0), snake.getDirection(), color);
+            drawEyes(gc, body.get(0),
+                    snake.getDirection(), color);
         }
     }
 
@@ -196,7 +195,7 @@ public class GameView implements GameStateListener {
     }
 
     private void drawOverlay(GraphicsContext gc,
-                              GameEngine engine,
+                              GameSnapshot snapshot,
                               int fw, int fh) {
         gc.setFill(Color.color(
                 BG_LIGHT.getRed(), BG_LIGHT.getGreen(),
@@ -205,15 +204,15 @@ public class GameView implements GameStateListener {
 
         String message;
         String sub;
-        switch (engine.getState()) {
+        switch (snapshot.getState()) {
             case WON:
                 message = "VICTORY!";
-                sub = "Score: " + engine.getScore()
+                sub = "Score: " + snapshot.getScore()
                         + "  R=restart";
                 break;
             case LOST:
                 message = "GAME OVER";
-                sub = "Score: " + engine.getScore()
+                sub = "Score: " + snapshot.getScore()
                         + "  R=restart";
                 break;
             case PAUSED:

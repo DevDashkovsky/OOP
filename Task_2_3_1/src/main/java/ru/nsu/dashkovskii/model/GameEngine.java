@@ -78,8 +78,9 @@ public class GameEngine {
     }
 
     private void fireStateChanged() {
+        GameSnapshot snapshot = new GameSnapshot(this);
         for (GameStateListener listener : listeners) {
-            listener.onGameStateChanged(this);
+            listener.onGameStateChanged(snapshot);
         }
     }
 
