@@ -155,6 +155,14 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Создаёт игровое поле с заданной конфигурацией и генератором случайных чисел.</div>
 </dd>
+<dt><a href="ru/nsu/dashkovskii/model/GameSnapshot.html" class="type-name-link" title="class in ru.nsu.dashkovskii.model">GameSnapshot</a> - Class in <a href="ru/nsu/dashkovskii/model/package-summary.html">ru.nsu.dashkovskii.model</a></dt>
+<dd>
+<div class="block">Неизменяемый снимок состояния игры.</div>
+</dd>
+<dt><a href="ru/nsu/dashkovskii/model/GameSnapshot.html#%3Cinit%3E(ru.nsu.dashkovskii.model.GameEngine)" class="member-name-link">GameSnapshot(GameEngine)</a> - Constructor for class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameSnapshot.html" title="class in ru.nsu.dashkovskii.model">GameSnapshot</a></dt>
+<dd>
+<div class="block">Создаёт снимок текущего состояния игры.</div>
+</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameState.html" class="type-name-link" title="enum class in ru.nsu.dashkovskii.model">GameState</a> - Enum Class in <a href="ru/nsu/dashkovskii/model/package-summary.html">ru.nsu.dashkovskii.model</a></dt>
 <dd>
 <div class="block">Возможные состояния игры.</div>
@@ -181,6 +189,8 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/model/Snake.html#getBody()" class="member-name-link">getBody()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/Snake.html" title="class in ru.nsu.dashkovskii.model">Snake</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/dashkovskii/model/SnakeSnapshot.html#getBody()" class="member-name-link">getBody()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/SnakeSnapshot.html" title="class in ru.nsu.dashkovskii.model">SnakeSnapshot</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/Snake.html#getBodySet()" class="member-name-link">getBodySet()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/Snake.html" title="class in ru.nsu.dashkovskii.model">Snake</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameConfig.html#getBonusFoodChance()" class="member-name-link">getBonusFoodChance()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameConfig.html" title="class in ru.nsu.dashkovskii.model">GameConfig</a></dt>
@@ -189,9 +199,15 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#getBots()" class="member-name-link">getBots()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/dashkovskii/model/GameSnapshot.html#getBotSnakes()" class="member-name-link">getBotSnakes()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameSnapshot.html" title="class in ru.nsu.dashkovskii.model">GameSnapshot</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#getCurrentSpeed()" class="member-name-link">getCurrentSpeed()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/dashkovskii/model/GameSnapshot.html#getCurrentSpeed()" class="member-name-link">getCurrentSpeed()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameSnapshot.html" title="class in ru.nsu.dashkovskii.model">GameSnapshot</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/Snake.html#getDirection()" class="member-name-link">getDirection()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/Snake.html" title="class in ru.nsu.dashkovskii.model">Snake</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/dashkovskii/model/SnakeSnapshot.html#getDirection()" class="member-name-link">getDirection()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/SnakeSnapshot.html" title="class in ru.nsu.dashkovskii.model">SnakeSnapshot</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/Direction.html#getDx()" class="member-name-link">getDx()</a> - Method in enum class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/Direction.html" title="enum class in ru.nsu.dashkovskii.model">Direction</a></dt>
 <dd>&nbsp;</dd>
@@ -201,21 +217,37 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameConfig.html#getFieldHeight()" class="member-name-link">getFieldHeight()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameConfig.html" title="class in ru.nsu.dashkovskii.model">GameConfig</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/dashkovskii/model/GameSnapshot.html#getFieldHeight()" class="member-name-link">getFieldHeight()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameSnapshot.html" title="class in ru.nsu.dashkovskii.model">GameSnapshot</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameConfig.html#getFieldWidth()" class="member-name-link">getFieldWidth()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameConfig.html" title="class in ru.nsu.dashkovskii.model">GameConfig</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/dashkovskii/model/GameSnapshot.html#getFieldWidth()" class="member-name-link">getFieldWidth()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameSnapshot.html" title="class in ru.nsu.dashkovskii.model">GameSnapshot</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameConfig.html#getFoodCount()" class="member-name-link">getFoodCount()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameConfig.html" title="class in ru.nsu.dashkovskii.model">GameConfig</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameField.html#getFoods()" class="member-name-link">getFoods()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameField.html" title="class in ru.nsu.dashkovskii.model">GameField</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/dashkovskii/model/GameSnapshot.html#getFoods()" class="member-name-link">getFoods()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameSnapshot.html" title="class in ru.nsu.dashkovskii.model">GameSnapshot</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/dashkovskii/view/GameViewController.html#getGameCanvas()" class="member-name-link">getGameCanvas()</a> - Method in class ru.nsu.dashkovskii.view.<a href="ru/nsu/dashkovskii/view/GameViewController.html" title="class in ru.nsu.dashkovskii.view">GameViewController</a></dt>
+<dd>
+<div class="block">Возвращает canvas для создания GameView извне.</div>
+</dd>
 <dt><a href="ru/nsu/dashkovskii/model/FoodType.html#getGrowthAmount()" class="member-name-link">getGrowthAmount()</a> - Method in enum class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/FoodType.html" title="enum class in ru.nsu.dashkovskii.model">FoodType</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/Snake.html#getHead()" class="member-name-link">getHead()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/Snake.html" title="class in ru.nsu.dashkovskii.model">Snake</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/dashkovskii/model/SnakeSnapshot.html#getHead()" class="member-name-link">getHead()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/SnakeSnapshot.html" title="class in ru.nsu.dashkovskii.model">SnakeSnapshot</a></dt>
+<dd>
+<div class="block">Возвращает позицию головы змейки.</div>
+</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameField.html#getHeight()" class="member-name-link">getHeight()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameField.html" title="class in ru.nsu.dashkovskii.model">GameField</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameConfig.html#getInitialSpeed()" class="member-name-link">getInitialSpeed()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameConfig.html" title="class in ru.nsu.dashkovskii.model">GameConfig</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#getLevel()" class="member-name-link">getLevel()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/dashkovskii/model/GameSnapshot.html#getLevel()" class="member-name-link">getLevel()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameSnapshot.html" title="class in ru.nsu.dashkovskii.model">GameSnapshot</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameConfig.html#getLevelUpEvery()" class="member-name-link">getLevelUpEvery()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameConfig.html" title="class in ru.nsu.dashkovskii.model">GameConfig</a></dt>
 <dd>&nbsp;</dd>
@@ -223,17 +255,25 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameField.html#getObstacles()" class="member-name-link">getObstacles()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameField.html" title="class in ru.nsu.dashkovskii.model">GameField</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/dashkovskii/model/GameSnapshot.html#getObstacles()" class="member-name-link">getObstacles()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameSnapshot.html" title="class in ru.nsu.dashkovskii.model">GameSnapshot</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#getPlayerSnake()" class="member-name-link">getPlayerSnake()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/dashkovskii/model/GameSnapshot.html#getPlayerSnake()" class="member-name-link">getPlayerSnake()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameSnapshot.html" title="class in ru.nsu.dashkovskii.model">GameSnapshot</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/Food.html#getPosition()" class="member-name-link">getPosition()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/Food.html" title="class in ru.nsu.dashkovskii.model">Food</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#getScore()" class="member-name-link">getScore()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/dashkovskii/model/GameSnapshot.html#getScore()" class="member-name-link">getScore()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameSnapshot.html" title="class in ru.nsu.dashkovskii.model">GameSnapshot</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/bot/BotSnake.html#getSnake()" class="member-name-link">getSnake()</a> - Method in class ru.nsu.dashkovskii.bot.<a href="ru/nsu/dashkovskii/bot/BotSnake.html" title="class in ru.nsu.dashkovskii.bot">BotSnake</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameConfig.html#getSpeedFoodChance()" class="member-name-link">getSpeedFoodChance()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameConfig.html" title="class in ru.nsu.dashkovskii.model">GameConfig</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameEngine.html#getState()" class="member-name-link">getState()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/dashkovskii/model/GameSnapshot.html#getState()" class="member-name-link">getState()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameSnapshot.html" title="class in ru.nsu.dashkovskii.model">GameSnapshot</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/bot/BotSnake.html#getStrategy()" class="member-name-link">getStrategy()</a> - Method in class ru.nsu.dashkovskii.bot.<a href="ru/nsu/dashkovskii/bot/BotSnake.html" title="class in ru.nsu.dashkovskii.bot">BotSnake</a></dt>
 <dd>&nbsp;</dd>
@@ -265,19 +305,24 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="ru/nsu/dashkovskii/view/GameViewController.html#handleKeyPress(javafx.scene.input.KeyEvent)" class="member-name-link">handleKeyPress(KeyEvent)</a> - Method in class ru.nsu.dashkovskii.view.<a href="ru/nsu/dashkovskii/view/GameViewController.html" title="class in ru.nsu.dashkovskii.view">GameViewController</a></dt>
 <dd>
-<div class="block">Обрабатывает события нажатия клавиш
- для управления змейкой и игровыми действиями.</div>
+<div class="block">Обрабатывает события нажатия клавиш.</div>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/model/Point.html#hashCode()" class="member-name-link">hashCode()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/Point.html" title="class in ru.nsu.dashkovskii.model">Point</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:I">I</h2>
 <dl class="index">
+<dt><a href="ru/nsu/dashkovskii/view/GameViewController.html#init(ru.nsu.dashkovskii.model.GameEngine,ru.nsu.dashkovskii.view.GameView)" class="member-name-link">init(GameEngine, GameView)</a> - Method in class ru.nsu.dashkovskii.view.<a href="ru/nsu/dashkovskii/view/GameViewController.html" title="class in ru.nsu.dashkovskii.view">GameViewController</a></dt>
+<dd>
+<div class="block">Инициализирует контроллер готовыми компонентами.</div>
+</dd>
 <dt><a href="ru/nsu/dashkovskii/view/GameViewController.html#initialize()" class="member-name-link">initialize()</a> - Method in class ru.nsu.dashkovskii.view.<a href="ru/nsu/dashkovskii/view/GameViewController.html" title="class in ru.nsu.dashkovskii.view">GameViewController</a></dt>
 <dd>
 <div class="block">Вызывается после инициализации FXML-полей.</div>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/model/Snake.html#isAlive()" class="member-name-link">isAlive()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/Snake.html" title="class in ru.nsu.dashkovskii.model">Snake</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/dashkovskii/model/SnakeSnapshot.html#isAlive()" class="member-name-link">isAlive()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/SnakeSnapshot.html" title="class in ru.nsu.dashkovskii.model">SnakeSnapshot</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameField.html#isObstacle(ru.nsu.dashkovskii.model.Point)" class="member-name-link">isObstacle(Point)</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameField.html" title="class in ru.nsu.dashkovskii.model">GameField</a></dt>
 <dd>
@@ -294,6 +339,8 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/dashkovskii/model/Direction.html#LEFT" class="member-name-link">LEFT</a> - Enum constant in enum class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/Direction.html" title="enum class in ru.nsu.dashkovskii.model">Direction</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/Snake.html#length()" class="member-name-link">length()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/Snake.html" title="class in ru.nsu.dashkovskii.model">Snake</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/dashkovskii/model/SnakeSnapshot.html#length()" class="member-name-link">length()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/SnakeSnapshot.html" title="class in ru.nsu.dashkovskii.model">SnakeSnapshot</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameConfig.html#load(java.lang.String)" class="member-name-link">load(String)</a> - Static method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameConfig.html" title="class in ru.nsu.dashkovskii.model">GameConfig</a></dt>
 <dd>
@@ -334,11 +381,11 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:O">O</h2>
 <dl class="index">
-<dt><a href="ru/nsu/dashkovskii/model/GameStateListener.html#onGameStateChanged(ru.nsu.dashkovskii.model.GameEngine)" class="member-name-link">onGameStateChanged(GameEngine)</a> - Method in interface ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameStateListener.html" title="interface in ru.nsu.dashkovskii.model">GameStateListener</a></dt>
+<dt><a href="ru/nsu/dashkovskii/model/GameStateListener.html#onGameStateChanged(ru.nsu.dashkovskii.model.GameSnapshot)" class="member-name-link">onGameStateChanged(GameSnapshot)</a> - Method in interface ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameStateListener.html" title="interface in ru.nsu.dashkovskii.model">GameStateListener</a></dt>
 <dd>
 <div class="block">Вызывается при изменении состояния игры.</div>
 </dd>
-<dt><a href="ru/nsu/dashkovskii/view/GameView.html#onGameStateChanged(ru.nsu.dashkovskii.model.GameEngine)" class="member-name-link">onGameStateChanged(GameEngine)</a> - Method in class ru.nsu.dashkovskii.view.<a href="ru/nsu/dashkovskii/view/GameView.html" title="class in ru.nsu.dashkovskii.view">GameView</a></dt>
+<dt><a href="ru/nsu/dashkovskii/view/GameView.html#onGameStateChanged(ru.nsu.dashkovskii.model.GameSnapshot)" class="member-name-link">onGameStateChanged(GameSnapshot)</a> - Method in class ru.nsu.dashkovskii.view.<a href="ru/nsu/dashkovskii/view/GameView.html" title="class in ru.nsu.dashkovskii.view">GameView</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/Direction.html#opposite()" class="member-name-link">opposite()</a> - Method in enum class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/Direction.html" title="enum class in ru.nsu.dashkovskii.model">Direction</a></dt>
 <dd>
@@ -368,7 +415,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/bot/RandomStrategy.html#%3Cinit%3E(java.util.Random)" class="member-name-link">RandomStrategy(Random)</a> - Constructor for class ru.nsu.dashkovskii.bot.<a href="ru/nsu/dashkovskii/bot/RandomStrategy.html" title="class in ru.nsu.dashkovskii.bot">RandomStrategy</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/dashkovskii/view/GameView.html#render(ru.nsu.dashkovskii.model.GameEngine)" class="member-name-link">render(GameEngine)</a> - Method in class ru.nsu.dashkovskii.view.<a href="ru/nsu/dashkovskii/view/GameView.html" title="class in ru.nsu.dashkovskii.view">GameView</a></dt>
+<dt><a href="ru/nsu/dashkovskii/view/GameView.html#render(ru.nsu.dashkovskii.model.GameSnapshot)" class="member-name-link">render(GameSnapshot)</a> - Method in class ru.nsu.dashkovskii.view.<a href="ru/nsu/dashkovskii/view/GameView.html" title="class in ru.nsu.dashkovskii.view">GameView</a></dt>
 <dd>
 <div class="block">Отрисовывает всё игровое состояние.</div>
 </dd>
@@ -402,6 +449,14 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/dashkovskii/model/Snake.html#%3Cinit%3E(ru.nsu.dashkovskii.model.Point,ru.nsu.dashkovskii.model.Direction)" class="member-name-link">Snake(Point, Direction)</a> - Constructor for class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/Snake.html" title="class in ru.nsu.dashkovskii.model">Snake</a></dt>
 <dd>
 <div class="block">Создаёт новую змейку в заданной начальной позиции с указанным направлением движения.</div>
+</dd>
+<dt><a href="ru/nsu/dashkovskii/model/SnakeSnapshot.html" class="type-name-link" title="class in ru.nsu.dashkovskii.model">SnakeSnapshot</a> - Class in <a href="ru/nsu/dashkovskii/model/package-summary.html">ru.nsu.dashkovskii.model</a></dt>
+<dd>
+<div class="block">Неизменяемый снимок состояния змейки для отрисовки.</div>
+</dd>
+<dt><a href="ru/nsu/dashkovskii/model/SnakeSnapshot.html#%3Cinit%3E(ru.nsu.dashkovskii.model.Snake)" class="member-name-link">SnakeSnapshot(Snake)</a> - Constructor for class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/SnakeSnapshot.html" title="class in ru.nsu.dashkovskii.model">SnakeSnapshot</a></dt>
+<dd>
+<div class="block">Создаёт снимок змейки.</div>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/model/GameField.html#spawnFood(java.util.List)" class="member-name-link">spawnFood(List&lt;Snake&gt;)</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/GameField.html" title="class in ru.nsu.dashkovskii.model">GameField</a></dt>
 <dd>

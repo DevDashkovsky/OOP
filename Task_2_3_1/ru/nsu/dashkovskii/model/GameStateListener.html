@@ -78,7 +78,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">GameStateListener</span></div>
 <div class="block">Слушатель изменений состояния игры.
- Реализации получают уведомления после каждого обновления игровой модели.</div>
+ Реализации получают неизменяемый снимок после каждого
+ обновления игровой модели.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -94,7 +95,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onGameStateChanged(ru.nsu.dashkovskii.model.GameEngine)" class="member-name-link">onGameStateChanged</a><wbr>(<a href="GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a>&nbsp;engine)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onGameStateChanged(ru.nsu.dashkovskii.model.GameSnapshot)" class="member-name-link">onGameStateChanged</a><wbr>(<a href="GameSnapshot.html" title="class in ru.nsu.dashkovskii.model">GameSnapshot</a>&nbsp;snapshot)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Вызывается при изменении состояния игры.</div>
 </div>
@@ -113,13 +114,13 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="onGameStateChanged(ru.nsu.dashkovskii.model.GameEngine)">
+<section class="detail" id="onGameStateChanged(ru.nsu.dashkovskii.model.GameSnapshot)">
 <h3>onGameStateChanged</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onGameStateChanged</span><wbr><span class="parameters">(<a href="GameEngine.html" title="class in ru.nsu.dashkovskii.model">GameEngine</a>&nbsp;engine)</span></div>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">onGameStateChanged</span><wbr><span class="parameters">(<a href="GameSnapshot.html" title="class in ru.nsu.dashkovskii.model">GameSnapshot</a>&nbsp;snapshot)</span></div>
 <div class="block">Вызывается при изменении состояния игры.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>engine</code> - движок игры, состояние которого изменилось</dd>
+<dd><code>snapshot</code> - снимок текущего состояния игры</dd>
 </dl>
 </section>
 </li>
