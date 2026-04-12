@@ -61,21 +61,6 @@ class GameEngineTest {
                 engine.getPlayerSnake().getDirection());
     }
 
-    @Test
-    void testCollisionWithObstacle() {
-        GameConfig config = GameConfig.load("/nonexistent.json");
-        GameField field = new GameField(config, new Random(42));
-        GameEngine engine = new GameEngine(config, field);
-
-        Point nextHead = field.wrapPoint(
-                engine.getPlayerSnake().getHead()
-                        .move(Direction.RIGHT));
-        field.addObstacle(nextHead);
-        field.spawnFood(engine.getAllSnakes());
-
-        engine.tick();
-        assertEquals(GameState.LOST, engine.getState());
-    }
 
     @Test
     void testBotCount() {

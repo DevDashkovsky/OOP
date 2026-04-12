@@ -146,9 +146,6 @@ public class GreedyStrategy implements BotStrategy {
     private boolean isBlocked(Point point, Snake self,
                               List<Snake> allSnakes,
                               GameField field) {
-        if (field.isObstacle(point)) {
-            return true;
-        }
         for (Snake snake : allSnakes) {
             if (snake == self) {
                 if (snake.collidesWith(point, true)) {

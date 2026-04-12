@@ -7,8 +7,8 @@ import java.util.Random;
 import java.util.Set;
 
 /**
- * Игровое поле, содержащее змеек, еду и препятствия.
- * Управляет появлением еды, обнаружением столкновений и условиями победы/поражения.
+ * Игровое поле, содержащее змеек и еду.
+ * Управляет появлением еды и условиями победы/поражения.
  */
 public class GameField {
     private final int width;
@@ -18,7 +18,6 @@ public class GameField {
     private final double bonusFoodChance;
     private final double speedFoodChance;
     private final List<Food> foods;
-    private final Set<Point> obstacles;
     private final Random random;
 
     /**
@@ -44,7 +43,6 @@ public class GameField {
         this.bonusFoodChance = config.getBonusFoodChance();
         this.speedFoodChance = config.getSpeedFoodChance();
         this.foods = new ArrayList<>();
-        this.obstacles = new HashSet<>();
         this.random = random;
     }
 
@@ -58,10 +56,6 @@ public class GameField {
 
     public List<Food> getFoods() {
         return foods;
-    }
-
-    public Set<Point> getObstacles() {
-        return obstacles;
     }
 
     public int getWinLength() {
@@ -113,27 +107,8 @@ public class GameField {
         return null;
     }
 
-    /**
-     * Проверяет, является ли точка препятствием.
-     *
-     * @param point точка для проверки
-     * @return true, если это препятствие
-     */
-    public boolean isObstacle(Point point) {
-        return obstacles.contains(point);
-    }
-
-    /**
-     * Добавляет препятствие в заданную точку.
-     *
-     * @param point позиция препятствия
-     */
-    public void addObstacle(Point point) {
-        obstacles.add(point);
-    }
-
     private Set<Point> getOccupiedCells(List<Snake> snakes) {
-        Set<Point> occupied = new HashSet<>(obstacles);
+        Set<Point> occupied = new HashSet<>();
         for (Snake snake : snakes) {
             occupied.addAll(snake.getBodySet());
         }

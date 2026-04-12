@@ -78,7 +78,7 @@ public class GameEngine {
     }
 
     private void fireStateChanged() {
-        GameSnapshot snapshot = new GameSnapshot(this);
+        GameSnapshot snapshot = GameSnapshot.of(this);
         for (GameStateListener listener : listeners) {
             listener.onGameStateChanged(snapshot);
         }
@@ -220,11 +220,6 @@ public class GameEngine {
                 continue;
             }
             Point head = snake.getHead();
-
-            if (field.isObstacle(head)) {
-                snake.kill();
-                continue;
-            }
 
             if (snake.collidesWith(head, true)) {
                 snake.kill();

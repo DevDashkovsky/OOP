@@ -25,15 +25,34 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource(
-                            "/ru/nsu/dashkovskii/game.fxml"));
+            java.net.URL fxmlUrl = getClass().getResource(
+                    "/ru/nsu/dashkovskii/game.fxml");
+            if (fxmlUrl == null) {
+                throw new IllegalStateException(
+                        "Файл разметки интерфейса 'game.fxml' не найден "
+                        + "по пути /ru/nsu/dashkovskii/game.fxml.\n"
+                        + "Возможно, файл был переименован или удалён.");
+            }
+            FXMLLoader loader = new FXMLLoader(fxmlUrl);
             Parent root = loader.load();
             GameViewController controller =
                     loader.getController();
 
+            boolean configMissing = getClass().getResourceAsStream(
+                    "/ru/nsu/dashkovskii/config.json") == null;
             GameConfig config = GameConfig.load(
                     "/ru/nsu/dashkovskii/config.json");
+            if (configMissing) {
+                Alert warn = new Alert(Alert.AlertType.WARNING);
+                warn.setTitle("Конфигурация не найдена");
+                warn.setHeaderText("Файл 'config.json' не найден");
+                warn.setContentText(
+                        "Файл конфигурации config.json не найден "
+                        + "по пути /ru/nsu/dashkovskii/config.json.\n"
+                        + "Возможно, файл был переименован или удалён.\n"
+                        + "Игра запустится с настройками по умолчанию.");
+                warn.showAndWait();
+            }
             GameEngine engine = new GameEngine(config);
             GameView view = new GameView(
                     controller.getGameCanvas());

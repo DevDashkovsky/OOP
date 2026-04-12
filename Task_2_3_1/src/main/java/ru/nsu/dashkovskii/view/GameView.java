@@ -45,8 +45,8 @@ public class GameView implements GameStateListener {
      * @param snapshot снимок состояния игры для отрисовки
      */
     public void render(GameSnapshot snapshot) {
-        int fw = snapshot.getFieldWidth();
-        int fh = snapshot.getFieldHeight();
+        int fw = snapshot.fieldWidth();
+        int fh = snapshot.fieldHeight();
         cellSize = Math.min(canvas.getWidth() / fw,
                 canvas.getHeight() / fh);
         cellSize = Math.floor(cellSize);
@@ -64,15 +64,14 @@ public class GameView implements GameStateListener {
         gc.translate(offsetX, offsetY);
 
         drawField(gc, fw, fh);
-        drawObstacles(gc, snapshot);
         drawFood(gc, snapshot);
-        drawSnake(gc, snapshot.getPlayerSnake(), PIXEL_ON);
+        drawSnake(gc, snapshot.playerSnake(), PIXEL_ON);
 
-        for (SnakeSnapshot bot : snapshot.getBotSnakes()) {
+        for (SnakeSnapshot bot : snapshot.botSnakes()) {
             drawSnake(gc, bot, PIXEL_DIM);
         }
 
-        if (snapshot.getState() != GameState.RUNNING) {
+        if (snapshot.state() != GameState.RUNNING) {
             drawOverlay(gc, snapshot, fw, fh);
         }
 
@@ -95,16 +94,9 @@ public class GameView implements GameStateListener {
         }
     }
 
-    private void drawObstacles(GraphicsContext gc,
-                                GameSnapshot snapshot) {
-        for (Point pp : snapshot.getObstacles()) {
-            fillCell(gc, pp.getX(), pp.getY(), PIXEL_DIM);
-        }
-    }
-
     private void drawFood(GraphicsContext gc,
                            GameSnapshot snapshot) {
-        for (Food food : snapshot.getFoods()) {
+        for (Food food : snapshot.foods()) {
             Color color;
             if (food.getType() == FoodType.BONUS) {
                 color = PIXEL_ON;
@@ -127,17 +119,17 @@ public class GameView implements GameStateListener {
     private void drawSnake(GraphicsContext gc,
                            SnakeSnapshot snake,
                            Color color) {
-        if (!snake.isAlive()) {
+        if (!snake.alive()) {
             return;
         }
-        List<Point> body = snake.getBody();
+        List<Point> body = snake.body();
         for (Point pp : body) {
             fillCell(gc, pp.getX(), pp.getY(), color);
         }
 
         if (!body.isEmpty()) {
             drawEyes(gc, body.get(0),
-                    snake.getDirection(), color);
+                    snake.direction(), color);
         }
     }
 
@@ -204,15 +196,15 @@ public class GameView implements GameStateListener {
 
         String message;
         String sub;
-        switch (snapshot.getState()) {
+        switch (snapshot.state()) {
             case WON:
                 message = "VICTORY!";
-                sub = "Score: " + snapshot.getScore()
+                sub = "Score: " + snapshot.score()
                         + "  R=restart";
                 break;
             case LOST:
                 message = "GAME OVER";
-                sub = "Score: " + snapshot.getScore()
+                sub = "Score: " + snapshot.score()
                         + "  R=restart";
                 break;
             case PAUSED:

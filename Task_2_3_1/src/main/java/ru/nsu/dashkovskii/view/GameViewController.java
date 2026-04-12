@@ -73,13 +73,13 @@ public class GameViewController {
         gameEngine.addListener(this::updateLabels);
 
         canvasPane.widthProperty().addListener((obs, o, n) ->
-                gameView.render(new GameSnapshot(gameEngine)));
+                gameView.render(GameSnapshot.of(gameEngine)));
         canvasPane.heightProperty().addListener((obs, o, n) ->
-                gameView.render(new GameSnapshot(gameEngine)));
+                gameView.render(GameSnapshot.of(gameEngine)));
 
         startGameLoop();
-        gameView.render(new GameSnapshot(gameEngine));
-        updateLabels(new GameSnapshot(gameEngine));
+        gameView.render(GameSnapshot.of(gameEngine));
+        updateLabels(GameSnapshot.of(gameEngine));
     }
 
     private void startGameLoop() {
@@ -111,8 +111,8 @@ public class GameViewController {
         gameEngine.addListener(gameView);
         gameEngine.addListener(this::updateLabels);
         startGameLoop();
-        gameView.render(new GameSnapshot(gameEngine));
-        updateLabels(new GameSnapshot(gameEngine));
+        gameView.render(GameSnapshot.of(gameEngine));
+        updateLabels(GameSnapshot.of(gameEngine));
     }
 
     /**
@@ -155,12 +155,12 @@ public class GameViewController {
     }
 
     private void updateLabels(GameSnapshot snapshot) {
-        scoreLabel.setText("Счёт: " + snapshot.getScore());
-        levelLabel.setText("Уровень: " + snapshot.getLevel());
+        scoreLabel.setText("Счёт: " + snapshot.score());
+        levelLabel.setText("Уровень: " + snapshot.level());
         lengthLabel.setText("Длина: "
-                + snapshot.getPlayerSnake().length());
+                + snapshot.playerSnake().body().size());
 
-        switch (snapshot.getState()) {
+        switch (snapshot.state()) {
             case WON:
                 stateLabel.setText("Победа!");
                 timer.stop();

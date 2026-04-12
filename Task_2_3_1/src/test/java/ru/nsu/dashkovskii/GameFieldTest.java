@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
 import java.util.List;
@@ -62,12 +61,4 @@ class GameFieldTest {
         assertNull(field.eatFoodAt(new Point(-1, -1)));
     }
 
-    @Test
-    void testObstacles() {
-        GameField field = new GameField(config);
-        Point obs = new Point(5, 5);
-        assertFalse(field.isObstacle(obs));
-        field.addObstacle(obs);
-        assertTrue(field.isObstacle(obs));
-    }
 }

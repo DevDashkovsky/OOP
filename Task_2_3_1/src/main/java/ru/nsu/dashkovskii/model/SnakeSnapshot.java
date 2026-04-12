@@ -6,44 +6,21 @@ import java.util.List;
 /**
  * Неизменяемый снимок состояния змейки для отрисовки.
  */
-public class SnakeSnapshot {
-    private final List<Point> body;
-    private final Direction direction;
-    private final boolean alive;
+public record SnakeSnapshot(List<Point> body,
+                             Direction direction,
+                             boolean alive) {
 
     /**
      * Создаёт снимок змейки.
      *
      * @param snake змейка для снимка
+     * @return снимок
      */
-    public SnakeSnapshot(Snake snake) {
-        this.body = new ArrayList<>(snake.getBody());
-        this.direction = snake.getDirection();
-        this.alive = snake.isAlive();
+    public static SnakeSnapshot of(Snake snake) {
+        return new SnakeSnapshot(
+                new ArrayList<>(snake.getBody()),
+                snake.getDirection(),
+                snake.isAlive());
     }
 
-    public List<Point> getBody() {
-        return body;
-    }
-
-    public Direction getDirection() {
-        return direction;
-    }
-
-    public boolean isAlive() {
-        return alive;
-    }
-
-    public int length() {
-        return body.size();
-    }
-
-    /**
-     * Возвращает позицию головы змейки.
-     *
-     * @return точка-голова
-     */
-    public Point getHead() {
-        return body.get(0);
-    }
 }
