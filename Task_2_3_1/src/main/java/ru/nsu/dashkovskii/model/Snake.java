@@ -12,6 +12,7 @@ public class Snake {
     private final Deque<Point> body;
     private final Set<Point> bodySet;
     private Direction direction;
+    private Direction lastMovedDirection;
     private int growthPending;
     private boolean alive;
 
@@ -27,6 +28,7 @@ public class Snake {
         this.body.addFirst(start);
         this.bodySet.add(start);
         this.direction = direction;
+        this.lastMovedDirection = direction;
         this.growthPending = 0;
         this.alive = true;
     }
@@ -53,7 +55,8 @@ public class Snake {
      * @param newDir желаемое новое направление
      */
     public void setDirection(Direction newDir) {
-        if (body.size() > 1 && newDir == direction.opposite()) {
+        if (body.size() > 1
+                && newDir == lastMovedDirection.opposite()) {
             return;
         }
         this.direction = newDir;
@@ -96,6 +99,7 @@ public class Snake {
      * @param wrappedHead позиция головы (возможно, обёрнутая по границам поля)
      */
     public void move(Point wrappedHead) {
+        lastMovedDirection = direction;
         body.addFirst(wrappedHead);
         bodySet.add(wrappedHead);
         if (growthPending > 0) {
