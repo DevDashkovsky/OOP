@@ -77,8 +77,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">GameField</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Игровое поле, содержащее змеек, еду и препятствия.
- Управляет появлением еды, обнаружением столкновений и условиями победы/поражения.</div>
+<div class="block">Игровое поле, содержащее змеек и еду.
+ Управляет появлением еды и условиями победы/поражения.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -113,24 +113,16 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addObstacle(ru.nsu.dashkovskii.model.Point)" class="member-name-link">addObstacle</a><wbr>(<a href="Point.html" title="class in ru.nsu.dashkovskii.model">Point</a>&nbsp;point)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Food.html" title="class in ru.nsu.dashkovskii.model">Food</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#eatFoodAt(ru.nsu.dashkovskii.model.Point)" class="member-name-link">eatFoodAt</a><wbr>(<a href="Point.html" title="class in ru.nsu.dashkovskii.model">Point</a>&nbsp;point)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Добавляет препятствие в заданную точку.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Food.html" title="class in ru.nsu.dashkovskii.model">Food</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#eatFoodAt(ru.nsu.dashkovskii.model.Point)" class="member-name-link">eatFoodAt</a><wbr>(<a href="Point.html" title="class in ru.nsu.dashkovskii.model">Point</a>&nbsp;point)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Проверяет, есть ли еда в заданной точке, и удаляет её при наличии.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Food.html" title="class in ru.nsu.dashkovskii.model">Food</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFoods()" class="member-name-link">getFoods</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getHeight()" class="member-name-link">getHeight</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Food.html" title="class in ru.nsu.dashkovskii.model">Food</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFoods()" class="member-name-link">getFoods</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="Point.html" title="class in ru.nsu.dashkovskii.model">Point</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getObstacles()" class="member-name-link">getObstacles</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getHeight()" class="member-name-link">getHeight</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWidth()" class="member-name-link">getWidth</a>()</code></div>
@@ -138,19 +130,14 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWinLength()" class="member-name-link">getWinLength</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isObstacle(ru.nsu.dashkovskii.model.Point)" class="member-name-link">isObstacle</a><wbr>(<a href="Point.html" title="class in ru.nsu.dashkovskii.model">Point</a>&nbsp;point)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#spawnFood(java.util.List)" class="member-name-link">spawnFood</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Snake.html" title="class in ru.nsu.dashkovskii.model">Snake</a>&gt;&nbsp;snakes)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Проверяет, является ли точка препятствием.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#spawnFood(java.util.List)" class="member-name-link">spawnFood</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Snake.html" title="class in ru.nsu.dashkovskii.model">Snake</a>&gt;&nbsp;snakes)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Спавнит еду до достижения требуемого количества на поле.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Point.html" title="class in ru.nsu.dashkovskii.model">Point</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#wrapPoint(ru.nsu.dashkovskii.model.Point)" class="member-name-link">wrapPoint</a><wbr>(<a href="Point.html" title="class in ru.nsu.dashkovskii.model">Point</a>&nbsp;point)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Point.html" title="class in ru.nsu.dashkovskii.model">Point</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#wrapPoint(ru.nsu.dashkovskii.model.Point)" class="member-name-link">wrapPoint</a><wbr>(<a href="Point.html" title="class in ru.nsu.dashkovskii.model">Point</a>&nbsp;point)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Оборачивает точку по границам поля (тороидальное поле).</div>
 </div>
 </div>
@@ -221,12 +208,6 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getObstacles()">
-<h3>getObstacles</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="Point.html" title="class in ru.nsu.dashkovskii.model">Point</a>&gt;</span>&nbsp;<span class="element-name">getObstacles</span>()</div>
-</section>
-</li>
-<li>
 <section class="detail" id="getWinLength()">
 <h3>getWinLength</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getWinLength</span>()</div>
@@ -266,30 +247,6 @@ loadScripts(document, 'script');</script>
 <dd><code>point</code> - точка для проверки</dd>
 <dt>Returns:</dt>
 <dd>съеденная еда или null, если еды в этой точке нет</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="isObstacle(ru.nsu.dashkovskii.model.Point)">
-<h3>isObstacle</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isObstacle</span><wbr><span class="parameters">(<a href="Point.html" title="class in ru.nsu.dashkovskii.model">Point</a>&nbsp;point)</span></div>
-<div class="block">Проверяет, является ли точка препятствием.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>point</code> - точка для проверки</dd>
-<dt>Returns:</dt>
-<dd>true, если это препятствие</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="addObstacle(ru.nsu.dashkovskii.model.Point)">
-<h3>addObstacle</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addObstacle</span><wbr><span class="parameters">(<a href="Point.html" title="class in ru.nsu.dashkovskii.model">Point</a>&nbsp;point)</span></div>
-<div class="block">Добавляет препятствие в заданную точку.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>point</code> - позиция препятствия</dd>
 </dl>
 </section>
 </li>
