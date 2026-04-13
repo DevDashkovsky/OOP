@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ru.nsu.dashkovskii.view.GameViewController"
+            stylesheets="@style.css">
+    <top>
+        <HBox styleClass="status-bar" spacing="20" alignment="CENTER">
+            <Label fx:id="scoreLabel" text="Счёт: 0"/>
+            <Label fx:id="levelLabel" text="Уровень: 1"/>
+            <Label fx:id="lengthLabel" text="Длина: 1"/>
+            <Label fx:id="stateLabel" text=""/>
+        </HBox>
+    </top>
+    <center>
+        <Pane fx:id="canvasPane">
+            <Canvas fx:id="gameCanvas"/>
+        </Pane>
+    </center>
+    <bottom>
+        <Label styleClass="hint-label"
+               text="Стрелки / WASD: движение  |  P: пауза  |  R: рестарт"
+               BorderPane.alignment="CENTER"/>
+    </bottom>
+</BorderPane>

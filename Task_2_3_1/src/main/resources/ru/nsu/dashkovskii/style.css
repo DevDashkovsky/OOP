@@ -1,0 +1,30 @@
+.root {
+    -fx-background-color: #9bbc0f;
+}
+
+.status-bar {
+    -fx-padding: 6 16;
+    -fx-background-color: #8bac0f;
+    -fx-border-color: #306230;
+    -fx-border-width: 0 0 2 0;
+    -fx-spacing: 20;
+}
+
+.status-bar .label {
+    -fx-text-fill: #0f380f;
+    -fx-font-size: 14px;
+    -fx-font-family: "Monospace";
+    -fx-font-weight: bold;
+}
+
+.hint-label {
+    -fx-text-fill: #306230;
+    -fx-font-size: 11px;
+    -fx-font-family: "Monospace";
+    -fx-padding: 4 16;
+    -fx-background-color: #8bac0f;
+    -fx-border-color: #306230;
+    -fx-border-width: 2 0 0 0;
+    -fx-max-width: infinity;
+    -fx-alignment: CENTER;
+}
