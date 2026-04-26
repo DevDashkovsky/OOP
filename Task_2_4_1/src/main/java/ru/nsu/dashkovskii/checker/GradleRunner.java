@@ -5,34 +5,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Запуск gradle-задач в (под)проекте студента.
+ * Запуск gradle-задач через wrapper студента (с фолбэком на системный gradle).
  */
 public final class GradleRunner {
 
-    private GradleRunner() {
+    private final ProcessRunner processes;
+
+    /** Создаёт раннер поверх заданного {@link ProcessRunner}. */
+    public GradleRunner(ProcessRunner processes) {
+        this.processes = processes;
     }
 
     /** Сборка без тестов. */
-    public static ProcessRunner.Result build(File projectDir, long timeoutMs) {
+    public ProcessRunner.Result build(File projectDir, long timeoutMs) {
         return runGradle(projectDir, List.of("build", "-x", "test", "-x", "check"), timeoutMs);
     }
 
     /** Генерация javadoc. */
-    public static ProcessRunner.Result javadoc(File projectDir, long timeoutMs) {
+    public ProcessRunner.Result javadoc(File projectDir, long timeoutMs) {
         return runGradle(projectDir, List.of("javadoc"), timeoutMs);
     }
 
-    /** Проверка стиля через checkstyle (Google Java Style ожидается в config). */
-    public static ProcessRunner.Result checkstyle(File projectDir, long timeoutMs) {
+    /** Проверка стиля через checkstyle. */
+    public ProcessRunner.Result checkstyle(File projectDir, long timeoutMs) {
         return runGradle(projectDir, List.of("checkstyleMain"), timeoutMs);
     }
 
     /** Запуск тестов. */
-    public static ProcessRunner.Result test(File projectDir, long timeoutMs) {
+    public ProcessRunner.Result test(File projectDir, long timeoutMs) {
         return runGradle(projectDir, List.of("test"), timeoutMs);
     }
 
-    private static ProcessRunner.Result runGradle(File dir, List<String> args, long timeoutMs) {
+    private ProcessRunner.Result runGradle(File dir, List<String> args, long timeoutMs) {
         List<String> cmd = new ArrayList<>();
         File wrapper = new File(dir, isWindows() ? "gradlew.bat" : "gradlew");
         if (wrapper.exists()) {
@@ -46,7 +50,7 @@ public final class GradleRunner {
         cmd.addAll(args);
         cmd.add("--no-daemon");
         cmd.add("--console=plain");
-        return ProcessRunner.run(dir, cmd, timeoutMs);
+        return processes.run(dir, cmd, timeoutMs);
     }
 
     private static boolean isWindows() {

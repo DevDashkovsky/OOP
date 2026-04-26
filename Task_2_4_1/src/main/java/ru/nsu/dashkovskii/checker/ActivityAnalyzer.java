@@ -10,26 +10,23 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Считает долю «активных» недель между двумя датами.
+ * Активность = доля ISO-недель в {@code [from, to]}, в которых был хотя бы один коммит.
  */
 public final class ActivityAnalyzer {
 
-    private ActivityAnalyzer() {
+    private final GitClient git;
+
+    /** Создаёт анализатор поверх заданного {@link GitClient}. */
+    public ActivityAnalyzer(GitClient git) {
+        this.git = git;
     }
 
-    /**
-     * Возвращает долю активных недель в заданном интервале.
-     *
-     * @param repoDir локальная копия репозитория
-     * @param from   начало учебного периода
-     * @param to     конец учебного периода
-     * @return доля недель, в которых был хотя бы один коммит, в [0..1]
-     */
-    public static double activityRatio(File repoDir, LocalDate from, LocalDate to) {
+    /** Доля активности в {@code [from, to]}, в пределах {@code [0..1]}. */
+    public double activityRatio(File repoDir, LocalDate from, LocalDate to) {
         if (!from.isBefore(to)) {
             return 0.0;
         }
-        List<Long> timestamps = GitClient.listCommitTimestamps(repoDir);
+        List<Long> timestamps = git.listCommitTimestamps(repoDir);
         Set<Integer> activeWeeks = new HashSet<>();
         ZoneId zone = ZoneId.systemDefault();
         for (long ts : timestamps) {

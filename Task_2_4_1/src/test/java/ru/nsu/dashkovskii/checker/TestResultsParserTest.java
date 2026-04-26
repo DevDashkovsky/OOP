@@ -9,6 +9,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 class TestResultsParserTest {
 
+    private final TestResultsParser parser = new TestResultsParser();
+
     @Test
     void readsJunitXml(@TempDir Path dir) throws Exception {
         Path results = dir.resolve("build/test-results/test");
@@ -24,7 +26,7 @@ class TestResultsParserTest {
                 </testsuite>
                 """);
 
-        TestResultsParser.Summary summary = TestResultsParser.parse(dir.toFile());
+        TestResultsParser.Summary summary = parser.parse(dir.toFile());
         assertEquals(5, summary.passed());
         assertEquals(1, summary.failed());
         assertEquals(1, summary.skipped());
@@ -32,7 +34,7 @@ class TestResultsParserTest {
 
     @Test
     void returnsZerosWhenNoResults(@TempDir Path dir) {
-        TestResultsParser.Summary s = TestResultsParser.parse(dir.toFile());
+        TestResultsParser.Summary s = parser.parse(dir.toFile());
         assertEquals(0, s.passed());
         assertEquals(0, s.failed());
         assertEquals(0, s.skipped());

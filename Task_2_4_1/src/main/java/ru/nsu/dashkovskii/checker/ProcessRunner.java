@@ -9,12 +9,10 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Тонкая обёртка над {@link ProcessBuilder}.
+ * Тонкая обёртка над {@link ProcessBuilder}. Создаётся один раз и
+ * передаётся как зависимость в {@link GitClient} и {@link GradleRunner}.
  */
 public final class ProcessRunner {
-
-    private ProcessRunner() {
-    }
 
     /** Результат запуска. */
     public record Result(int exitCode, String output, boolean timedOut) {
@@ -23,14 +21,8 @@ public final class ProcessRunner {
         }
     }
 
-    /**
-     * Запускает процесс и ждёт завершения.
-     *
-     * @param dir   рабочая директория
-     * @param cmd   команда
-     * @param timeoutMs таймаут в мс; {@code 0} — без таймаута
-     */
-    public static Result run(File dir, List<String> cmd, long timeoutMs) {
+    /** Запускает процесс в {@code dir} и возвращает результат с захваченным выводом. */
+    public Result run(File dir, List<String> cmd, long timeoutMs) {
         ProcessBuilder pb = new ProcessBuilder(cmd);
         if (dir != null) {
             pb.directory(dir);
@@ -43,7 +35,6 @@ public final class ProcessRunner {
             return new Result(-1, "Не удалось запустить: " + e.getMessage(), false);
         }
         StringBuilder out = new StringBuilder();
-        // Читаем stdout в отдельном потоке, иначе буфер ОС заполнится и процесс зависнет
         Thread reader = new Thread(() -> {
             try (BufferedReader r = new BufferedReader(
                     new InputStreamReader(p.getInputStream(), StandardCharsets.UTF_8))) {
@@ -52,6 +43,7 @@ public final class ProcessRunner {
                     out.append(line).append('\n');
                 }
             } catch (IOException ignored) {
+                // поток закрыт — выходим тихо
             }
         });
         reader.setDaemon(true);

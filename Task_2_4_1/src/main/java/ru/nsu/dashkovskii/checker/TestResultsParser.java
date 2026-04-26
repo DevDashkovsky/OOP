@@ -13,24 +13,24 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
- * Парсер JUnit XML-отчётов gradle.
+ * Парсер JUnit XML из {@code build/test-results/test/*.xml}.
+ * DOCTYPE отключён намеренно — не ослаблять.
  */
 public final class TestResultsParser {
 
-    /** Триплет число-пройденных/число-упавших/число-пропущенных. */
+    /** Триплет passed/failed/skipped. */
     public record Summary(int passed, int failed, int skipped) {
+        /** Поэлементная сумма. */
         public Summary add(Summary other) {
-            return new Summary(passed + other.passed, failed + other.failed, skipped + other.skipped);
+            return new Summary(
+                    passed + other.passed,
+                    failed + other.failed,
+                    skipped + other.skipped);
         }
     }
 
-    private TestResultsParser() {
-    }
-
-    /**
-     * Собирает результаты в {@code projectDir/build/test-results/test/*.xml}.
-     */
-    public static Summary parse(File projectDir) {
+    /** Возвращает свод по всем XML в папке результатов. */
+    public Summary parse(File projectDir) {
         File resultsDir = new File(projectDir, "build/test-results/test");
         if (!resultsDir.isDirectory()) {
             return new Summary(0, 0, 0);
@@ -46,7 +46,7 @@ public final class TestResultsParser {
         return total;
     }
 
-    private static Summary parseOne(File file) {
+    private Summary parseOne(File file) {
         try (InputStream in = new FileInputStream(file)) {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setFeature(
@@ -58,7 +58,6 @@ public final class TestResultsParser {
             int failures = readInt(root, "failures");
             int errors = readInt(root, "errors");
             int skipped = readInt(root, "skipped");
-            // gradle JUnit5 XML: атрибут "skipped" есть всегда, иначе считаем по элементам
             if (skipped == 0) {
                 NodeList skippedNodes = root.getElementsByTagName("skipped");
                 skipped = skippedNodes.getLength();
