@@ -83,7 +83,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public static record </span><span class="element-name type-name-label">TestResultsParser.Summary</span>(int&nbsp;passed, int&nbsp;failed, int&nbsp;skipped)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
-<div class="block">Триплет число-пройденных/число-упавших/число-пропущенных.</div>
+<div class="block">Триплет passed/failed/skipped.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -117,7 +117,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="TestResultsParser.Summary.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser.Summary</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#add(ru.nsu.dashkovskii.checker.TestResultsParser.Summary)" class="member-name-link">add</a><wbr>(<a href="TestResultsParser.Summary.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser.Summary</a>&nbsp;other)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Поэлементная сумма.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -192,6 +194,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="add(ru.nsu.dashkovskii.checker.TestResultsParser.Summary)">
 <h3>add</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="TestResultsParser.Summary.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser.Summary</a></span>&nbsp;<span class="element-name">add</span><wbr><span class="parameters">(<a href="TestResultsParser.Summary.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser.Summary</a>&nbsp;other)</span></div>
+<div class="block">Поэлементная сумма.</div>
 </section>
 </li>
 <li>

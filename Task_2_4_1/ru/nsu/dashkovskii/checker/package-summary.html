@@ -89,11 +89,11 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="ActivityAnalyzer.html" title="class in ru.nsu.dashkovskii.checker">ActivityAnalyzer</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Считает долю «активных» недель между двумя датами.</div>
+<div class="block">Активность = доля ISO-недель в <code>[from, to]</code>, в которых был хотя бы один коммит.</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="CheckExecutor.html" title="class in ru.nsu.dashkovskii.checker">CheckExecutor</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Оркестрация проверок: клонирование, сборка, тесты, стиль, javadoc, активность.</div>
+<div class="block">Оркестрация проверок: клонирование, прогон стадий, расчёт балла, активность.</div>
 </div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="GitClient.html" title="class in ru.nsu.dashkovskii.checker">GitClient</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
@@ -101,7 +101,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="GradleRunner.html" title="class in ru.nsu.dashkovskii.checker">GradleRunner</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Запуск gradle-задач в (под)проекте студента.</div>
+<div class="block">Запуск gradle-задач через wrapper студента (с фолбэком на системный gradle).</div>
 </div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="ProcessRunner.html" title="class in ru.nsu.dashkovskii.checker">ProcessRunner</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
@@ -111,17 +111,22 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color class-summary class-summary-tab4">
 <div class="block">Результат запуска.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="TaskLocator.html" title="class in ru.nsu.dashkovskii.checker">TaskLocator</a></div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="ScoreCalculator.html" title="class in ru.nsu.dashkovskii.checker">ScoreCalculator</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Ищет подпроект лабораторной внутри клонированного репозитория.</div>
+<div class="block">Считает балл за задачу: четыре равные четверти (build/docs/style/tests),
+ затем штраф за дедлайн (soft → ×0.5, hard → 0), затем бонус.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="TestResultsParser.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser</a></div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="TaskLocator.html" title="class in ru.nsu.dashkovskii.checker">TaskLocator</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Парсер JUnit XML-отчётов gradle.</div>
+<div class="block">Ищет подпроект <code>Task_&lt;id&gt;</code> внутри клонированного репозитория.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab4"><a href="TestResultsParser.Summary.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser.Summary</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab4">
-<div class="block">Триплет число-пройденных/число-упавших/число-пропущенных.</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="TestResultsParser.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="block">Парсер JUnit XML из <code>build/test-results/test/*.xml</code>.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab4"><a href="TestResultsParser.Summary.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser.Summary</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab4">
+<div class="block">Триплет passed/failed/skipped.</div>
 </div>
 </div>
 </div>

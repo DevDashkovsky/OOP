@@ -54,18 +54,24 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="ru/nsu/dashkovskii/checker/ActivityAnalyzer.html" class="type-name-link" title="class in ru.nsu.dashkovskii.checker">ActivityAnalyzer</a> - Class in <a href="ru/nsu/dashkovskii/checker/package-summary.html">ru.nsu.dashkovskii.checker</a></dt>
 <dd>
-<div class="block">Считает долю «активных» недель между двумя датами.</div>
+<div class="block">Активность = доля ISO-недель в <code>[from, to]</code>, в которых был хотя бы один коммит.</div>
+</dd>
+<dt><a href="ru/nsu/dashkovskii/checker/ActivityAnalyzer.html#%3Cinit%3E(ru.nsu.dashkovskii.checker.GitClient)" class="member-name-link">ActivityAnalyzer(GitClient)</a> - Constructor for class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/ActivityAnalyzer.html" title="class in ru.nsu.dashkovskii.checker">ActivityAnalyzer</a></dt>
+<dd>
+<div class="block">Создаёт анализатор поверх заданного <a href="ru/nsu/dashkovskii/checker/GitClient.html" title="class in ru.nsu.dashkovskii.checker"><code>GitClient</code></a>.</div>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/model/CheckerSettings.html#activityMultiplier(double)" class="member-name-link">activityMultiplier(double)</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/CheckerSettings.html" title="class in ru.nsu.dashkovskii.model">CheckerSettings</a></dt>
 <dd>
 <div class="block">Возвращает множитель по доле активных недель.</div>
 </dd>
-<dt><a href="ru/nsu/dashkovskii/checker/ActivityAnalyzer.html#activityRatio(java.io.File,java.time.LocalDate,java.time.LocalDate)" class="member-name-link">activityRatio(File, LocalDate, LocalDate)</a> - Static method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/ActivityAnalyzer.html" title="class in ru.nsu.dashkovskii.checker">ActivityAnalyzer</a></dt>
+<dt><a href="ru/nsu/dashkovskii/checker/ActivityAnalyzer.html#activityRatio(java.io.File,java.time.LocalDate,java.time.LocalDate)" class="member-name-link">activityRatio(File, LocalDate, LocalDate)</a> - Method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/ActivityAnalyzer.html" title="class in ru.nsu.dashkovskii.checker">ActivityAnalyzer</a></dt>
 <dd>
-<div class="block">Возвращает долю активных недель в заданном интервале.</div>
+<div class="block">Доля активности в <code>[from, to]</code>, в пределах <code>[0..1]</code>.</div>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/checker/TestResultsParser.Summary.html#add(ru.nsu.dashkovskii.checker.TestResultsParser.Summary)" class="member-name-link">add(TestResultsParser.Summary)</a> - Method in record class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/TestResultsParser.Summary.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser.Summary</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Поэлементная сумма.</div>
+</dd>
 <dt><a href="ru/nsu/dashkovskii/model/CheckerSettings.html#addBonus(ru.nsu.dashkovskii.model.CheckerSettings.BonusPoint)" class="member-name-link">addBonus(CheckerSettings.BonusPoint)</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/CheckerSettings.html" title="class in ru.nsu.dashkovskii.model">CheckerSettings</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/Assignment.html#addCheck(java.lang.String,java.lang.String,java.util.List)" class="member-name-link">addCheck(String, String, List&lt;String&gt;)</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/Assignment.html" title="class in ru.nsu.dashkovskii.model">Assignment</a></dt>
@@ -84,6 +90,10 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/CheckerConfig.html#addTask(ru.nsu.dashkovskii.model.LabTask)" class="member-name-link">addTask(LabTask)</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/CheckerConfig.html" title="class in ru.nsu.dashkovskii.model">CheckerConfig</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/dashkovskii/checker/ScoreCalculator.html#apply(ru.nsu.dashkovskii.model.LabTask,double,ru.nsu.dashkovskii.model.TaskResult)" class="member-name-link">apply(LabTask, double, TaskResult)</a> - Method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/ScoreCalculator.html" title="class in ru.nsu.dashkovskii.checker">ScoreCalculator</a></dt>
+<dd>
+<div class="block">Записывает в <code>result</code> итоговый балл с учётом дедлайна и бонуса.</div>
+</dd>
 <dt><a href="ru/nsu/dashkovskii/model/Assignment.html" class="type-name-link" title="class in ru.nsu.dashkovskii.model">Assignment</a> - Class in <a href="ru/nsu/dashkovskii/model/package-summary.html">ru.nsu.dashkovskii.model</a></dt>
 <dd>
 <div class="block">Что именно надо проверить: для каждой группы — какие задачи у каких студентов.</div>
@@ -101,7 +111,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates an instance of a <code>BonusPoint</code> record class.</div>
 </dd>
-<dt><a href="ru/nsu/dashkovskii/checker/GradleRunner.html#build(java.io.File,long)" class="member-name-link">build(File, long)</a> - Static method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GradleRunner.html" title="class in ru.nsu.dashkovskii.checker">GradleRunner</a></dt>
+<dt><a href="ru/nsu/dashkovskii/checker/GradleRunner.html#build(java.io.File,long)" class="member-name-link">build(File, long)</a> - Method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GradleRunner.html" title="class in ru.nsu.dashkovskii.checker">GradleRunner</a></dt>
 <dd>
 <div class="block">Сборка без тестов.</div>
 </dd>
@@ -126,15 +136,15 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/checker/CheckExecutor.html" class="type-name-link" title="class in ru.nsu.dashkovskii.checker">CheckExecutor</a> - Class in <a href="ru/nsu/dashkovskii/checker/package-summary.html">ru.nsu.dashkovskii.checker</a></dt>
 <dd>
-<div class="block">Оркестрация проверок: клонирование, сборка, тесты, стиль, javadoc, активность.</div>
+<div class="block">Оркестрация проверок: клонирование, прогон стадий, расчёт балла, активность.</div>
 </dd>
-<dt><a href="ru/nsu/dashkovskii/checker/CheckExecutor.html#%3Cinit%3E(ru.nsu.dashkovskii.model.CheckerConfig,java.io.File,java.time.LocalDate,java.time.LocalDate)" class="member-name-link">CheckExecutor(CheckerConfig, File, LocalDate, LocalDate)</a> - Constructor for class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/CheckExecutor.html" title="class in ru.nsu.dashkovskii.checker">CheckExecutor</a></dt>
+<dt><a href="ru/nsu/dashkovskii/checker/CheckExecutor.html#%3Cinit%3E(ru.nsu.dashkovskii.model.CheckerConfig,java.io.File,java.time.LocalDate,java.time.LocalDate,ru.nsu.dashkovskii.checker.GitClient,ru.nsu.dashkovskii.checker.GradleRunner,ru.nsu.dashkovskii.checker.TaskLocator,ru.nsu.dashkovskii.checker.TestResultsParser,ru.nsu.dashkovskii.checker.ActivityAnalyzer,ru.nsu.dashkovskii.checker.ScoreCalculator)" class="member-name-link">CheckExecutor(CheckerConfig, File, LocalDate, LocalDate, GitClient, GradleRunner, TaskLocator, TestResultsParser, ActivityAnalyzer, ScoreCalculator)</a> - Constructor for class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/CheckExecutor.html" title="class in ru.nsu.dashkovskii.checker">CheckExecutor</a></dt>
 <dd>
-<div class="block">Создаёт исполнитель с заданной конфигурацией и рабочей директорией.</div>
+<div class="block">Создаёт исполнитель со всеми сервисами, внедрёнными снаружи.</div>
 </dd>
-<dt><a href="ru/nsu/dashkovskii/checker/GitClient.html#checkoutDefault(java.io.File)" class="member-name-link">checkoutDefault(File)</a> - Static method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GitClient.html" title="class in ru.nsu.dashkovskii.checker">GitClient</a></dt>
+<dt><a href="ru/nsu/dashkovskii/checker/GitClient.html#checkoutDefault(java.io.File)" class="member-name-link">checkoutDefault(File)</a> - Method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GitClient.html" title="class in ru.nsu.dashkovskii.checker">GitClient</a></dt>
 <dd>
-<div class="block">Пытается переключиться на master или main.</div>
+<div class="block">Переключается на main или master и подтягивает изменения.</div>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/model/Checkpoint.html" class="type-name-link" title="class in ru.nsu.dashkovskii.model">Checkpoint</a> - Record Class in <a href="ru/nsu/dashkovskii/model/package-summary.html">ru.nsu.dashkovskii.model</a></dt>
 <dd>
@@ -144,13 +154,13 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates an instance of a <code>Checkpoint</code> record class.</div>
 </dd>
-<dt><a href="ru/nsu/dashkovskii/checker/GradleRunner.html#checkstyle(java.io.File,long)" class="member-name-link">checkstyle(File, long)</a> - Static method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GradleRunner.html" title="class in ru.nsu.dashkovskii.checker">GradleRunner</a></dt>
+<dt><a href="ru/nsu/dashkovskii/checker/GradleRunner.html#checkstyle(java.io.File,long)" class="member-name-link">checkstyle(File, long)</a> - Method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GradleRunner.html" title="class in ru.nsu.dashkovskii.checker">GradleRunner</a></dt>
 <dd>
-<div class="block">Проверка стиля через checkstyle (Google Java Style ожидается в config).</div>
+<div class="block">Проверка стиля через checkstyle.</div>
 </dd>
-<dt><a href="ru/nsu/dashkovskii/checker/GitClient.html#cloneOrFetch(java.lang.String,java.io.File)" class="member-name-link">cloneOrFetch(String, File)</a> - Static method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GitClient.html" title="class in ru.nsu.dashkovskii.checker">GitClient</a></dt>
+<dt><a href="ru/nsu/dashkovskii/checker/GitClient.html#cloneOrFetch(java.lang.String,java.io.File)" class="member-name-link">cloneOrFetch(String, File)</a> - Method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GitClient.html" title="class in ru.nsu.dashkovskii.checker">GitClient</a></dt>
 <dd>
-<div class="block">Клонирует репозиторий в <code>targetDir</code>, если его ещё нет, иначе делает fetch.</div>
+<div class="block">Клонирует репозиторий, либо делает fetch, если он уже есть.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:D">D</h2>
@@ -268,9 +278,9 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Работа с git через консольный клиент.</div>
 </dd>
-<dt><a href="ru/nsu/dashkovskii/checker/GitClient.html#globalUser()" class="member-name-link">globalUser()</a> - Static method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GitClient.html" title="class in ru.nsu.dashkovskii.checker">GitClient</a></dt>
+<dt><a href="ru/nsu/dashkovskii/checker/GitClient.html#%3Cinit%3E(ru.nsu.dashkovskii.checker.ProcessRunner)" class="member-name-link">GitClient(ProcessRunner)</a> - Constructor for class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GitClient.html" title="class in ru.nsu.dashkovskii.checker">GitClient</a></dt>
 <dd>
-<div class="block">Возвращает <code>git config --global user.name</code>.</div>
+<div class="block">Создаёт клиент поверх заданного <a href="ru/nsu/dashkovskii/checker/ProcessRunner.html" title="class in ru.nsu.dashkovskii.checker"><code>ProcessRunner</code></a>.</div>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/model/CheckerSettings.html#grade(double)" class="member-name-link">grade(double)</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/CheckerSettings.html" title="class in ru.nsu.dashkovskii.model">CheckerSettings</a></dt>
 <dd>
@@ -278,7 +288,11 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/checker/GradleRunner.html" class="type-name-link" title="class in ru.nsu.dashkovskii.checker">GradleRunner</a> - Class in <a href="ru/nsu/dashkovskii/checker/package-summary.html">ru.nsu.dashkovskii.checker</a></dt>
 <dd>
-<div class="block">Запуск gradle-задач в (под)проекте студента.</div>
+<div class="block">Запуск gradle-задач через wrapper студента (с фолбэком на системный gradle).</div>
+</dd>
+<dt><a href="ru/nsu/dashkovskii/checker/GradleRunner.html#%3Cinit%3E(ru.nsu.dashkovskii.checker.ProcessRunner)" class="member-name-link">GradleRunner(ProcessRunner)</a> - Constructor for class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GradleRunner.html" title="class in ru.nsu.dashkovskii.checker">GradleRunner</a></dt>
+<dd>
+<div class="block">Создаёт раннер поверх заданного <a href="ru/nsu/dashkovskii/checker/ProcessRunner.html" title="class in ru.nsu.dashkovskii.checker"><code>ProcessRunner</code></a>.</div>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/model/GroupReport.html" class="type-name-link" title="class in ru.nsu.dashkovskii.model">GroupReport</a> - Class in <a href="ru/nsu/dashkovskii/model/package-summary.html">ru.nsu.dashkovskii.model</a></dt>
 <dd>
@@ -318,16 +332,16 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/TaskResult.html#isDocs()" class="member-name-link">isDocs()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/TaskResult.html" title="class in ru.nsu.dashkovskii.model">TaskResult</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/dashkovskii/checker/GitClient.html#isNonInteractive()" class="member-name-link">isNonInteractive()</a> - Static method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GitClient.html" title="class in ru.nsu.dashkovskii.checker">GitClient</a></dt>
+<dt><a href="ru/nsu/dashkovskii/checker/GitClient.html#isNonInteractive()" class="member-name-link">isNonInteractive()</a> - Method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GitClient.html" title="class in ru.nsu.dashkovskii.checker">GitClient</a></dt>
 <dd>
-<div class="block">Проверяет, что git настроен без интерактивных запросов аутентификации.</div>
+<div class="block">Проверяет, что git настроен без интерактивных prompt'ов.</div>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/model/TaskResult.html#isStyleOk()" class="member-name-link">isStyleOk()</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/TaskResult.html" title="class in ru.nsu.dashkovskii.model">TaskResult</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:J">J</h2>
 <dl class="index">
-<dt><a href="ru/nsu/dashkovskii/checker/GradleRunner.html#javadoc(java.io.File,long)" class="member-name-link">javadoc(File, long)</a> - Static method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GradleRunner.html" title="class in ru.nsu.dashkovskii.checker">GradleRunner</a></dt>
+<dt><a href="ru/nsu/dashkovskii/checker/GradleRunner.html#javadoc(java.io.File,long)" class="member-name-link">javadoc(File, long)</a> - Method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GradleRunner.html" title="class in ru.nsu.dashkovskii.checker">GradleRunner</a></dt>
 <dd>
 <div class="block">Генерация javadoc.</div>
 </dd>
@@ -340,24 +354,24 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/model/LabTask.html#%3Cinit%3E(java.lang.String)" class="member-name-link">LabTask(String)</a> - Constructor for class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/LabTask.html" title="class in ru.nsu.dashkovskii.model">LabTask</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/dashkovskii/checker/GitClient.html#lastCommitDate(java.io.File,java.lang.String)" class="member-name-link">lastCommitDate(File, String)</a> - Static method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GitClient.html" title="class in ru.nsu.dashkovskii.checker">GitClient</a></dt>
+<dt><a href="ru/nsu/dashkovskii/checker/GitClient.html#lastCommitDate(java.io.File,java.lang.String)" class="member-name-link">lastCommitDate(File, String)</a> - Method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GitClient.html" title="class in ru.nsu.dashkovskii.checker">GitClient</a></dt>
 <dd>
-<div class="block">Возвращает дату последнего коммита, затрагивающего указанный путь внутри репозитория.</div>
+<div class="block">Дата последнего коммита, затрагивающего <code>subPath</code>, или <code>null</code>.</div>
 </dd>
-<dt><a href="ru/nsu/dashkovskii/checker/GitClient.html#listCommitTimestamps(java.io.File)" class="member-name-link">listCommitTimestamps(File)</a> - Static method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GitClient.html" title="class in ru.nsu.dashkovskii.checker">GitClient</a></dt>
+<dt><a href="ru/nsu/dashkovskii/checker/GitClient.html#listCommitTimestamps(java.io.File)" class="member-name-link">listCommitTimestamps(File)</a> - Method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GitClient.html" title="class in ru.nsu.dashkovskii.checker">GitClient</a></dt>
 <dd>
-<div class="block">Список timestamp коммитов (unix seconds).</div>
+<div class="block">Список unix-таймстампов всех коммитов.</div>
 </dd>
-<dt><a href="ru/nsu/dashkovskii/checker/TaskLocator.html#locate(java.io.File,java.lang.String)" class="member-name-link">locate(File, String)</a> - Static method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/TaskLocator.html" title="class in ru.nsu.dashkovskii.checker">TaskLocator</a></dt>
+<dt><a href="ru/nsu/dashkovskii/checker/TaskLocator.html#locate(java.io.File,java.lang.String)" class="member-name-link">locate(File, String)</a> - Method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/TaskLocator.html" title="class in ru.nsu.dashkovskii.checker">TaskLocator</a></dt>
 <dd>
-<div class="block">Возвращает директорию подпроекта по идентификатору задачи либо <code>null</code>.</div>
+<div class="block">Возвращает директорию подпроекта или <code>null</code>, если не найдена.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:M">M</h2>
 <dl class="index">
 <dt><a href="ru/nsu/dashkovskii/OopChecker.html#main(java.lang.String%5B%5D)" class="member-name-link">main(String[])</a> - Static method in class ru.nsu.dashkovskii.<a href="ru/nsu/dashkovskii/OopChecker.html" title="class in ru.nsu.dashkovskii">OopChecker</a></dt>
 <dd>
-<div class="block">Точка входа.</div>
+<div class="block">Точка входа JVM.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:N">N</h2>
@@ -366,17 +380,15 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the value of the <code>name</code> record component.</div>
 </dd>
-<dt><a href="ru/nsu/dashkovskii/checker/GitClient.html#now()" class="member-name-link">now()</a> - Static method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GitClient.html" title="class in ru.nsu.dashkovskii.checker">GitClient</a></dt>
-<dd>
-<div class="block">Текущее время — для определения «свежести» репозитория.</div>
-</dd>
 </dl>
 <h2 class="title" id="I:O">O</h2>
 <dl class="index">
 <dt><a href="ru/nsu/dashkovskii/OopChecker.html" class="type-name-link" title="class in ru.nsu.dashkovskii">OopChecker</a> - Class in <a href="ru/nsu/dashkovskii/package-summary.html">ru.nsu.dashkovskii</a></dt>
 <dd>
-<div class="block">Входная точка: ищет checker.groovy в рабочей директории и исполняет команду.</div>
+<div class="block">Входная точка: парсит args, собирает граф зависимостей, запускает команду.</div>
 </dd>
+<dt><a href="ru/nsu/dashkovskii/OopChecker.html#%3Cinit%3E()" class="member-name-link">OopChecker()</a> - Constructor for class ru.nsu.dashkovskii.<a href="ru/nsu/dashkovskii/OopChecker.html" title="class in ru.nsu.dashkovskii">OopChecker</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/checker/ProcessRunner.Result.html#output()" class="member-name-link">output()</a> - Method in record class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/ProcessRunner.Result.html" title="class in ru.nsu.dashkovskii.checker">ProcessRunner.Result</a></dt>
 <dd>
 <div class="block">Returns the value of the <code>output</code> record component.</div>
@@ -384,9 +396,9 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:P">P</h2>
 <dl class="index">
-<dt><a href="ru/nsu/dashkovskii/checker/TestResultsParser.html#parse(java.io.File)" class="member-name-link">parse(File)</a> - Static method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/TestResultsParser.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser</a></dt>
+<dt><a href="ru/nsu/dashkovskii/checker/TestResultsParser.html#parse(java.io.File)" class="member-name-link">parse(File)</a> - Method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/TestResultsParser.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser</a></dt>
 <dd>
-<div class="block">Собирает результаты в <code>projectDir/build/test-results/test/*.xml</code>.</div>
+<div class="block">Возвращает свод по всем XML в папке результатов.</div>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/checker/TestResultsParser.Summary.html#passed()" class="member-name-link">passed()</a> - Method in record class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/TestResultsParser.Summary.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser.Summary</a></dt>
 <dd>
@@ -400,6 +412,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Тонкая обёртка над <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/ProcessBuilder.html" title="class or interface in java.lang" class="external-link"><code>ProcessBuilder</code></a>.</div>
 </dd>
+<dt><a href="ru/nsu/dashkovskii/checker/ProcessRunner.html#%3Cinit%3E()" class="member-name-link">ProcessRunner()</a> - Constructor for class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/ProcessRunner.html" title="class in ru.nsu.dashkovskii.checker">ProcessRunner</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/checker/ProcessRunner.Result.html" class="type-name-link" title="class in ru.nsu.dashkovskii.checker">ProcessRunner.Result</a> - Record Class in <a href="ru/nsu/dashkovskii/checker/package-summary.html">ru.nsu.dashkovskii.checker</a></dt>
 <dd>
 <div class="block">Результат запуска.</div>
@@ -427,13 +441,24 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Запускает все проверки, возвращает отчёты по группам.</div>
 </dd>
-<dt><a href="ru/nsu/dashkovskii/checker/ProcessRunner.html#run(java.io.File,java.util.List,long)" class="member-name-link">run(File, List&lt;String&gt;, long)</a> - Static method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/ProcessRunner.html" title="class in ru.nsu.dashkovskii.checker">ProcessRunner</a></dt>
+<dt><a href="ru/nsu/dashkovskii/checker/ProcessRunner.html#run(java.io.File,java.util.List,long)" class="member-name-link">run(File, List&lt;String&gt;, long)</a> - Method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/ProcessRunner.html" title="class in ru.nsu.dashkovskii.checker">ProcessRunner</a></dt>
 <dd>
-<div class="block">Запускает процесс и ждёт завершения.</div>
+<div class="block">Запускает процесс в <code>dir</code> и возвращает результат с захваченным выводом.</div>
+</dd>
+<dt><a href="ru/nsu/dashkovskii/OopChecker.html#run(java.lang.String%5B%5D,java.io.File)" class="member-name-link">run(String[], File)</a> - Method in class ru.nsu.dashkovskii.<a href="ru/nsu/dashkovskii/OopChecker.html" title="class in ru.nsu.dashkovskii">OopChecker</a></dt>
+<dd>
+<div class="block">Запускает выбранную команду; возвращает код возврата.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:S">S</h2>
 <dl class="index">
+<dt><a href="ru/nsu/dashkovskii/checker/ScoreCalculator.html" class="type-name-link" title="class in ru.nsu.dashkovskii.checker">ScoreCalculator</a> - Class in <a href="ru/nsu/dashkovskii/checker/package-summary.html">ru.nsu.dashkovskii.checker</a></dt>
+<dd>
+<div class="block">Считает балл за задачу: четыре равные четверти (build/docs/style/tests),
+ затем штраф за дедлайн (soft → ×0.5, hard → 0), затем бонус.</div>
+</dd>
+<dt><a href="ru/nsu/dashkovskii/checker/ScoreCalculator.html#%3Cinit%3E()" class="member-name-link">ScoreCalculator()</a> - Constructor for class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/ScoreCalculator.html" title="class in ru.nsu.dashkovskii.checker">ScoreCalculator</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/StudentReport.html#setActivityRatio(double)" class="member-name-link">setActivityRatio(double)</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/StudentReport.html" title="class in ru.nsu.dashkovskii.model">StudentReport</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/TaskResult.html#setBonus(double)" class="member-name-link">setBonus(double)</a> - Method in class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/TaskResult.html" title="class in ru.nsu.dashkovskii.model">TaskResult</a></dt>
@@ -511,25 +536,29 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/checker/TaskLocator.html" class="type-name-link" title="class in ru.nsu.dashkovskii.checker">TaskLocator</a> - Class in <a href="ru/nsu/dashkovskii/checker/package-summary.html">ru.nsu.dashkovskii.checker</a></dt>
 <dd>
-<div class="block">Ищет подпроект лабораторной внутри клонированного репозитория.</div>
+<div class="block">Ищет подпроект <code>Task_&lt;id&gt;</code> внутри клонированного репозитория.</div>
 </dd>
+<dt><a href="ru/nsu/dashkovskii/checker/TaskLocator.html#%3Cinit%3E()" class="member-name-link">TaskLocator()</a> - Constructor for class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/TaskLocator.html" title="class in ru.nsu.dashkovskii.checker">TaskLocator</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/model/TaskResult.html" class="type-name-link" title="class in ru.nsu.dashkovskii.model">TaskResult</a> - Class in <a href="ru/nsu/dashkovskii/model/package-summary.html">ru.nsu.dashkovskii.model</a></dt>
 <dd>
 <div class="block">Результат проверки одной задачи у студента.</div>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/model/TaskResult.html#%3Cinit%3E(java.lang.String)" class="member-name-link">TaskResult(String)</a> - Constructor for class ru.nsu.dashkovskii.model.<a href="ru/nsu/dashkovskii/model/TaskResult.html" title="class in ru.nsu.dashkovskii.model">TaskResult</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/dashkovskii/checker/GradleRunner.html#test(java.io.File,long)" class="member-name-link">test(File, long)</a> - Static method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GradleRunner.html" title="class in ru.nsu.dashkovskii.checker">GradleRunner</a></dt>
+<dt><a href="ru/nsu/dashkovskii/checker/GradleRunner.html#test(java.io.File,long)" class="member-name-link">test(File, long)</a> - Method in class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/GradleRunner.html" title="class in ru.nsu.dashkovskii.checker">GradleRunner</a></dt>
 <dd>
 <div class="block">Запуск тестов.</div>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/checker/TestResultsParser.html" class="type-name-link" title="class in ru.nsu.dashkovskii.checker">TestResultsParser</a> - Class in <a href="ru/nsu/dashkovskii/checker/package-summary.html">ru.nsu.dashkovskii.checker</a></dt>
 <dd>
-<div class="block">Парсер JUnit XML-отчётов gradle.</div>
+<div class="block">Парсер JUnit XML из <code>build/test-results/test/*.xml</code>.</div>
 </dd>
+<dt><a href="ru/nsu/dashkovskii/checker/TestResultsParser.html#%3Cinit%3E()" class="member-name-link">TestResultsParser()</a> - Constructor for class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/TestResultsParser.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/dashkovskii/checker/TestResultsParser.Summary.html" class="type-name-link" title="class in ru.nsu.dashkovskii.checker">TestResultsParser.Summary</a> - Record Class in <a href="ru/nsu/dashkovskii/checker/package-summary.html">ru.nsu.dashkovskii.checker</a></dt>
 <dd>
-<div class="block">Триплет число-пройденных/число-упавших/число-пропущенных.</div>
+<div class="block">Триплет passed/failed/skipped.</div>
 </dd>
 <dt><a href="ru/nsu/dashkovskii/checker/ProcessRunner.Result.html#timedOut()" class="member-name-link">timedOut()</a> - Method in record class ru.nsu.dashkovskii.checker.<a href="ru/nsu/dashkovskii/checker/ProcessRunner.Result.html" title="class in ru.nsu.dashkovskii.checker">ProcessRunner.Result</a></dt>
 <dd>

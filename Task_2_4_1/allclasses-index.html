@@ -61,7 +61,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/checker/ActivityAnalyzer.html" title="class in ru.nsu.dashkovskii.checker">ActivityAnalyzer</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Считает долю «активных» недель между двумя датами.</div>
+<div class="block">Активность = доля ISO-недель в <code>[from, to]</code>, в которых был хотя бы один коммит.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/model/Assignment.html" title="class in ru.nsu.dashkovskii.model">Assignment</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
@@ -81,7 +81,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/checker/CheckExecutor.html" title="class in ru.nsu.dashkovskii.checker">CheckExecutor</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Оркестрация проверок: клонирование, сборка, тесты, стиль, javadoc, активность.</div>
+<div class="block">Оркестрация проверок: клонирование, прогон стадий, расчёт балла, активность.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab4"><a href="ru/nsu/dashkovskii/model/Checkpoint.html" title="class in ru.nsu.dashkovskii.model">Checkpoint</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab4">
@@ -93,7 +93,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/checker/GradleRunner.html" title="class in ru.nsu.dashkovskii.checker">GradleRunner</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Запуск gradle-задач в (под)проекте студента.</div>
+<div class="block">Запуск gradle-задач через wrapper студента (с фолбэком на системный gradle).</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/model/GroupReport.html" title="class in ru.nsu.dashkovskii.model">GroupReport</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
@@ -109,7 +109,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/OopChecker.html" title="class in ru.nsu.dashkovskii">OopChecker</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Входная точка: ищет checker.groovy в рабочей директории и исполняет команду.</div>
+<div class="block">Входная точка: парсит args, собирает граф зависимостей, запускает команду.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/checker/ProcessRunner.html" title="class in ru.nsu.dashkovskii.checker">ProcessRunner</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
@@ -119,33 +119,38 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab4">
 <div class="block">Результат запуска.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/model/Student.html" title="class in ru.nsu.dashkovskii.model">Student</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/checker/ScoreCalculator.html" title="class in ru.nsu.dashkovskii.checker">ScoreCalculator</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Считает балл за задачу: четыре равные четверти (build/docs/style/tests),
+ затем штраф за дедлайн (soft → ×0.5, hard → 0), затем бонус.</div>
+</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/model/Student.html" title="class in ru.nsu.dashkovskii.model">Student</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Студент с github-аккаунтом и ссылкой на репозиторий.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/model/StudentGroup.html" title="class in ru.nsu.dashkovskii.model">StudentGroup</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/model/StudentGroup.html" title="class in ru.nsu.dashkovskii.model">StudentGroup</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Учебная группа.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/model/StudentReport.html" title="class in ru.nsu.dashkovskii.model">StudentReport</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/model/StudentReport.html" title="class in ru.nsu.dashkovskii.model">StudentReport</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Сводка по одному студенту.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/checker/TaskLocator.html" title="class in ru.nsu.dashkovskii.checker">TaskLocator</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Ищет подпроект лабораторной внутри клонированного репозитория.</div>
-</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/model/TaskResult.html" title="class in ru.nsu.dashkovskii.model">TaskResult</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/checker/TaskLocator.html" title="class in ru.nsu.dashkovskii.checker">TaskLocator</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Ищет подпроект <code>Task_&lt;id&gt;</code> внутри клонированного репозитория.</div>
+</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/model/TaskResult.html" title="class in ru.nsu.dashkovskii.model">TaskResult</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Результат проверки одной задачи у студента.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/checker/TestResultsParser.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
-<div class="block">Парсер JUnit XML-отчётов gradle.</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/dashkovskii/checker/TestResultsParser.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Парсер JUnit XML из <code>build/test-results/test/*.xml</code>.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab4"><a href="ru/nsu/dashkovskii/checker/TestResultsParser.Summary.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser.Summary</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab4">
-<div class="block">Триплет число-пройденных/число-упавших/число-пропущенных.</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab4"><a href="ru/nsu/dashkovskii/checker/TestResultsParser.Summary.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser.Summary</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab4">
+<div class="block">Триплет passed/failed/skipped.</div>
 </div>
 </div>
 </div>

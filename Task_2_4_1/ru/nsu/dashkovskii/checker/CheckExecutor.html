@@ -77,7 +77,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">CheckExecutor</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Оркестрация проверок: клонирование, сборка, тесты, стиль, javadoc, активность.</div>
+<div class="block">Оркестрация проверок: клонирование, прогон стадий, расчёт балла, активность.
+ Зависимости приходят через конструктор — статики только в локальных хелперах.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -89,12 +90,18 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.dashkovskii.model.CheckerConfig,java.io.File,java.time.LocalDate,java.time.LocalDate)" class="member-name-link">CheckExecutor</a><wbr>(<a href="../model/CheckerConfig.html" title="class in ru.nsu.dashkovskii.model">CheckerConfig</a>&nbsp;config,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.dashkovskii.model.CheckerConfig,java.io.File,java.time.LocalDate,java.time.LocalDate,ru.nsu.dashkovskii.checker.GitClient,ru.nsu.dashkovskii.checker.GradleRunner,ru.nsu.dashkovskii.checker.TaskLocator,ru.nsu.dashkovskii.checker.TestResultsParser,ru.nsu.dashkovskii.checker.ActivityAnalyzer,ru.nsu.dashkovskii.checker.ScoreCalculator)" class="member-name-link">CheckExecutor</a><wbr>(<a href="../model/CheckerConfig.html" title="class in ru.nsu.dashkovskii.model">CheckerConfig</a>&nbsp;config,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;workspace,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html" title="class or interface in java.time" class="external-link">LocalDate</a>&nbsp;from,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html" title="class or interface in java.time" class="external-link">LocalDate</a>&nbsp;to)</code></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html" title="class or interface in java.time" class="external-link">LocalDate</a>&nbsp;to,
+ <a href="GitClient.html" title="class in ru.nsu.dashkovskii.checker">GitClient</a>&nbsp;git,
+ <a href="GradleRunner.html" title="class in ru.nsu.dashkovskii.checker">GradleRunner</a>&nbsp;gradle,
+ <a href="TaskLocator.html" title="class in ru.nsu.dashkovskii.checker">TaskLocator</a>&nbsp;taskLocator,
+ <a href="TestResultsParser.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser</a>&nbsp;testResults,
+ <a href="ActivityAnalyzer.html" title="class in ru.nsu.dashkovskii.checker">ActivityAnalyzer</a>&nbsp;activity,
+ <a href="ScoreCalculator.html" title="class in ru.nsu.dashkovskii.checker">ScoreCalculator</a>&nbsp;scoreCalculator)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Создаёт исполнитель с заданной конфигурацией и рабочей директорией.</div>
+<div class="block">Создаёт исполнитель со всеми сервисами, внедрёнными снаружи.</div>
 </div>
 </div>
 </section>
@@ -133,13 +140,19 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(ru.nsu.dashkovskii.model.CheckerConfig,java.io.File,java.time.LocalDate,java.time.LocalDate)">
+<section class="detail" id="&lt;init&gt;(ru.nsu.dashkovskii.model.CheckerConfig,java.io.File,java.time.LocalDate,java.time.LocalDate,ru.nsu.dashkovskii.checker.GitClient,ru.nsu.dashkovskii.checker.GradleRunner,ru.nsu.dashkovskii.checker.TaskLocator,ru.nsu.dashkovskii.checker.TestResultsParser,ru.nsu.dashkovskii.checker.ActivityAnalyzer,ru.nsu.dashkovskii.checker.ScoreCalculator)">
 <h3>CheckExecutor</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CheckExecutor</span><wbr><span class="parameters">(<a href="../model/CheckerConfig.html" title="class in ru.nsu.dashkovskii.model">CheckerConfig</a>&nbsp;config,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;workspace,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html" title="class or interface in java.time" class="external-link">LocalDate</a>&nbsp;from,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html" title="class or interface in java.time" class="external-link">LocalDate</a>&nbsp;to)</span></div>
-<div class="block">Создаёт исполнитель с заданной конфигурацией и рабочей директорией.</div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html" title="class or interface in java.time" class="external-link">LocalDate</a>&nbsp;to,
+ <a href="GitClient.html" title="class in ru.nsu.dashkovskii.checker">GitClient</a>&nbsp;git,
+ <a href="GradleRunner.html" title="class in ru.nsu.dashkovskii.checker">GradleRunner</a>&nbsp;gradle,
+ <a href="TaskLocator.html" title="class in ru.nsu.dashkovskii.checker">TaskLocator</a>&nbsp;taskLocator,
+ <a href="TestResultsParser.html" title="class in ru.nsu.dashkovskii.checker">TestResultsParser</a>&nbsp;testResults,
+ <a href="ActivityAnalyzer.html" title="class in ru.nsu.dashkovskii.checker">ActivityAnalyzer</a>&nbsp;activity,
+ <a href="ScoreCalculator.html" title="class in ru.nsu.dashkovskii.checker">ScoreCalculator</a>&nbsp;scoreCalculator)</span></div>
+<div class="block">Создаёт исполнитель со всеми сервисами, внедрёнными снаружи.</div>
 </section>
 </li>
 </ul>
