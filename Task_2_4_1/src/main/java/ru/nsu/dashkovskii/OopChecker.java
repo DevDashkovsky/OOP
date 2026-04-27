@@ -31,8 +31,17 @@ public final class OopChecker {
     private final ScoreCalculator scoreCalculator = new ScoreCalculator();
 
     /** Точка входа JVM. */
-    public static void main(String[] args) throws Exception {
-        System.exit(new OopChecker().run(args, new File(System.getProperty("user.dir"))));
+    public static void main(String[] args) {
+        try {
+            System.exit(new OopChecker().run(args, new File(System.getProperty("user.dir"))));
+        } catch (Exception e) {
+            String message = e.getMessage();
+            if (message == null) {
+                message = e.getClass().getSimpleName();
+            }
+            System.err.println("Ошибка: " + message);
+            System.exit(1);
+        }
     }
 
     /** Запускает выбранную команду; возвращает код возврата. */
