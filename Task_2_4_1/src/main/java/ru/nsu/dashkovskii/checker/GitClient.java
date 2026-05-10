@@ -62,7 +62,6 @@ public final class GitClient {
             try {
                 result.add(Long.parseLong(line));
             } catch (NumberFormatException ignored) {
-                // мусорные строки — пропускаем
             }
         }
         return result;

@@ -49,7 +49,7 @@ class ConfigLoaderTest {
                 }
                 """);
 
-        CheckerConfig config = ConfigLoader.loadFromDir(dir.toFile());
+        CheckerConfig config = new ConfigLoader().loadFromDir(dir.toFile());
 
         assertEquals(1, config.getTasks().size());
         assertEquals("Простые числа", config.getTasks().get("2_1_1").getName());
@@ -87,7 +87,7 @@ class ConfigLoaderTest {
                 importConfig '../shared/tasks.groovy'
                 """);
 
-        CheckerConfig config = ConfigLoader.loadFromDir(semester);
+        CheckerConfig config = new ConfigLoader().loadFromDir(semester);
         assertTrue(config.getTasks().containsKey("1_1_1"));
         assertEquals("Hello", config.getTasks().get("1_1_1").getName());
     }

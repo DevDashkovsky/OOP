@@ -20,15 +20,6 @@ class TasksBlock {
         config.addTask(lab)
     }
 
-    def task(Map attrs, String id) {
-        task(id) {
-            if (attrs.name != null) name attrs.name
-            if (attrs.maxPoints != null) maxPoints attrs.maxPoints
-            if (attrs.softDeadline != null) softDeadline attrs.softDeadline
-            if (attrs.hardDeadline != null) hardDeadline attrs.hardDeadline
-        }
-    }
-
     static class LabTaskDsl {
         LabTask lab
 
@@ -38,10 +29,6 @@ class TasksBlock {
 
         def softDeadline(String v) { lab.softDeadline = LocalDate.parse(v) }
 
-        def softDeadline(LocalDate v) { lab.softDeadline = v }
-
         def hardDeadline(String v) { lab.hardDeadline = LocalDate.parse(v) }
-
-        def hardDeadline(LocalDate v) { lab.hardDeadline = v }
     }
 }

@@ -29,6 +29,7 @@ public final class OopChecker {
     private final TestResultsParser testResults = new TestResultsParser();
     private final ActivityAnalyzer activity = new ActivityAnalyzer(git);
     private final ScoreCalculator scoreCalculator = new ScoreCalculator();
+    private final ConfigLoader configLoader = new ConfigLoader();
 
     /** Точка входа JVM. */
     public static void main(String[] args) {
@@ -68,7 +69,7 @@ public final class OopChecker {
             System.err.println("Предупреждение: GIT_TERMINAL_PROMPT!=0 — git может "
                     + "запрашивать ввод. Запустите с GIT_TERMINAL_PROMPT=0.");
         }
-        CheckerConfig config = ConfigLoader.loadFromDir(workDir);
+        CheckerConfig config = configLoader.loadFromDir(workDir);
         LocalDate from = config.getCheckpoints().stream()
                 .map(Checkpoint::date).min(LocalDate::compareTo)
                 .orElse(LocalDate.now().minusMonths(4));

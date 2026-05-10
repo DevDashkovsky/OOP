@@ -70,7 +70,7 @@ public final class TestResultsParser {
         }
     }
 
-    private static int readInt(Element el, String attr) {
+    private int readInt(Element el, String attr) {
         String v = el.getAttribute(attr);
         if (v.isEmpty()) {
             return 0;

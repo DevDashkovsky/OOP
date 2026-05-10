@@ -70,14 +70,20 @@ public final class HtmlReportGenerator {
             if (r == null) {
                 continue;
             }
-            sb.append("<tr><td>").append(escape(displayName(sr))).append("</td>")
-                    .append(mark(r.isBuilt())).append(mark(r.isDocs()))
-                    .append(mark(r.isStyleOk()))
-                    .append("<td>").append(r.getTestsPassed()).append('/')
-                    .append(r.getTestsFailed()).append('/')
-                    .append(r.getTestsSkipped()).append("</td>")
-                    .append("<td>").append(fmt(r.getBonus())).append("</td>")
-                    .append("<td>").append(fmt(r.getTotal())).append("</td></tr>");
+            sb.append("<tr><td>").append(escape(displayName(sr))).append("</td>");
+            if (r.getErrorMessage() != null) {
+                sb.append("<td colspan=\"6\" class=\"fail\">")
+                        .append(escape(r.getErrorMessage())).append("</td>");
+            } else {
+                sb.append(mark(r.isBuilt())).append(mark(r.isDocs()))
+                        .append(mark(r.isStyleOk()))
+                        .append("<td>").append(r.getTestsPassed()).append('/')
+                        .append(r.getTestsFailed()).append('/')
+                        .append(r.getTestsSkipped()).append("</td>")
+                        .append("<td>").append(fmt(r.getBonus())).append("</td>")
+                        .append("<td>").append(fmt(r.getTotal())).append("</td>");
+            }
+            sb.append("</tr>");
         }
         sb.append("</table>");
     }
@@ -111,7 +117,7 @@ public final class HtmlReportGenerator {
         sb.append("</table>");
     }
 
-    private static String displayName(StudentReport sr) {
+    private String displayName(StudentReport sr) {
         String full = sr.getStudent().getFullName();
         return full == null ? sr.getStudent().getGithubNick() : full;
     }
@@ -158,18 +164,18 @@ public final class HtmlReportGenerator {
         sb.append("</table>");
     }
 
-    private static String mark(boolean ok) {
+    private String mark(boolean ok) {
         return ok ? "<td class=\"ok\">+</td>" : "<td class=\"fail\">-</td>";
     }
 
-    private static String fmt(double v) {
+    private String fmt(double v) {
         if (v == Math.floor(v)) {
             return Integer.toString((int) v);
         }
         return String.format(java.util.Locale.ROOT, "%.2f", v);
     }
 
-    private static String escape(String s) {
+    private String escape(String s) {
         if (s == null) {
             return "";
         }

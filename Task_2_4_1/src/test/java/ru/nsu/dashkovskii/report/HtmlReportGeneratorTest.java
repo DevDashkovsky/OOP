@@ -30,15 +30,17 @@ class HtmlReportGeneratorTest {
         group.addStudent(s);
         config.addGroup(group);
 
-        GroupReport gr = new GroupReport(group);
-        StudentReport sr = new StudentReport(s);
         TaskResult r = new TaskResult("2_1_1");
         r.setBuilt(true);
         r.setDocs(true);
         r.setStyleOk(true);
         r.setTestsPassed(10);
         r.setTotal(1.0);
+
+        StudentReport sr = new StudentReport(s);
         sr.addResult(r);
+
+        GroupReport gr = new GroupReport(group);
         gr.addStudentReport(sr);
 
         String html = new HtmlReportGenerator(config).render(List.of(gr));
@@ -47,6 +49,34 @@ class HtmlReportGeneratorTest {
         assertTrue(html.contains("Простые числа"));
         assertTrue(html.contains("Иванов Иван"));
         assertTrue(html.contains("10/0/0"));
+    }
+
+    @Test
+    void rendersErrorMessageInsteadOfStages() {
+        CheckerConfig config = new CheckerConfig();
+        LabTask task = new LabTask("2_1_1");
+        task.setName("Простые числа");
+        task.setMaxPoints(1);
+        config.addTask(task);
+
+        StudentGroup group = new StudentGroup("24216");
+        Student s = new Student("DevDashkovsky");
+        s.setFullName("Дашковский Егор");
+        group.addStudent(s);
+        config.addGroup(group);
+
+        TaskResult r = new TaskResult("2_1_1");
+        r.setErrorMessage("Не удалось клонировать репозиторий");
+
+        StudentReport sr = new StudentReport(s);
+        sr.addResult(r);
+        GroupReport gr = new GroupReport(group);
+        gr.addStudentReport(sr);
+
+        String html = new HtmlReportGenerator(config).render(List.of(gr));
+
+        assertTrue(html.contains("Не удалось клонировать репозиторий"));
+        assertTrue(html.contains("colspan=\"6\""));
     }
 
     @Test
@@ -65,14 +95,15 @@ class HtmlReportGeneratorTest {
         group.addStudent(s);
         config.addGroup(group);
 
-        GroupReport gr = new GroupReport(group);
-        StudentReport sr = new StudentReport(s);
-
         // сдана до АК1 — должна учитываться
         TaskResult early = new TaskResult("2_1_1");
         early.setTotal(1.0);
         early.setSubmissionDate(LocalDate.of(2024, 10, 15));
+
+        StudentReport sr = new StudentReport(s);
         sr.addResult(early);
+
+        GroupReport gr = new GroupReport(group);
         gr.addStudentReport(sr);
 
         String html = new HtmlReportGenerator(config).render(List.of(gr));

@@ -13,7 +13,7 @@ class ConfigLoader {
     static final String DEFAULT_SCRIPT = 'checker.groovy'
 
     /** Ищет DEFAULT_SCRIPT в указанной директории. */
-    static CheckerConfig loadFromDir(File dir) {
+    CheckerConfig loadFromDir(File dir) {
         File script = new File(dir, DEFAULT_SCRIPT)
         if (!script.exists()) {
             throw new IllegalStateException(
@@ -23,7 +23,7 @@ class ConfigLoader {
     }
 
     /** Загружает конфигурацию из указанного файла. */
-    static CheckerConfig load(File scriptFile) {
+    CheckerConfig load(File scriptFile) {
         def cc = new CompilerConfiguration()
         cc.scriptBaseClass = DelegatingScript.name
         def shell = new GroovyShell(ConfigLoader.class.classLoader, new Binding(), cc)

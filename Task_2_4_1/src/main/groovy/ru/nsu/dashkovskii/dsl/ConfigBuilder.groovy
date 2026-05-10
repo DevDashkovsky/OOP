@@ -47,9 +47,6 @@ class ConfigBuilder {
         cc.scriptBaseClass = DelegatingScript.name
         def shell = new GroovyShell(this.class.classLoader, new Binding(), cc)
         def script = (DelegatingScript) shell.parse(file)
-        def nested = new ConfigBuilder(scriptDir: file.parentFile)
-        // разделять состояние не нужно: импорт должен пополнять текущий конфиг
-        // поэтому прокидываем «я», но сохраняем scriptDir для вложенных импортов
         def saved = this.scriptDir
         this.scriptDir = file.parentFile
         try {
@@ -60,7 +57,7 @@ class ConfigBuilder {
         }
     }
 
-    private static void runInContext(Closure closure, Object delegate) {
+    private void runInContext(Closure closure, Object delegate) {
         closure.resolveStrategy = Closure.DELEGATE_FIRST
         closure.delegate = delegate
         closure.call()

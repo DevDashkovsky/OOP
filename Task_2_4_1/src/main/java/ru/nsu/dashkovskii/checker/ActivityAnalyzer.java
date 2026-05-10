@@ -40,13 +40,13 @@ public final class ActivityAnalyzer {
         return Math.min(1.0, (double) activeWeeks.size() / totalWeeks);
     }
 
-    private static int weekKey(LocalDate d) {
+    private int weekKey(LocalDate d) {
         int year = d.get(IsoFields.WEEK_BASED_YEAR);
         int week = d.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
         return year * 100 + week;
     }
 
-    private static long countWeeks(LocalDate from, LocalDate to) {
+    private long countWeeks(LocalDate from, LocalDate to) {
         LocalDate cursor = from;
         long count = 0;
         while (!cursor.isAfter(to)) {

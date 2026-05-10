@@ -43,7 +43,6 @@ public final class ProcessRunner {
                     out.append(line).append('\n');
                 }
             } catch (IOException ignored) {
-                // поток закрыт — выходим тихо
             }
         });
         reader.setDaemon(true);

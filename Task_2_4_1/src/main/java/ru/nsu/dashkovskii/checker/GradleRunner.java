@@ -53,7 +53,7 @@ public final class GradleRunner {
         return processes.run(dir, cmd, timeoutMs);
     }
 
-    private static boolean isWindows() {
+    private boolean isWindows() {
         return System.getProperty("os.name", "").toLowerCase().contains("win");
     }
 }

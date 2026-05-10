@@ -39,7 +39,7 @@ public final class ScoreCalculator {
         return share;
     }
 
-    private static double applyDeadline(double score, LabTask task, LocalDate submission) {
+    private double applyDeadline(double score, LabTask task, LocalDate submission) {
         if (task == null || submission == null) {
             return score;
         }
