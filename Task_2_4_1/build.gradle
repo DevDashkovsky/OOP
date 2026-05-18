@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+    id 'groovy'
+    id 'jacoco'
+    id 'application'
+    id 'checkstyle'
+}
+
+group = 'ru.nsu.dashkovskii'
+version = '1.0-SNAPSHOT'
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+checkstyle {
+    toolVersion = "10.12.5"
+}
+
+application {
+    mainClass = 'ru.nsu.dashkovskii.OopChecker'
+}
+
+run {
+    standardInput = System.in
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java { srcDirs = [] }
+        groovy { srcDirs = ['src/main/java', 'src/main/groovy'] }
+    }
+    test {
+        java { srcDirs = [] }
+        groovy { srcDirs = ['src/test/java', 'src/test/groovy'] }
+    }
+}
+
+dependencies {
+    implementation 'org.apache.groovy:groovy:4.0.21'
+    implementation 'org.apache.groovy:groovy-json:4.0.21'
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
