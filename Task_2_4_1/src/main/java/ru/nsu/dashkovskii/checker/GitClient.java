@@ -46,10 +46,10 @@ public final class GitClient {
         return false;
     }
 
-    /** Список unix-таймстампов всех коммитов. */
+    /** Список unix-таймстампов всех коммитов (без merge — это не активная работа). */
     public List<Long> listCommitTimestamps(File repoDir) {
         ProcessRunner.Result r = processes.run(repoDir,
-                List.of("git", "log", "--pretty=format:%ct"), 30_000);
+                List.of("git", "log", "--no-merges", "--pretty=format:%ct"), 30_000);
         List<Long> result = new ArrayList<>();
         if (!r.success()) {
             return result;
