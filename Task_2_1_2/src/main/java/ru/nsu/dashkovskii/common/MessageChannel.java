@@ -78,14 +78,17 @@ public final class MessageChannel implements AutoCloseable {
         try {
             oos.close();
         } catch (IOException ignored) {
+            // already closed or broken — нечего делать
         }
         try {
             ois.close();
         } catch (IOException ignored) {
+            // already closed or broken — нечего делать
         }
         try {
             socket.close();
         } catch (IOException ignored) {
+            // already closed or broken — нечего делать
         }
     }
 }

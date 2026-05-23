@@ -58,12 +58,11 @@ class TaskRegistryTest {
     void doubleMarkDoneDoesNotOvercount() {
         TaskRegistry registry = new TaskRegistry();
         long id1 = registry.enqueue(new int[] {6});
-        long id2 = registry.enqueue(new int[] {7});
-
         registry.markAssigned(id1, "worker-A", System.currentTimeMillis() + 30_000);
         registry.markDone(id1, false);
         registry.markDone(id1, false);
 
+        long id2 = registry.enqueue(new int[] {7});
         assertFalse(registry.isFinished(),
                 "id2 ещё не обработан — isFinished не должен срабатывать от двойного markDone");
 
@@ -136,7 +135,7 @@ class TaskRegistryTest {
         registry.returnToQueue(taskId);
 
         assertNull(registry.takeNextPending(50L),
-                "returnToQueue не должна работать для ASSIGNED — там должен использоваться requeue");
+                "returnToQueue не должна срабатывать для ASSIGNED — для этого есть requeue");
     }
 
     @Test

@@ -117,14 +117,12 @@ public final class Master {
 
         waitForFinish();
 
-        boolean answer = registry.answerFound();
-
         broadcastStop();
         closeQuietly(serverSocket);
         pool.shutdownNow();
         pool.awaitTermination(2, TimeUnit.SECONDS);
         closeAllWorkers();
-        return answer;
+        return registry.answerFound();
     }
 
     private void prepareChunks() {
@@ -168,6 +166,7 @@ public final class Master {
         try {
             socket.close();
         } catch (IOException ignored) {
+            // already closed — нечего делать
         }
     }
 }
