@@ -1,0 +1,63 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'application'
+    id 'checkstyle'
+}
+
+group = 'ru.nsu.dashkovskii'
+version = '1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+checkstyle {
+    toolVersion = "10.12.5"
+}
+
+application {
+    mainClass = 'ru.nsu.dashkovskii.master.Master'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
+
+tasks.register('runMaster', JavaExec) {
+    group = 'application'
+    description = 'Запуск Master-узла. Аргументы передавать через -PappArgs="..."'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'ru.nsu.dashkovskii.master.Master'
+    standardInput = System.in
+    if (project.hasProperty('appArgs')) {
+        args(project.appArgs.toString().split(' '))
+    }
+}
+
+tasks.register('runWorker', JavaExec) {
+    group = 'application'
+    description = 'Запуск Worker-узла. Аргументы передавать через -PappArgs="host port"'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'ru.nsu.dashkovskii.worker.Worker'
+    if (project.hasProperty('appArgs')) {
+        args(project.appArgs.toString().split(' '))
+    }
+}
