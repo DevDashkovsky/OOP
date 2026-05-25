@@ -1,7 +1,5 @@
 package ru.nsu.dashkovskii.common;
 
-import java.io.Serial;
-
 /**
  * Команда «остановиться» от master'а к worker'у.
  *
@@ -9,7 +7,4 @@ import java.io.Serial;
  * Worker должен прервать текущий счёт и закрыть соединение.
  */
 public record StopMessage() implements Message {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
 }

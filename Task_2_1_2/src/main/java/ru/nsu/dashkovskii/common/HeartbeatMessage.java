@@ -1,7 +1,5 @@
 package ru.nsu.dashkovskii.common;
 
-import java.io.Serial;
-
 /**
  * Периодический сигнал «живости» от worker'а к master'у.
  *
@@ -11,7 +9,4 @@ import java.io.Serial;
  * @param workerId сгенерированный worker'ом стабильный идентификатор узла
  */
 public record HeartbeatMessage(String workerId) implements Message {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
 }

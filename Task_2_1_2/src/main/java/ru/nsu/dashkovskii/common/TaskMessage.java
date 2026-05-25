@@ -1,7 +1,5 @@
 package ru.nsu.dashkovskii.common;
 
-import java.io.Serial;
-
 /**
  * Сообщение о выдаче задачи worker'у.
  *
@@ -9,7 +7,4 @@ import java.io.Serial;
  * @param chunk массив чисел для проверки на наличие составного
  */
 public record TaskMessage(long taskId, int[] chunk) implements Message {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
 }
